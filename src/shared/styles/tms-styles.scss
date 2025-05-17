@@ -1,0 +1,43 @@
+$darker-blue: #0073ad;
+$dark-blue: #008fd8;
+$tms-blue: #3aa5dc;
+$medium-blue: #77c1ea;
+$light-blue: #96cdee;
+$extra-light-blue: #bfe1f3;
+$dark-grey: #3b3b3b;
+$grey: #7f7f7f;
+
+$screenXxs: 480px;
+$screenXs: 640px;
+$screenSm: 768px;
+$screenMd: 1024px;
+$screenLg: 1200px;
+$screenXl: 1920px;
+
+$xxs-only: "(min-width: #{$screenXxs}) and (max-width: #{$screenXs - 1})";
+$xs-only: "(min-width: #{$screenXs}) and (max-width: #{$screenSm - 1})";
+$sm-only: "(min-width: #{$screenSm}) and (max-width: #{$screenMd - 1})";
+$md-only: "(min-width: #{$screenMd}) and (max-width: #{$screenLg - 1})";
+$lg-only: "(min-width: #{$screenLg}) and (max-width: #{$screenXl - 1})";
+$xl-only: "(min-width: #{$screenXl})";
+
+$min-xxs: "(min-width: #{$screenXxs})";
+$min-xs: "(min-width: #{$screenXs})";
+$min-sm: "(min-width: #{$screenSm})";
+$min-md: "(min-width: #{$screenMd})";
+$min-lg: "(min-width: #{$screenLg})";
+$min-xl: "(min-width: #{$screenXl})";
+
+@mixin media($query, $type: "screen") {
+  $media-query: "#{$type} and #{$query}";
+
+  @media #{$media-query} {
+    @content;
+  }
+}
+
+@function rem($size) {
+  $basePxSize: 16;
+  $remSize: calc($size / $basePxSize);
+  @return #{$remSize}rem;
+}

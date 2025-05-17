@@ -1,0 +1,128 @@
+@import "../../shared/styles/tms-styles.scss";
+
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 18;
+  width: 100vw;
+  background-color: white;
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  width: 188px;
+}
+
+.nav-links-container {
+  display: none;
+
+  @include media($min-sm) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.nav-link {
+  margin: 10px 0;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+
+  &:hover {
+    border-bottom: 2px solid $dark-grey;
+  }
+
+  @include media($min-sm) {
+    margin: 0 10px;
+  }
+}
+
+.nav-link-active {
+  @extend .nav-link;
+  color: $dark-blue;
+  //   border-bottom: 2px solid $dark-blue;
+
+  &:hover {
+    color: $dark-blue;
+    border-bottom: 2px solid $dark-blue;
+  }
+}
+
+.nav-hangurger-container {
+  width: 30px;
+  height: 20px;
+  z-index: 20;
+
+  > :nth-child(2) {
+    margin: 6px 0;
+  }
+
+  @include media($min-sm) {
+    display: none;
+  }
+}
+
+.nav-hamburger-line {
+  width: 30px;
+  height: 3px;
+  background-color: $dark-grey;
+  transition: all 0.3s ease;
+}
+
+.nav-hamburger-line-active1 {
+  @extend .nav-hamburger-line;
+  transform: rotate(45deg);
+  position: relative;
+  top: 9px;
+}
+
+.nav-hamburger-line-active2 {
+  @extend .nav-hamburger-line;
+  opacity: 0;
+}
+
+.nav-hamburger-line-active3 {
+  @extend .nav-hamburger-line;
+  transform: rotate(-45deg);
+  position: relative;
+  top: -9px;
+}
+
+.nav-mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 250px;
+  height: 100%;
+  z-index: 19;
+  background-color: white;
+  padding: 30px 20px 0;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include media($min-sm) {
+    display: none;
+  }
+}
+
+.nav-mobile-menu-active {
+  @extend .nav-mobile-menu;
+  right: 0;
+
+  @include media($min-sm) {
+    display: none;
+  }
+}
