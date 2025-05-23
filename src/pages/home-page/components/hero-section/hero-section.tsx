@@ -13,14 +13,9 @@ const HeroSection = forwardRef<HTMLDivElement, {}>((_, ref) => {
           <div className="hero-title bold">
             TMS Is Like Oxygen For Your Devices. Breathe Easy!
           </div>
-          <div className="hero-subtitle">
+          <div className="hero-subtitle bold">
             The fastest and easiest way to manage, secure, backup and recover
-            your Corporate-Owned and BYOD mobile devices.
-          </div>
-          <div>
-            <Button className="bold" to={pageRoutes.getStarted} isSecondary>
-              Get Started
-            </Button>
+            your Corporate-owned and BYOD smartphone and tablet devices
           </div>
         </div>
       </div>

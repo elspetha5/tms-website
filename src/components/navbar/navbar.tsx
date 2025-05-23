@@ -22,9 +22,9 @@ function Navbar() {
         hash === pageRoutes.homeScroll.substring(1),
     },
     {
-      label: "Our Story",
-      to: pageRoutes.ourStory,
-      isActive: pathname === pageRoutes.ourStory,
+      label: "Why TMS?",
+      to: pageRoutes.whyTms,
+      isActive: pathname === pageRoutes.whyTms,
     },
     {
       label: "Pricing",
