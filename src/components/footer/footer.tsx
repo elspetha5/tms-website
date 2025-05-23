@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedin,
@@ -6,6 +5,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { faCopyright } from "@fortawesome/free-regular-svg-icons/faCopyright";
 
 import Button from "../../library/button/button";
 import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
@@ -55,6 +55,9 @@ const footerColumns = [
 ];
 
 function Footer() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
   return (
     <div className="footer-container">
       <div className="footer-content">
@@ -78,17 +81,14 @@ function Footer() {
           </div>
         </div>
         {footerColumns.map((col) => (
-          <div className="footer-info-col-container">
-            <div className="footer-info-col-title" key={col.title}>
-              {col.title}
-            </div>
+          <div className="footer-info-col-container" key={col.title}>
+            <div className="footer-info-col-title bold">{col.title}</div>
             {col.links.map((link) => (
-              <div>
+              <div key={link.label}>
                 <Button
                   to={link.to}
                   className="footer-link-btn"
                   href={link.href}
-                  key={link.label}
                 >
                   {link.label}
                 </Button>
@@ -96,6 +96,10 @@ function Footer() {
             ))}
           </div>
         ))}
+      </div>
+      <div className="footer-copyright">
+        <FontAwesomeIcon className="" icon={faCopyright} /> {currentYear} Total
+        Mobility Solution. All rights reserved.
       </div>
     </div>
   );

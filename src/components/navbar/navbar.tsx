@@ -16,8 +16,10 @@ function Navbar() {
   const navbarLinks = [
     {
       label: "Home",
-      to: pageRoutes.home,
-      isActive: `${pathname}${hash}` === pageRoutes.home,
+      to: hash ? pageRoutes.homeScroll : pageRoutes.home,
+      isActive:
+        `${pathname}${hash}` === pageRoutes.home ||
+        hash === pageRoutes.homeScroll.substring(1),
     },
     {
       label: "Our Story",
@@ -27,12 +29,12 @@ function Navbar() {
     {
       label: "Pricing",
       to: pageRoutes.pricing,
-      isActive: hash === "#pricing",
+      isActive: hash === pageRoutes.pricing.substring(1),
     },
     {
       label: "FAQ's",
       to: pageRoutes.faqs,
-      isActive: hash === "#faqs",
+      isActive: hash === pageRoutes.faqs.substring(1),
     },
     {
       label: "Get Started",
@@ -59,7 +61,7 @@ function Navbar() {
             <div className="nav-links-container">
               {navbarLinks.map((link) => (
                 <Button
-                  className={`nav-link${link.isActive ? "-active" : ""}`}
+                  className={`nav-link${link.isActive ? "-active" : ""} bold`}
                   to={link.to}
                   isPrimary={link.label === "Get Started"}
                   key={link.label}

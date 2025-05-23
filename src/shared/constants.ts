@@ -3,6 +3,7 @@ export const firebaseImgUrl =
 
 export const pageRoutes = {
   home: "/",
+  homeScroll: "/#home",
   ourStory: "/our-story",
   getStarted: "/get-started",
   supportRequest: "/support-request",

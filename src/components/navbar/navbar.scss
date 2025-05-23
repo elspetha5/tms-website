@@ -34,12 +34,11 @@
 
 .nav-link {
   margin: 10px 0;
-  font-weight: bold;
   border-bottom: 2px solid transparent;
   border-top: 2px solid transparent;
 
   &:hover {
-    border-bottom: 2px solid styles.$dark-grey;
+    border-bottom: 2px solid styles.$dark-blue;
   }
 
   @include styles.media(styles.$min-sm) {
@@ -50,7 +49,6 @@
 .nav-link-active {
   @extend .nav-link;
   color: styles.$dark-blue;
-  //   border-bottom: 2px solid styles.$dark-blue;
 
   &:hover {
     color: styles.$dark-blue;

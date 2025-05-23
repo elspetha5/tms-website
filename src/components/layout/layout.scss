@@ -7,10 +7,13 @@
   flex-direction: column;
 }
 
+.layout-inner-container {
+  position: relative;
+}
+
 .layout-content {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  // min-height: 700px;
+  // max-width: 1200px;
+  // margin: 0 auto;
+  // padding: 20px;
 }
