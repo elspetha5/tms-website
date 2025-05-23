@@ -1,4 +1,4 @@
-@import "../../shared/styles/tms-styles.scss";
+@use "../../shared/tms-styles.scss" as styles;
 
 .layout-container {
   background-color: white;

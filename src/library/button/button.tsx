@@ -13,6 +13,7 @@ interface ButtonProps {
   isSecondary?: boolean;
   isTertiary?: boolean;
   onClick?: (event: SyntheticEvent) => void;
+  to?: string;
 }
 
 function Button(props: ButtonProps) {
@@ -26,6 +27,7 @@ function Button(props: ButtonProps) {
     isSecondary,
     isTertiary,
     onClick,
+    to,
   } = props;
   let className = "";
   if (isPrimary) className = "btn-primary";
@@ -34,16 +36,23 @@ function Button(props: ButtonProps) {
   if (isDisabled) className = `${className}-disabled`;
   let button;
 
-  if (href) {
+  if (to) {
     button = (
       <Link
-        to={href}
+        to={to}
         className={`btn ${className} ${classNameProp}`}
         onClick={onClick}
       >
         {Icon && <Icon />}
-        {children}
+        {children && children}
       </Link>
+    );
+  } else if (href) {
+    button = (
+      <a className={`btn ${className} ${classNameProp}`} href={href}>
+        {Icon && <Icon />}
+        {children && children}
+      </a>
     );
   } else {
     button = (

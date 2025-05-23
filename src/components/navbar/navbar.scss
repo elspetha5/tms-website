@@ -1,4 +1,4 @@
-@import "../../shared/styles/tms-styles.scss";
+@use "../../shared/tms-styles.scss" as styles;
 
 .navbar {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -26,7 +26,7 @@
 .nav-links-container {
   display: none;
 
-  @include media($min-sm) {
+  @include styles.media(styles.$min-sm) {
     display: flex;
     align-items: center;
   }
@@ -39,22 +39,22 @@
   border-top: 2px solid transparent;
 
   &:hover {
-    border-bottom: 2px solid $dark-grey;
+    border-bottom: 2px solid styles.$dark-grey;
   }
 
-  @include media($min-sm) {
+  @include styles.media(styles.$min-sm) {
     margin: 0 10px;
   }
 }
 
 .nav-link-active {
   @extend .nav-link;
-  color: $dark-blue;
-  //   border-bottom: 2px solid $dark-blue;
+  color: styles.$dark-blue;
+  //   border-bottom: 2px solid styles.$dark-blue;
 
   &:hover {
-    color: $dark-blue;
-    border-bottom: 2px solid $dark-blue;
+    color: styles.$dark-blue;
+    border-bottom: 2px solid styles.$dark-blue;
   }
 }
 
@@ -67,7 +67,7 @@
     margin: 6px 0;
   }
 
-  @include media($min-sm) {
+  @include styles.media(styles.$min-sm) {
     display: none;
   }
 }
@@ -75,7 +75,7 @@
 .nav-hamburger-line {
   width: 30px;
   height: 3px;
-  background-color: $dark-grey;
+  background-color: styles.$dark-grey;
   transition: all 0.3s ease;
 }
 
@@ -113,7 +113,7 @@
   flex-direction: column;
   align-items: flex-start;
 
-  @include media($min-sm) {
+  @include styles.media(styles.$min-sm) {
     display: none;
   }
 }
@@ -122,7 +122,7 @@
   @extend .nav-mobile-menu;
   right: 0;
 
-  @include media($min-sm) {
+  @include styles.media(styles.$min-sm) {
     display: none;
   }
 }

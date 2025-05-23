@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import Button from "../../library/button/button";
-import { firebaseImgUrl } from "../../shared/constants";
+import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
 
 import "./navbar.scss";
 
@@ -10,33 +10,34 @@ function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { pathname, hash } = useLocation();
   const showLinks =
-    pathname !== "/get-started" && pathname !== "/support-request";
+    pathname !== pageRoutes.getStarted &&
+    pathname !== pageRoutes.supportRequest;
 
   const navbarLinks = [
     {
       label: "Home",
-      href: "/",
-      isActive: `${pathname}${hash}` === "/",
+      to: pageRoutes.home,
+      isActive: `${pathname}${hash}` === pageRoutes.home,
     },
     {
       label: "Our Story",
-      href: "/our-story",
-      isActive: pathname === "/our-story",
+      to: pageRoutes.ourStory,
+      isActive: pathname === pageRoutes.ourStory,
     },
     {
       label: "Pricing",
-      href: "/#pricing",
+      to: pageRoutes.pricing,
       isActive: hash === "#pricing",
     },
     {
       label: "FAQ's",
-      href: "/#faqs",
+      to: pageRoutes.faqs,
       isActive: hash === "#faqs",
     },
     {
       label: "Get Started",
-      href: "/get-started",
-      isActive: pathname === "/get-started",
+      to: pageRoutes.getStarted,
+      isActive: pathname === pageRoutes.getStarted,
     },
   ];
 
@@ -44,7 +45,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="logo">
-          <Link to="/" className="logo-link">
+          <Link to={pageRoutes.home} className="logo-link">
             <img
               className="nav-logo"
               src={`${firebaseImgUrl}/TMS-logo-no-background.png?alt=media&token=cf8499c6-a5dd-4d14-9a67-85b2e98c87d8`}
@@ -59,7 +60,7 @@ function Navbar() {
               {navbarLinks.map((link) => (
                 <Button
                   className={`nav-link${link.isActive ? "-active" : ""}`}
-                  href={link.href}
+                  to={link.to}
                   isPrimary={link.label === "Get Started"}
                   key={link.label}
                 >
@@ -95,7 +96,7 @@ function Navbar() {
               {navbarLinks.map((link) => (
                 <Button
                   className={`nav-link${link.isActive ? "-active" : ""}`}
-                  href={link.href}
+                  to={link.to}
                   isPrimary={link.label === "Get Started"}
                   key={link.label}
                   onClick={() => setShowMobileMenu(!showMobileMenu)}

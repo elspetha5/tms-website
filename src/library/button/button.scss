@@ -1,4 +1,4 @@
-@import "../../shared/styles/tms-styles.scss";
+@use "../../shared/tms-styles.scss" as styles;
 
 %btn {
   padding: 10px 20px;
@@ -12,26 +12,26 @@
 
 .btn-primary.btn-primary {
   @extend %btn;
-  background-color: $tms-blue;
+  background-color: styles.$tms-blue;
   color: white;
-  border: 2px solid $tms-blue;
+  border: 2px solid styles.$tms-blue;
 
   &:hover {
     background-color: white;
-    color: $tms-blue;
-    border: 2px solid $tms-blue;
+    color: styles.$tms-blue;
+    border: 2px solid styles.$tms-blue;
   }
 }
 
 .btn-secondary.btn-secondary {
   @extend %btn;
   background-color: white;
-  color: $tms-blue;
-  border: 2px solid $tms-blue;
+  color: styles.$tms-blue;
+  border: 2px solid styles.$tms-blue;
 
   &:hover {
-    background-color: $tms-blue;
+    background-color: styles.$tms-blue;
     color: white;
-    border: 2px solid $tms-blue;
+    border: 2px solid styles.$tms-blue;
   }
 }
