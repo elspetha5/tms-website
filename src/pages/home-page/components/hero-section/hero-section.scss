@@ -1,58 +1,79 @@
 @use "../../../../shared/tms-styles.scss" as styles;
 
 .hero-section-container {
-  background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/TMS-hero-image.png?alt=media&token=ae081bc6-698b-47de-baa0-9f540812041a");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/TMS-hero-image-alt.jpeg?alt=media&token=28d2d01f-0597-423c-bdae-bbf8c3757b61");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
+  // position: relative;
+  // z-index: 1;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.227);
-    z-index: -1;
-  }
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   // background-color: rgba(255, 255, 255, 0.203);
+  //   z-index: -1;
+  // }
 }
 
 .hero-inner-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
   min-height: 550px;
   display: flex;
   justify-content: flex-end;
 }
 
 .hero-content {
-  width: 70%;
-  padding: 0 50px;
-  text-align: right;
+  width: 100%;
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: flex-start;
   margin-bottom: 30px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  @include styles.media(styles.$min-xs) {
+    width: 70%;
+  }
+
+  @include styles.media(styles.$min-md) {
+    width: 60%;
+  }
+
+  @include styles.media(styles.$min-lg) {
+    width: 50%;
+  }
 }
 
 .hero-title {
-  font-size: styles.rem(48);
+  font-size: styles.rem(35);
   line-height: 1.2;
-  margin: 0 0 20px;
-  color: styles.$dark-grey;
+
+  @include styles.media(styles.$min-xs) {
+    font-size: styles.rem(40);
+  }
+
+  @include styles.media(styles.$min-md) {
+    font-size: styles.rem(43);
+  }
 }
 
 .hero-subtitle {
-  width: 75%;
-  margin: 20px 0;
-  color: white;
+  width: 70%;
+  font-size: styles.rem(14);
+  margin: 10px 0 20px;
+
+  @include styles.media(styles.$min-md) {
+    font-size: styles.rem(16);
+  }
+}
+
+.hero-section-cta {
+  text-shadow: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }

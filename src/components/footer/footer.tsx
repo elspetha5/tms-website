@@ -8,6 +8,7 @@ import {
 import { faCopyright } from "@fortawesome/free-regular-svg-icons/faCopyright";
 
 import Button from "../../library/button/button";
+import ContentContainer from "../content-container/content-container";
 import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
 
 import "./footer.scss";
@@ -60,43 +61,45 @@ function Footer() {
 
   return (
     <div className="footer-container">
-      <div className="footer-content">
-        <div className="footer-logo-social-container">
-          <Button to={pageRoutes.home}>
-            <img
-              className="footer-logo"
-              src={`${firebaseImgUrl}/TMS-logo-white-2025.png?alt=media&token=94abd378-9779-4d4a-8592-507195d507b2`}
-              alt="white-logo"
-            />
-          </Button>
-          <div className="footer-social-links">
-            {socialBtns.map((btn) => (
-              <Button key={btn.key} href={btn.href}>
-                <FontAwesomeIcon
-                  className="footer-social-link"
-                  icon={btn.icon}
-                />
-              </Button>
-            ))}
-          </div>
-        </div>
-        {footerColumns.map((col) => (
-          <div className="footer-info-col-container" key={col.title}>
-            <div className="footer-info-col-title bold">{col.title}</div>
-            {col.links.map((link) => (
-              <div key={link.label}>
-                <Button
-                  to={link.to}
-                  className="footer-link-btn"
-                  href={link.href}
-                >
-                  {link.label}
+      <ContentContainer>
+        <div className="footer-content">
+          <div className="footer-logo-social-container">
+            <Button to={pageRoutes.home}>
+              <img
+                className="footer-logo"
+                src={`${firebaseImgUrl}/TMS-logo-white-2025.png?alt=media&token=94abd378-9779-4d4a-8592-507195d507b2`}
+                alt="white-logo"
+              />
+            </Button>
+            <div className="footer-social-links">
+              {socialBtns.map((btn) => (
+                <Button key={btn.key} href={btn.href}>
+                  <FontAwesomeIcon
+                    className="footer-social-link"
+                    icon={btn.icon}
+                  />
                 </Button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
+          {footerColumns.map((col) => (
+            <div className="footer-info-col-container" key={col.title}>
+              <div className="footer-info-col-title bold">{col.title}</div>
+              {col.links.map((link) => (
+                <div key={link.label}>
+                  <Button
+                    to={link.to}
+                    className="footer-link-btn"
+                    href={link.href}
+                  >
+                    {link.label}
+                  </Button>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </ContentContainer>
       <div className="footer-copyright">
         <FontAwesomeIcon className="" icon={faCopyright} /> {currentYear} Total
         Mobility Solution. All rights reserved.
