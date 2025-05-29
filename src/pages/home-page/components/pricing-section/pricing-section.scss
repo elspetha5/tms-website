@@ -1,5 +1,64 @@
 @use "../../../../shared/tms-styles.scss" as styles;
 
-.pricing-section-container {
-  height: 800px;
+.pricing-content-container {
+  max-width: 800px;
+}
+
+.pricing-grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: stretch;
+
+  @include styles.media(styles.$min-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pricing-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pricing-card-title {
+  font-size: styles.rem(30);
+  margin: 10px 0 20px;
+}
+
+.pricing-card-subtitle {
+  min-height: 52px;
+  margin-bottom: 30px;
+}
+
+.pricing-card-price {
+  font-size: styles.rem(30);
+  padding-bottom: 10px;
+  border-bottom: 1px solid styles.$light-grey;
+  margin-bottom: 30px;
+}
+
+.pricing-card-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+
+  .pricing-check-icon {
+    padding-top: 0.5px;
+    margin-right: 5px;
+    color: styles.$tms-blue;
+  }
+}
+
+.pricing-cta {
+  margin-top: 20px;
+}
+
+.pricing-caveats-container {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.pricing-caveat {
+  margin: 20px 0;
 }

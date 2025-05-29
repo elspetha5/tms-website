@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedin,
   faFacebook,
-  faTwitter,
+  faXTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons/faCopyright";
@@ -15,22 +15,22 @@ import "./footer.scss";
 
 const socialBtns = [
   {
-    href: "#",
+    href: "https://www.linkedin.com/in/total-mobility-solution-b89b19353/",
     icon: faLinkedin,
     key: "linked in",
   },
   {
-    href: "#",
+    href: "https://www.facebook.com/totalmobilitysolution",
     icon: faFacebook,
     key: "facebook",
   },
   {
-    href: "#",
-    icon: faTwitter,
+    href: "https://x.com/_tms_solution_",
+    icon: faXTwitter,
     key: "twitter",
   },
   {
-    href: "#",
+    href: "https://www.instagram.com/total_mobility_solution/",
     icon: faInstagram,
     key: "instagram",
   },
@@ -41,8 +41,8 @@ const footerColumns = [
     title: "Company",
     links: [
       { label: "Our Story", to: pageRoutes.ourStory },
-      { label: "Why TMS?", to: "#" },
       { label: "Into The Future", to: "#" },
+      { label: "Blog", to: "#" },
     ],
   },
   {

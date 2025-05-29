@@ -1,1 +1,28 @@
 @use "../../../../shared/tms-styles.scss" as styles;
+
+.testimonials-grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: stretch;
+  max-width: 1000px;
+
+  @include styles.media(styles.$min-xs) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include styles.media(styles.$min-md) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.testimonials-name {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: styles.rem(14);
+}
+
+.testimonials-company {
+  font-size: styles.rem(14);
+  font-style: italic;
+}

@@ -14,6 +14,7 @@ interface ButtonProps {
   isTertiary?: boolean;
   onClick?: (event: SyntheticEvent) => void;
   to?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 function Button(props: ButtonProps) {
@@ -28,6 +29,7 @@ function Button(props: ButtonProps) {
     isTertiary,
     onClick,
     to,
+    type,
   } = props;
   let className = "";
   if (isPrimary) className = "btn-primary";
@@ -49,14 +51,23 @@ function Button(props: ButtonProps) {
     );
   } else if (href) {
     button = (
-      <a className={`btn ${className} ${classNameProp}`} href={href}>
+      <a
+        className={`btn ${className} ${classNameProp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={href}
+      >
         {Icon && <Icon />}
         {children && children}
       </a>
     );
   } else {
     button = (
-      <button className={`btn ${className} ${classNameProp}`} onClick={onClick}>
+      <button
+        className={`btn ${className} ${classNameProp}`}
+        onClick={onClick}
+        type={type}
+      >
         {children}
       </button>
     );

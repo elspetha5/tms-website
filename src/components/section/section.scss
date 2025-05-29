@@ -1,0 +1,14 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.home-section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.home-section-title {
+  font-size: styles.rem(30);
+  margin-bottom: 40px;
+  text-align: center;
+}

@@ -1,1 +1,19 @@
 @use "../../../../shared/tms-styles.scss" as styles;
+
+.affiliate-img-container {
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.affiliate-img {
+  max-height: 60px;
+  max-width: 160px;
+}
+
+.affiliate-img-apple {
+  margin: 0 -25px;
+}

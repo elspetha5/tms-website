@@ -14,10 +14,19 @@ function Navbar() {
     pathname !== pageRoutes.getStarted &&
     pathname !== pageRoutes.supportRequest;
 
+  function scrollToTop() {
+    if (hash === pageRoutes.homeScroll.substring(1)) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }
+
   const navbarLinks = [
     {
       label: "Home",
-      to: hash ? pageRoutes.homeScroll : pageRoutes.home,
+      to: hash || pathname === "/" ? pageRoutes.homeScroll : pageRoutes.home,
       isActive:
         `${pathname}${hash}` === pageRoutes.home ||
         hash === pageRoutes.homeScroll.substring(1),
@@ -67,6 +76,7 @@ function Navbar() {
                     to={link.to}
                     isPrimary={link.label === "Get Started"}
                     key={link.label}
+                    onClick={scrollToTop}
                   >
                     {link.label}
                   </Button>

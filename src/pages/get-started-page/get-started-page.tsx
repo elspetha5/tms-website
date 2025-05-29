@@ -1,7 +1,367 @@
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+
+import Section from "../../components/section/section";
+import { getStartedGoogleSheetUrl } from "../../shared/constants";
+import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
+import Button from "../../library/button/button";
+
 import "./get-started-page.scss";
 
+const initFormFields: FormField[] = [
+  {
+    name: "Name",
+    placeholder: "Your name",
+    isRequired: true,
+  },
+  {
+    name: "Email",
+    placeholder: "Your company email",
+    isRequired: true,
+    type: "email",
+  },
+  {
+    name: "Company name",
+    placeholder: "Your company name",
+    isRequired: true,
+  },
+  {
+    name: "Website",
+    placeholder: "Your company website",
+    isRequired: true,
+  },
+  {
+    label: "# of corporate owned devices",
+    name: "Corporate owned",
+    isRequired: true,
+    type: "number",
+  },
+  {
+    label: "# of bring your own devices",
+    name: "BYOD",
+    isRequired: true,
+    type: "number",
+  },
+  {
+    label: "What is your preferred mobile platform?",
+    name: "Mobile platform",
+    isRequired: true,
+    selectOptions: ["iOS", "Android"],
+  },
+  {
+    label: "Are you concerned about on-device security?",
+    name: "Security",
+    isRequired: true,
+    selectOptions: ["Yes very!", "Not really", "Tell me more"],
+  },
+  {
+    label:
+      "Do you have an on-device real-time backup and recovery solution in place?",
+    name: "Backup and Recovery",
+    isRequired: true,
+    selectOptions: [
+      "I'm backed up through M360 or Google Workspace",
+      "I don't know",
+      "Tell me more",
+    ],
+  },
+  {
+    label: "When would you like to get started?",
+    name: "Get started",
+    isRequired: true,
+    selectOptions: ["I'm ready now", "Within 30 days", "Exploring my options"],
+  },
+  {
+    name: "More details",
+    placeholder:
+      "Please share any additional details about your fleet of mobile devices",
+    isRequired: false,
+    isTextArea: true,
+  },
+];
+
 function GetStartedPage() {
-  return <div>get started</div>;
+  const {
+    formFields,
+    handleChange,
+    handleNumberKeyDown,
+    handleSubmit,
+    isSubmitting,
+    submitStatus,
+    submitMessage,
+    resetForm,
+  } = useForm(initFormFields, getStartedGoogleSheetUrl);
+
+  return (
+    <Section title="Get Started with TMS">
+      <Box
+        component="form"
+        sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+        noValidate
+        autoComplete="off"
+      >
+        <div className="form-group-container">
+          <div className="form-group">
+            {formFields.map((field, i) => {
+              if (i < 2)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error}
+                    fullWidth
+                    helperText={field.errorMessage || field.label}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onKeyDown={
+                      field.type === "number"
+                        ? handleNumberKeyDown
+                        : () => {
+                            return;
+                          }
+                    }
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+          <div className="form-group">
+            {formFields.map((field, i) => {
+              if (i === 2 || i === 3)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error || field.label}
+                    fullWidth
+                    helperText={field.errorMessage}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onKeyDown={
+                      field.type === "number"
+                        ? handleNumberKeyDown
+                        : () => {
+                            return;
+                          }
+                    }
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+          <div className="form-group">
+            <div>Number of devices:</div>
+            {formFields.map((field, i) => {
+              if (i === 4 || i === 5)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error}
+                    fullWidth
+                    helperText={field.errorMessage || field.label}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onKeyDown={
+                      field.type === "number"
+                        ? handleNumberKeyDown
+                        : () => {
+                            return;
+                          }
+                    }
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+          <div className="form-group">
+            {formFields.map((field, i) => {
+              if (i === 6 || i === 7)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error}
+                    fullWidth
+                    helperText={field.errorMessage || field.label}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onKeyDown={
+                      field.type === "number"
+                        ? handleNumberKeyDown
+                        : () => {
+                            return;
+                          }
+                    }
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+          <div className="form-group">
+            {formFields.map((field, i) => {
+              if (i === 8 || i === 9)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error}
+                    fullWidth
+                    helperText={field.errorMessage || field.label}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onKeyDown={
+                      field.type === "number"
+                        ? handleNumberKeyDown
+                        : () => {
+                            return;
+                          }
+                    }
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+          <div className="form-group">
+            {formFields.map((field, i) => {
+              if (i === 10)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error}
+                    fullWidth
+                    helperText={field.errorMessage || field.label}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onKeyDown={
+                      field.type === "number"
+                        ? handleNumberKeyDown
+                        : () => {
+                            return;
+                          }
+                    }
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+        </div>
+      </Box>
+      <Button
+        type="submit"
+        className="get-started-btn"
+        isPrimary
+        isDisabled={isSubmitting}
+        onClick={
+          isSubmitting
+            ? () => {
+                return;
+              }
+            : handleSubmit
+        }
+      >
+        {isSubmitting ? "Submitting..." : "Submit"}
+      </Button>
+    </Section>
+  );
 }
 
 export default GetStartedPage;

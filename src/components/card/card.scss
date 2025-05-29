@@ -1,0 +1,32 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.card-container {
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card-background-blue {
+  background-color: styles.$extra-light-blue;
+  color: white;
+}
+
+.card-background-dark-grey {
+  background-color: styles.$dark-grey;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
+}
+
+.card-background-light-grey {
+  background-color: styles.$extra-light-grey;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
+}
+
+.card-background-black {
+  background-color: black;
+  color: white;
+}
+
+.card-background-white {
+  background-color: white;
+}
