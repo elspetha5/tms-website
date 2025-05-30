@@ -15,7 +15,7 @@ import "./footer.scss";
 
 const socialBtns = [
   {
-    href: "https://www.linkedin.com/in/total-mobility-solution-b89b19353/",
+    href: "https://www.linkedin.com/company/total-mobility-solution-provider",
     icon: faLinkedin,
     key: "linked in",
   },

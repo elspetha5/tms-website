@@ -58,7 +58,7 @@ const initFormFields: FormField[] = [
   {
     label:
       "Do you have an on-device real-time backup and recovery solution in place?",
-    name: "Backup and Recovery",
+    name: "Backup and recovery",
     isRequired: true,
     selectOptions: [
       "I'm backed up through M360 or Google Workspace",
