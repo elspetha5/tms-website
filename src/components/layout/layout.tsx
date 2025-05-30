@@ -7,8 +7,6 @@ import "./layout.scss";
 
 function Layout() {
   return (
-    // create container component for margins of inner content
-
     // Make a toast notification that pops from right bottom after 30s
     // Ready to get started with button
     // user closes it, but they can pull it back out again if they click

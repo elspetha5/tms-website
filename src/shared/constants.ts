@@ -15,4 +15,7 @@ export const pageRoutes = {
   partners: "/partners",
   pricing: "/#pricing",
   faqs: "/#faqs",
+  login: "/login",
+  clientDashboard: "/client-dashboard",
+  invoiceForm: "/invoice-form",
 };
