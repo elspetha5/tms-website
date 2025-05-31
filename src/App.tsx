@@ -96,7 +96,7 @@ function App() {
             />
           </Route>
 
-          <Route
+          {/* <Route
             path="*"
             element={
               <div>
@@ -104,7 +104,7 @@ function App() {
                 <Link to={pageRoutes.home}>Go Home</Link>
               </div>
             }
-          />
+          /> */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>
