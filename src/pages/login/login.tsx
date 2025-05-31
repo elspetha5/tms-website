@@ -11,56 +11,59 @@ import InputLabel from "@mui/material/InputLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-import useForm from "../../shared/hooks/use-form/use-form";
+import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
 import Button from "../../library/button/button";
 import Section from "../../components/section/section";
 import { pageRoutes } from "../../shared/constants";
 
 import "./login.scss";
 
-const loginFields = [
+const initLoginFields: FormField[] = [
   {
     label: "Email",
     name: "email",
     isRequired: true,
+    type: "email",
   },
   {
     label: "Password",
     name: "password",
     isRequired: true,
+    type: "password",
   },
 ];
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { formFields, handleBlur, handleChange, isError } =
+    useForm(initLoginFields);
+  const emailField = formFields.find((field) => field.name === "email")[0];
+  const passwordField = formFields.find(
+    (field) => field.name === "password"
+  )[0];
   const [showPassword, setShowPassword] = useState(false);
   const { login, authError } = useAuth() as {
     login: (email: string, password: string) => {};
     authError: any;
   };
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email || !password) {
-      setError("Please fill in both email and password");
+    setIsSubmitting(true);
+    if (isError) {
       return;
     }
 
-    setError("");
-    setIsLoading(true);
-
     try {
-      await login(email, password);
+      await login(emailField.value, passwordField.value);
       navigate(pageRoutes.invoiceForm);
     } catch (firebaseError: any) {
       console.error("Login component caught error:", firebaseError);
       setError(authError || "Failed to log in. Please check your credentials.");
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   }
 
@@ -74,20 +77,18 @@ function Login() {
       >
         <div>
           <TextField
-            disabled={isLoading}
-            error={Boolean(error)}
+            disabled={isSubmitting}
+            error={Boolean(error) || emailField.error}
             fullWidth
-            helperText={error}
-            id="email"
-            label="Email"
-            name="email"
-            onChange={(e) => {
-              e.preventDefault();
-              setEmail(e.target.value);
-            }}
+            helperText={error || emailField.errorMessage}
+            id={emailField.name}
+            label={emailField.label}
+            name={emailField.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
             required
-            type="email"
-            value={email}
+            type={emailField.type}
+            value={emailField.value}
             variant="outlined"
           />
         </div>
@@ -96,12 +97,10 @@ function Login() {
             <InputLabel htmlFor="login-password">Password</InputLabel>
             <OutlinedInput
               id="login-password"
-              label="Password"
-              onChange={(e) => {
-                e.preventDefault();
-                setPassword(e.target.value);
-              }}
-              value={password}
+              label={passwordField.label}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={passwordField.value}
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -133,10 +132,10 @@ function Login() {
       <Button
         type="submit"
         isPrimary
-        isDisabled={isLoading}
+        isDisabled={isSubmitting || isError}
         onClick={handleSubmit}
       >
-        {isLoading ? "Logging in..." : "Login"}
+        {isSubmitting ? "Logging in..." : "Login"}
       </Button>
     </Section>
   );

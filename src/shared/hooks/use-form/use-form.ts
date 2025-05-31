@@ -22,13 +22,14 @@ export interface FormField {
   value?: string;
 }
 
-function useForm(fieldsBlueprint: FormField[], webAppUrl: string) {
+function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
   const memoizedInitialState = useMemo(
     () => createInitialFormState(fieldsBlueprint),
     [fieldsBlueprint]
   );
 
   const [formFields, setFormFields] = useState(memoizedInitialState);
+  const [isError, setIsError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null
@@ -61,42 +62,75 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl: string) {
     }
   }
 
-  async function handleSubmit(e) {
+  function handleValidation(field) {
+    let updatedField = { ...field, error: false, errorMessage: "" };
+    let isError = false;
+
+    if (
+      updatedField.type === "email" &&
+      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(
+        updatedField.value
+      )
+    ) {
+      updatedField = {
+        ...updatedField,
+        error: true,
+        errorMessage: "Not a valid email address",
+      };
+      isError = true;
+    }
+    if (updatedField.isRequired && !updatedField.value.trim()) {
+      updatedField = {
+        ...updatedField,
+        error: true,
+        errorMessage: "This field is required.",
+      };
+      isError = true;
+    }
+
+    setIsError(isError);
+    return updatedField;
+  }
+
+  function handleBlur(e) {
+    const { name } = e.target;
+
+    setFormFields((prevFields) => {
+      return prevFields.map((field) => {
+        if (field.name === name) {
+          return handleValidation(field);
+        }
+        return field;
+      });
+    });
+  }
+
+  async function handleSheetSubmit(e) {
     e.preventDefault();
+    setIsError(false);
     setIsSubmitting(true);
     setSubmitStatus(null);
     setSubmitMessage("");
 
-    let hasOverallValidationError = false;
-    const validatedFields = formFields.map((field) => {
-      if (field.isRequired && !field.value.trim()) {
-        hasOverallValidationError = true;
-        return {
-          ...field,
-          error: true,
-          errorMessage: "This field is required.",
-        };
-      }
-      if (
-        field.type === "email" &&
-        !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(field.value)
-      ) {
-        hasOverallValidationError = true;
-        return {
-          ...field,
-          error: true,
-          errorMessage: "Not a valid email address",
-        };
-      }
-      return { ...field, error: false, errorMessage: "" };
+    let isFormValid = true;
+
+    await setFormFields((prevFields) => {
+      const validatedFields = prevFields.map((field) => {
+        const updatedField = handleValidation(field);
+        if (updatedField.error) {
+          isFormValid = false;
+        }
+        return updatedField;
+      });
+
+      return validatedFields;
     });
 
-    setFormFields(validatedFields);
-
-    if (hasOverallValidationError) {
+    if (!isFormValid) {
       setSubmitStatus("error");
       setSubmitMessage("Please correct the highlighted fields and try again");
       setIsSubmitting(false);
+      setIsError(true);
       return;
     }
 
@@ -105,23 +139,25 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl: string) {
       dataToSubmit.append(field.name, field.value);
     });
 
-    try {
-      await fetch(webAppUrl, {
-        method: "POST",
-        mode: "no-cors",
-        cache: "no-cache",
-        body: dataToSubmit,
-      });
+    if (webAppUrl) {
+      try {
+        await fetch(webAppUrl, {
+          method: "POST",
+          mode: "no-cors",
+          cache: "no-cache",
+          body: dataToSubmit,
+        });
 
-      setSubmitStatus("success");
-      setSubmitMessage("Your request has been sent successfully!");
-      setFormFields(memoizedInitialState);
-    } catch (error) {
-      console.error("Submission error:", error);
-      setSubmitStatus("error");
-      setSubmitMessage("Failed to send request. Please try again later.");
-    } finally {
-      setIsSubmitting(false);
+        setSubmitStatus("success");
+        setSubmitMessage("Your request has been sent successfully!");
+        setFormFields(memoizedInitialState);
+      } catch (error) {
+        console.error("Submission error:", error);
+        setSubmitStatus("error");
+        setSubmitMessage("Failed to send request. Please try again later.");
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   }
 
@@ -134,9 +170,11 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl: string) {
 
   return {
     formFields,
+    handleBlur,
     handleChange,
     handleNumberKeyDown,
-    handleSubmit,
+    handleSheetSubmit,
+    isError,
     isSubmitting,
     submitStatus,
     submitMessage,

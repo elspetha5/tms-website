@@ -11,9 +11,24 @@
 
 .form-group {
   text-align: center;
+
+  @include styles.media(styles.$min-xs) {
+    text-align: left;
+  }
 }
 
 .get-started-btn {
-  margin-top: 50px;
+  margin: 20px 0 10px;
   font-size: styles.rem(18);
+}
+
+.get-started-major-label {
+  width: 100%;
+  margin-left: 8px;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.get-started-first-major-label {
+  margin-top: 10px;
 }

@@ -1,0 +1,40 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.message {
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: styles.rem(14);
+  scroll-margin-top: 120px;
+}
+
+.message-info {
+  border: 1px solid styles.$info;
+  color: styles.$info;
+  background-color: styles.$info-background;
+}
+
+.message-warning {
+  border: 1px solid styles.$warning;
+  color: styles.$warning;
+  background-color: styles.$warning-background;
+}
+
+.message-error {
+  border: 1px solid styles.$error;
+  color: styles.$error;
+  background-color: styles.$error-background;
+}
+
+.message-success {
+  border: 1px solid styles.$success;
+  color: styles.$success;
+  background-color: styles.$success-background;
+}
+
+.message-icon {
+  margin-right: 10px;
+  margin-top: 3px;
+}

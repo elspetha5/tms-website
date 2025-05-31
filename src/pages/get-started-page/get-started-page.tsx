@@ -1,11 +1,12 @@
+import { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 
 import Section from "../../components/section/section";
-import { getStartedGoogleSheetUrl } from "../../shared/constants";
 import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
 import Button from "../../library/button/button";
+import Message from "../../components/message/message";
 
 import "./get-started-page.scss";
 
@@ -14,6 +15,16 @@ const initFormFields: FormField[] = [
     name: "Name",
     placeholder: "Your name",
     isRequired: true,
+  },
+  {
+    name: "Company title",
+    placeholder: "Your company title",
+    isRequired: false,
+  },
+  {
+    name: "Phone",
+    placeholder: "Your phone number",
+    isRequired: false,
   },
   {
     name: "Email",
@@ -32,13 +43,13 @@ const initFormFields: FormField[] = [
     isRequired: true,
   },
   {
-    label: "# of corporate owned devices",
-    name: "Corporate owned",
+    label: "# of company-owned devices",
+    name: "Corporate-owned",
     isRequired: true,
     type: "number",
   },
   {
-    label: "# of bring your own devices",
+    label: "# of employee-owned devices",
     name: "BYOD",
     isRequired: true,
     type: "number",
@@ -61,7 +72,7 @@ const initFormFields: FormField[] = [
     name: "Backup and recovery",
     isRequired: true,
     selectOptions: [
-      "I'm backed up through M360 or Google Workspace",
+      "I use M365 or Google Workspace",
       "I don't know",
       "Tell me more",
     ],
@@ -84,282 +95,340 @@ const initFormFields: FormField[] = [
 function GetStartedPage() {
   const {
     formFields,
+    handleBlur,
     handleChange,
     handleNumberKeyDown,
-    handleSubmit,
+    handleSheetSubmit,
+    isError,
     isSubmitting,
     submitStatus,
     submitMessage,
-    resetForm,
-  } = useForm(initFormFields, getStartedGoogleSheetUrl);
+  } = useForm(
+    initFormFields,
+    import.meta.env.VITE_GOOGLE_SHEET_GET_STARTED_URL
+  );
 
   return (
     <Section title="Get Started with TMS">
-      <Box
-        component="form"
-        sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
-        noValidate
-        autoComplete="off"
-      >
-        <div className="form-group-container">
-          <div className="form-group">
-            {formFields.map((field, i) => {
-              if (i < 2)
-                return (
-                  <TextField
-                    disabled={isSubmitting}
-                    error={field.error}
-                    fullWidth
-                    helperText={field.errorMessage || field.label}
-                    id={field.name}
-                    key={field.name}
-                    label={field.name}
-                    multiline={field.isTextArea}
-                    name={field.name}
-                    onChange={handleChange}
-                    onKeyDown={
-                      field.type === "number"
-                        ? handleNumberKeyDown
-                        : () => {
-                            return;
-                          }
-                    }
-                    placeholder={field.placeholder}
-                    required={field.isRequired}
-                    rows={5}
-                    select={Boolean(field.selectOptions)}
-                    type={field.type || "text"}
-                    value={field.value}
-                    variant="outlined"
-                  >
-                    {Boolean(field.selectOptions) &&
-                      field.selectOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                );
-            })}
-          </div>
-          <div className="form-group">
-            {formFields.map((field, i) => {
-              if (i === 2 || i === 3)
-                return (
-                  <TextField
-                    disabled={isSubmitting}
-                    error={field.error || field.label}
-                    fullWidth
-                    helperText={field.errorMessage}
-                    id={field.name}
-                    key={field.name}
-                    label={field.name}
-                    multiline={field.isTextArea}
-                    name={field.name}
-                    onChange={handleChange}
-                    onKeyDown={
-                      field.type === "number"
-                        ? handleNumberKeyDown
-                        : () => {
-                            return;
-                          }
-                    }
-                    placeholder={field.placeholder}
-                    required={field.isRequired}
-                    rows={5}
-                    select={Boolean(field.selectOptions)}
-                    type={field.type || "text"}
-                    value={field.value}
-                    variant="outlined"
-                  >
-                    {Boolean(field.selectOptions) &&
-                      field.selectOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                );
-            })}
-          </div>
-          <div className="form-group">
-            <div>Number of devices:</div>
-            {formFields.map((field, i) => {
-              if (i === 4 || i === 5)
-                return (
-                  <TextField
-                    disabled={isSubmitting}
-                    error={field.error}
-                    fullWidth
-                    helperText={field.errorMessage || field.label}
-                    id={field.name}
-                    key={field.name}
-                    label={field.name}
-                    multiline={field.isTextArea}
-                    name={field.name}
-                    onChange={handleChange}
-                    onKeyDown={
-                      field.type === "number"
-                        ? handleNumberKeyDown
-                        : () => {
-                            return;
-                          }
-                    }
-                    placeholder={field.placeholder}
-                    required={field.isRequired}
-                    rows={5}
-                    select={Boolean(field.selectOptions)}
-                    type={field.type || "text"}
-                    value={field.value}
-                    variant="outlined"
-                  >
-                    {Boolean(field.selectOptions) &&
-                      field.selectOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                );
-            })}
-          </div>
-          <div className="form-group">
-            {formFields.map((field, i) => {
-              if (i === 6 || i === 7)
-                return (
-                  <TextField
-                    disabled={isSubmitting}
-                    error={field.error}
-                    fullWidth
-                    helperText={field.errorMessage || field.label}
-                    id={field.name}
-                    key={field.name}
-                    label={field.name}
-                    multiline={field.isTextArea}
-                    name={field.name}
-                    onChange={handleChange}
-                    onKeyDown={
-                      field.type === "number"
-                        ? handleNumberKeyDown
-                        : () => {
-                            return;
-                          }
-                    }
-                    placeholder={field.placeholder}
-                    required={field.isRequired}
-                    rows={5}
-                    select={Boolean(field.selectOptions)}
-                    type={field.type || "text"}
-                    value={field.value}
-                    variant="outlined"
-                  >
-                    {Boolean(field.selectOptions) &&
-                      field.selectOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                );
-            })}
-          </div>
-          <div className="form-group">
-            {formFields.map((field, i) => {
-              if (i === 8 || i === 9)
-                return (
-                  <TextField
-                    disabled={isSubmitting}
-                    error={field.error}
-                    fullWidth
-                    helperText={field.errorMessage || field.label}
-                    id={field.name}
-                    key={field.name}
-                    label={field.name}
-                    multiline={field.isTextArea}
-                    name={field.name}
-                    onChange={handleChange}
-                    onKeyDown={
-                      field.type === "number"
-                        ? handleNumberKeyDown
-                        : () => {
-                            return;
-                          }
-                    }
-                    placeholder={field.placeholder}
-                    required={field.isRequired}
-                    rows={5}
-                    select={Boolean(field.selectOptions)}
-                    type={field.type || "text"}
-                    value={field.value}
-                    variant="outlined"
-                  >
-                    {Boolean(field.selectOptions) &&
-                      field.selectOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                );
-            })}
-          </div>
-          <div className="form-group">
-            {formFields.map((field, i) => {
-              if (i === 10)
-                return (
-                  <TextField
-                    disabled={isSubmitting}
-                    error={field.error}
-                    fullWidth
-                    helperText={field.errorMessage || field.label}
-                    id={field.name}
-                    key={field.name}
-                    label={field.name}
-                    multiline={field.isTextArea}
-                    name={field.name}
-                    onChange={handleChange}
-                    onKeyDown={
-                      field.type === "number"
-                        ? handleNumberKeyDown
-                        : () => {
-                            return;
-                          }
-                    }
-                    placeholder={field.placeholder}
-                    required={field.isRequired}
-                    rows={5}
-                    select={Boolean(field.selectOptions)}
-                    type={field.type || "text"}
-                    value={field.value}
-                    variant="outlined"
-                  >
-                    {Boolean(field.selectOptions) &&
-                      field.selectOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                );
-            })}
-          </div>
-        </div>
-      </Box>
-      <Button
-        type="submit"
-        className="get-started-btn"
-        isPrimary
-        isDisabled={isSubmitting}
-        onClick={
-          isSubmitting
-            ? () => {
-                return;
-              }
-            : handleSubmit
-        }
-      >
-        {isSubmitting ? "Submitting..." : "Submit"}
-      </Button>
+      {submitStatus && submitMessage && (
+        <Message type={submitStatus} message={submitMessage} />
+      )}
+      {submitStatus !== "success" && (
+        <>
+          <Box
+            component="form"
+            sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+            noValidate
+            autoComplete="off"
+          >
+            <div className="form-group-container">
+              <div className="form-group">
+                <div className="get-started-major-label get-started-first-major-label">
+                  Info:
+                </div>
+                {formFields.map((field, i) => {
+                  if (i < 2)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error}
+                        fullWidth
+                        helperText={field.errorMessage || field.label}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+              <div className="form-group">
+                {formFields.map((field, i) => {
+                  if (i === 2 || i === 3)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error || field.label}
+                        fullWidth
+                        helperText={field.errorMessage}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+              <div className="form-group">
+                {formFields.map((field, i) => {
+                  if (i === 4 || i === 5)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error || field.label}
+                        fullWidth
+                        helperText={field.errorMessage}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+              <div className="form-group">
+                <div className="get-started-major-label">
+                  Number of devices:
+                </div>
+                {formFields.map((field, i) => {
+                  if (i === 6 || i === 7)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error}
+                        fullWidth
+                        helperText={field.errorMessage || field.label}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+              <div className="form-group">
+                <div className="get-started-major-label">Preferences:</div>
+                {formFields.map((field, i) => {
+                  if (i === 8 || i === 9)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error}
+                        fullWidth
+                        helperText={field.errorMessage || field.label}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+              <div className="form-group">
+                {formFields.map((field, i) => {
+                  if (i === 10 || i === 11)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error}
+                        fullWidth
+                        helperText={field.errorMessage || field.label}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+              <div className="form-group">
+                {formFields.map((field, i) => {
+                  if (i === 12)
+                    return (
+                      <TextField
+                        disabled={isSubmitting}
+                        error={field.error}
+                        fullWidth
+                        helperText={field.errorMessage || field.label}
+                        id={field.name}
+                        key={field.name}
+                        label={field.name}
+                        multiline={field.isTextArea}
+                        name={field.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onKeyDown={
+                          field.type === "number"
+                            ? handleNumberKeyDown
+                            : () => {
+                                return;
+                              }
+                        }
+                        placeholder={field.placeholder}
+                        required={field.isRequired}
+                        rows={5}
+                        select={Boolean(field.selectOptions)}
+                        type={field.type || "text"}
+                        value={field.value}
+                        variant="outlined"
+                      >
+                        {Boolean(field.selectOptions) &&
+                          field.selectOptions.map((option) => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
+                      </TextField>
+                    );
+                })}
+              </div>
+            </div>
+          </Box>
+          <Button
+            type="submit"
+            className="get-started-btn"
+            isPrimary
+            isDisabled={isSubmitting || isError}
+            onClick={handleSheetSubmit}
+          >
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </>
+      )}
     </Section>
   );
 }

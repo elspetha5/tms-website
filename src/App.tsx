@@ -22,33 +22,137 @@ import { AuthProvider } from "./shared/contexts/auth-context";
 
 import { pageRoutes } from "./shared/constants";
 
+// function ScrollTo() {
+//   const location = useLocation();
+//   const lastPathname = useRef(location.pathname);
+//   const lastHash = useRef(location.hash);
+
+//   useEffect(() => {
+//     const isNewPage = location.pathname !== lastPathname.current;
+//     lastPathname.current = location.pathname;
+
+//     const hashChanged = location.hash !== lastHash.current;
+//     lastHash.current = location.hash;
+
+//     if (location.hash) {
+//       const id = location.hash.substring(1);
+//       const element = document.getElementById(id);
+
+//       if (element) {
+//         setTimeout(() => {
+//           const elementRect = element.getBoundingClientRect();
+//           const targetScrollY = elementRect.top + window.scrollY - 110;
+
+//           window.scrollTo({
+//             top: targetScrollY,
+//             behavior: "smooth",
+//           });
+//         }, 100);
+//       } else {
+//         window.scrollTo(0, 0);
+//       }
+//     } else if (isNewPage) {
+//       window.scrollTo(0, 0);
+//     }
+//   }, [location]);
+
+//   // useEffect(() => {
+//   //   if (location.hash && location.hash !== lastHash.current) {
+//   //     lastHash.current = location.hash;
+//   //     const id = location.hash.substring(1);
+//   //     const element = document.getElementById(id);
+
+//   //     if (element) {
+//   //       setTimeout(() => {
+//   //         const elementRect = element.getBoundingClientRect();
+//   //         const targetScrollY = elementRect.top + window.scrollY - 110;
+
+//   //         window.scrollTo({
+//   //           top: targetScrollY,
+//   //           behavior: "smooth",
+//   //         });
+//   //       }, 100);
+//   //     }
+//   //   }
+//   // }, [location]);
+
+//   // useEffect(() => {
+//   //   window.scrollTo(0, 0);
+//   // }, [location.pathname]);
+
+//   return null;
+// }
+
 function ScrollTo() {
   const location = useLocation();
-  const lastHash = useRef("");
+  const lastPathname = useRef(location.pathname);
+  const lastHash = useRef(location.hash);
 
   useEffect(() => {
-    if (location.hash && location.hash !== lastHash.current) {
-      lastHash.current = location.hash;
+    console.group("ScrollTo Effect Run"); // Group console messages for clarity
+    console.log("Current Location:", {
+      pathname: location.pathname,
+      hash: location.hash,
+      search: location.search,
+    });
+    console.log("Previous Pathname:", lastPathname.current);
+    console.log("Previous Hash:", lastHash.current);
+
+    const isNewPage = location.pathname !== lastPathname.current;
+    lastPathname.current = location.pathname;
+
+    const hashChanged = location.hash !== lastHash.current;
+    lastHash.current = location.hash;
+
+    if (location.hash) {
+      console.log("--- Attempting hash scroll ---");
       const id = location.hash.substring(1);
       const element = document.getElementById(id);
+      console.log("Target ID from hash:", id);
+      console.log("Element found by ID:", element); // THIS IS CRUCIAL: Is it null?
 
       if (element) {
+        console.log("Element found, scheduling scroll with timeout...");
+        // Increased timeout slightly for better testing
         setTimeout(() => {
           const elementRect = element.getBoundingClientRect();
-          const targetScrollY = elementRect.top + window.scrollY - 110;
+          const currentWindowScrollY = window.scrollY; // Get current scroll before calc
+          const targetScrollY = elementRect.top + currentWindowScrollY - 110;
+
+          console.log("Inside setTimeout - Element Rect Top:", elementRect.top);
+          console.log(
+            "Inside setTimeout - Window ScrollY:",
+            currentWindowScrollY
+          );
+          console.log(
+            "Inside setTimeout - Calculated Target ScrollY:",
+            targetScrollY
+          );
 
           window.scrollTo({
             top: targetScrollY,
             behavior: "smooth",
           });
-        }, 100);
+          console.log(`Successfully attempted scroll to hash: #${id}`);
+        }, 300); // Try a longer timeout for testing, e.g., 300ms or 500ms
+      } else {
+        console.warn(
+          `ELEMENT NOT FOUND for ID: '${id}'. Cannot scroll to hash.`
+        );
+        // If element is not found, what should happen? Currently, it does nothing further.
+        // If you want to scroll to top in this case, uncomment:
+        // window.scrollTo(0, 0);
       }
+    } else if (isNewPage) {
+      console.log("--- New page, no hash. Scrolling to top. ---");
+      window.scrollTo(0, 0);
+    } else {
+      console.log(
+        "--- No scroll action needed (same page, same hash, or only query params changed). ---"
+      );
     }
+    console.groupEnd();
   }, [location]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   return null;
 }
@@ -56,8 +160,8 @@ function ScrollTo() {
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <ScrollTo />
       <AuthProvider>
+        <ScrollTo />
         <Routes>
           <Route path={pageRoutes.home} element={<Layout />}>
             <Route index element={<HomePage />} />

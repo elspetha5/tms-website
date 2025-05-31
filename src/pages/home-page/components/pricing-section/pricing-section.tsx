@@ -12,7 +12,7 @@ import "./pricing-section.scss";
 const caveatsArr = [
   "All prices based on at least 100 devices managed",
   "Onboarding for initial devices only is $199/device",
-  "Published pricing is per device/moth and is all-inclusive",
+  "Published pricing is per device/month and is all-inclusive",
 ];
 
 const pricingCardsArr = [
@@ -37,12 +37,12 @@ const pricingCardsArr = [
   },
   {
     title: "Add ons",
-    subtitle: "What about device and data security?",
+    subtitle: "What about device security and data backup?",
     price: "+$5.99",
     items: [
       "On-device security and SMS-phishing prevention",
       "On-device real-time backup and recovery",
-      "24/7/365 suppor",
+      "24/7/365 support",
     ],
     check: false,
     backgroundColor: backgroundColors.lightGrey,

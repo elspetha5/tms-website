@@ -5,14 +5,15 @@ import ContentContainer from "../content-container/content-container";
 import "./section.scss";
 
 interface SectionProps {
+  className?: string;
   id?: string;
   title: string;
 }
 
 function Section({ children, ...props }: PropsWithChildren<SectionProps>) {
-  const { id, title } = props;
+  const { className, id, title } = props;
   return (
-    <div id={id}>
+    <div className={className} id={id}>
       <ContentContainer>
         <div className="section-container">
           <div className="section-title">{title}</div>

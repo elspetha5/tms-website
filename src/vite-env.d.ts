@@ -9,6 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_FIREBASE_APP_ID: string;
   readonly VITE_FIREBASE_MEASUREMENT_ID?: string;
   readonly VITE_FIREBASE_DB_URL?: string;
+  readonly VITE_GOOGLE_SHEET_GET_STARTED_URL: string;
 }
 
 interface ImportMeta {
