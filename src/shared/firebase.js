@@ -3,15 +3,14 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBHxTzJR7QzDD8Oqwb3TCi6OY3zsRRWWmw",
-  authDomain: "total-mobility-solution-6c7cc.firebaseapp.com",
-  databaseURL:
-    "https://total-mobility-solution-6c7cc-default-rtdb.firebaseio.com",
-  projectId: "total-mobility-solution-6c7cc",
-  storageBucket: "total-mobility-solution-6c7cc.firebasestorage.app",
-  messagingSenderId: "1002124974884",
-  appId: "1:1002124974884:web:cede353a2c7ae5c3f731b1",
-  measurementId: "G-C6N2S710TM",
+  apiKey: import.meta.env.VITE_FIREBASE_NEW_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
