@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,7 +9,7 @@ import Message from "../../components/message/message";
 
 import "./get-started-page.scss";
 
-const initFormFields: FormField[] = [
+const initGetStartedFields: FormField[] = [
   {
     name: "Name",
     placeholder: "Your name",
@@ -51,7 +50,7 @@ const initFormFields: FormField[] = [
   {
     label: "# of employee-owned devices",
     name: "BYOD",
-    isRequired: true,
+    isRequired: false,
     type: "number",
   },
   {
@@ -104,7 +103,7 @@ function GetStartedPage() {
     submitStatus,
     submitMessage,
   } = useForm(
-    initFormFields,
+    initGetStartedFields,
     import.meta.env.VITE_GOOGLE_SHEET_GET_STARTED_URL
   );
 
@@ -420,7 +419,7 @@ function GetStartedPage() {
           </Box>
           <Button
             type="submit"
-            className="get-started-btn"
+            className="form-btn"
             isPrimary
             isDisabled={isSubmitting || isError}
             onClick={handleSheetSubmit}

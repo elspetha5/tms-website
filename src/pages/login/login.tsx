@@ -78,9 +78,9 @@ function Login() {
         <div>
           <TextField
             disabled={isSubmitting}
-            error={Boolean(error) || emailField.error}
+            error={Boolean(error)}
             fullWidth
-            helperText={error || emailField.errorMessage}
+            helperText={error}
             id={emailField.name}
             label={emailField.label}
             name={emailField.name}

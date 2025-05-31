@@ -51,6 +51,7 @@ const footerColumns = [
       { label: "Contact", href: "mailto:contact@totalmobilitysolution.com" },
       { label: "Partners", to: pageRoutes.partners },
       { label: "Support Request", to: pageRoutes.supportRequest },
+      // { label: "Login", to: pageRoutes.login },
     ],
   },
 ];
