@@ -11,7 +11,7 @@ function HeroSection() {
         <div className="hero-inner-container">
           <div className="hero-content">
             <div className="hero-title bold">
-              TMS Is Like Oxygen For Your Devices. Breathe Easy!
+              Total Control. Total Security. Total Mobility.
             </div>
             <div className="hero-subtitle bold">
               The fastest and easiest way to manage, secure, backup and recover

@@ -14,8 +14,8 @@ function Section({ children, ...props }: PropsWithChildren<SectionProps>) {
   return (
     <div id={id}>
       <ContentContainer>
-        <div className="home-section-container">
-          <div className="home-section-title">{title}</div>
+        <div className="section-container">
+          <div className="section-title">{title}</div>
           {children}
         </div>
       </ContentContainer>

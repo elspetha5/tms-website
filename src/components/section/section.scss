@@ -1,13 +1,13 @@
 @use "../../shared/tms-styles.scss" as styles;
 
-.home-section-container {
+.section-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
-.home-section-title {
+.section-title {
   font-size: styles.rem(30);
   margin-bottom: 40px;
   text-align: center;

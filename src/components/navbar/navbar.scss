@@ -13,10 +13,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+
+  @include styles.media(styles.$min-xs) {
+    padding: 20px 30px;
+  }
+
+  @include styles.media(styles.$min-sm) {
+    padding: 20px 40px;
+  }
 }
 
 .nav-logo {
-  width: 188px;
+  width: 125px;
+
+  @include styles.media(styles.$min-xs) {
+    width: 160px;
+  }
+
+  @include styles.media(styles.$min-sm) {
+    width: 188px;
+  }
 }
 
 .nav-links-container {

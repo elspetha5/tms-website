@@ -55,7 +55,7 @@ function ScrollTo() {
 
 function App() {
   return (
-    <BrowserRouter basename="/tms-website/">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ScrollTo />
       <AuthProvider>
         <Routes>
