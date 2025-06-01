@@ -1,0 +1,14 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+
+  background-image: repeating-linear-gradient(
+    styles.$extra-light-grey,
+    styles.$extra-light-blue,
+    styles.$extra-light-grey 2000px
+  );
+}

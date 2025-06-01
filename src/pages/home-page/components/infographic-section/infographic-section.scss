@@ -1,7 +1,7 @@
 @use "../../../../shared/tms-styles.scss" as styles;
 
 .infographic-section-container {
-  padding: 70px 20px;
+  padding: 30px 5px;
   text-align: right;
   background-color: styles.$medium-grey;
   display: flex;
@@ -10,6 +10,7 @@
   border-top: 5px solid white;
 
   @include styles.media(styles.$min-md) {
+    padding: 30px;
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
@@ -19,22 +20,20 @@
 .infographic-title {
   color: white;
   font-size: styles.rem(24);
-  margin: 20px 0 50px;
-  //   margin-left: 150px;
-  margin-left: 30px;
-  margin-top: 35px;
-  margin-right: 50px;
   text-align: center;
 
   @include styles.media(styles.$min-md) {
     text-align: right;
+    margin-top: 100px;
   }
 }
 
 .infographic-img {
   width: 100%;
-  max-width: 800px;
-  //   margin-bottom: 50px;
+  max-width: 900px;
+  margin-bottom: 50px;
+  margin-top: 37px;
+  margin-left: 10px;
 }
 
 .infographic-arrow-icon-left {
@@ -49,3 +48,119 @@
     display: none;
   }
 }
+
+// .build-container {
+//   position: relative;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-width: 100%;
+//   height: 0;
+//   padding-bottom: 36vw;
+//   // overflow: hidden;
+// }
+
+// .infographic-graphic-container {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .infographic-graphic-center {
+//   position: relative;
+//   width: 15vw;
+//   height: 0;
+//   padding-bottom: 15vw;
+//   border-radius: 50%;
+//   background-color: styles.$extra-light-grey;
+//   z-index: 2;
+// }
+
+// .infographic-graphic-logo {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   object-fit: contain;
+//   padding: 10%;
+//   box-sizing: border-box;
+// }
+
+// .infographic-surrounding-circles-container {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .infographic-info-circle-container {
+//   position: absolute;
+//   width: 5.5vw;
+//   height: 5.5vw;
+//   border-radius: 50%;
+//   background-color: styles.$tms-blue;
+//   color: white;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: center;
+//   cursor: pointer;
+//   z-index: 1;
+//   top: 100%;
+//   left: 50%;
+// }
+
+// .infographic-info-circle-container[data-circle-id="1"] {
+//   transform: translate(calc(-50% + 2.5vw), calc(-50% - 15.2vw));
+// }
+// .infographic-info-circle-container[data-circle-id="2"] {
+//   transform: translate(calc(-50% + 9.5vw), calc(-50% - 12.2vw));
+// }
+// .infographic-info-circle-container[data-circle-id="3"] {
+//   transform: translate(calc(-50% + 13.8vw), calc(-50% - 6.3vw));
+// }
+// .infographic-info-circle-container[data-circle-id="4"] {
+//   transform: translate(calc(-50% + 15vw), calc(-50% + 1vw));
+// }
+// .infographic-info-circle-container[data-circle-id="5"] {
+//   transform: translate(calc(-50% + 13vw), calc(-50% + 8vw));
+// }
+// .infographic-info-circle-container[data-circle-id="6"] {
+//   transform: translate(calc(-50% + 7.8vw), calc(-50% + 13.3vw));
+// }
+// .infographic-info-circle-container[data-circle-id="7"] {
+//   transform: translate(calc(-50% + 0.5vw), calc(-50% + 15.2vw));
+// }
+// .infographic-info-circle-container[data-circle-id="8"] {
+//   transform: translate(
+//     calc(-50% - 6.7vw),
+//     calc(-50% + 14vw)
+//   ); /* Note the negative X */
+// }
+// .infographic-info-circle-container[data-circle-id="9"] {
+//   transform: translate(calc(-50% - 12.2vw), calc(-50% + 9.3vw));
+// }
+// .infographic-info-circle-container[data-circle-id="10"] {
+//   transform: translate(calc(-50% - 15.3vw), calc(-50% + 2.5vw));
+// }
+// .infographic-info-circle-container[data-circle-id="11"] {
+//   transform: translate(calc(-50% - 15vw), calc(-50% - 4.6vw));
+// }
+// .infographic-info-circle-container[data-circle-id="12"] {
+//   transform: translate(calc(-50% - 11.2vw), calc(-50% - 10.7vw));
+// }
+// .infographic-info-circle-container[data-circle-id="13"] {
+//   transform: translate(calc(-50% - 5vw), calc(-50% - 14.8vw));
+// }
+
+// .infographic-info-circle-text {
+//   display: none;
+// }

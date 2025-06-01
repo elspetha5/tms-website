@@ -1,0 +1,40 @@
+@use "../../../../shared/tms-styles.scss" as styles;
+
+.blog-post-container {
+  width: 93%;
+  max-width: 800px;
+  padding: 20px 15px 0;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+
+  @include styles.media(styles.$min-sm) {
+    width: 85%;
+    padding: 20px 30px 0;
+  }
+
+  @include styles.media(styles.$min-md) {
+    width: 70%;
+    padding: 20px 40px 0;
+  }
+}
+
+h1 {
+  font-size: styles.rem(25);
+}
+
+h2 {
+  font-size: styles.rem(21);
+}
+
+.blog-post-btn-container {
+  text-align: right;
+  width: 100%;
+}
+
+.blog-post-btn {
+  margin: 0 20px;
+}

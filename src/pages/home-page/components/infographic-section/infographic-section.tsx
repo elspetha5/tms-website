@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { firebaseImgUrl } from "../../../../shared/constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -5,7 +6,7 @@ import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons/faCircleC
 import { faCircleChevronDown } from "@fortawesome/free-solid-svg-icons/faCircleChevronDown";
 import {
   faCloudArrowUp,
-  faCloudArrowDown,
+  // faCloudArrowDown,
   faFolderOpen,
   faArrowsRotate,
   faForwardStep,
@@ -22,73 +23,111 @@ import {
 
 import "./infographic-section.scss";
 
-const infoCircle = [
+const infoCircles = [
   {
+    id: "1",
     icon: faCircleChevronDown,
-    name: "On-device backup & recovery",
+    text: "iOS device lifecycle management",
   },
   {
+    id: "2",
     icon: faCircleChevronDown,
-    name: "Containerization",
+    text: "Android device lifecycle management",
   },
   {
+    id: "3",
     icon: faCircleChevronDown,
-    name: "OS update management",
+    text: "TEM procurement & management - Verizon, AT&T, T-Mobile, etc",
   },
   {
+    id: "4",
     icon: faCircleChevronDown,
-    name: "Remote management",
+    text: "Device migration",
   },
   {
+    id: "5",
     icon: faCircleChevronDown,
-    name: "Location history",
+    text: "Full kitting & staging services",
   },
   {
+    id: "6",
     icon: faCircleChevronDown,
-    name: "Geofencing",
+    text: "Device deployment",
   },
   {
+    id: "7",
     icon: faCircleChevronDown,
-    name: "Security management",
+    text: "Spares inventory management",
   },
   {
+    id: "8",
     icon: faCircleChevronDown,
-    name: "Audit & reports",
+    text: "Real-time remote device management",
   },
   {
+    id: "9",
     icon: faCircleChevronDown,
-    name: "Device onboarding",
+    text: "24/7/365 help desk",
   },
   {
+    id: "10",
     icon: faCircleChevronDown,
-    name: "Asset management",
+    text: "On-device security & SMS-phishing prevention",
   },
   {
+    id: "11",
     icon: faCircleChevronDown,
-    name: "Profile management",
+    text: "Device maintenance & repair",
   },
   {
+    id: "12",
     icon: faCircleChevronDown,
-    name: "App management",
+    text: "OS update & apps management",
   },
   {
+    id: "13",
     icon: faCircleChevronDown,
-    name: "iOS & Android device lifecycle management",
+    text: "Real-time on-device backup & recovery",
   },
 ];
 
 function InfographicSection() {
+  const [visibleCircleId, setVisibleCircleId] = useState(null);
+
+  function handleCircleClick(id) {
+    setVisibleCircleId((prevId) => (prevId === id ? null : id));
+  }
+
   return (
     <div className="infographic-section-container">
-      <div className="infographic-graphic-container">
-        <div className="infographic-graphic-center"></div>
-
-        <img
-          className="infographic-img"
-          src={`${firebaseImgUrl}/TMS-infographic-white.svg?alt=media&token=686a2f5d-c63a-4e1d-a3a1-f0351bfd46b3`}
-          alt="TMS Infographic"
-        />
-      </div>
+      {/* <div className="build-container">
+        <div className="infographic-graphic-container">
+          <div className="infographic-graphic-center">
+            <img
+              className="infographic-graphic-logo"
+              src={`${firebaseImgUrl}/TMS-icon-only-logo.png?alt=media&token=d14556ea-9c00-4624-9060-87f322366bc4`}
+              alt="logo"
+            />
+          </div>
+        </div>
+        <div className="infographic-surrounding-circles-container">
+          {infoCircles.map((circ) => (
+            <div
+              key={circ.id}
+              className="infographic-info-circle-container"
+              data-circle-id={circ.id}
+            >
+              <FontAwesomeIcon icon={circ.icon} />
+              <div className="infographic-info-circle-text">{circ.text}</div>
+            </div>
+          ))}
+        </div>
+      </div> */}
+      <img
+        className="infographic-img"
+        src={`${firebaseImgUrl}/New-TMS-infographic-white.svg?alt=media&token=f839fd4c-6316-4519-898e-89ed2ea2e141`}
+        alt="TMS Infographic"
+      />
       <div className="infographic-title bold">
         <FontAwesomeIcon
           className="infographic-arrow-icon-left"

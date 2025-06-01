@@ -34,7 +34,6 @@ function ScrollTo() {
     const isNewPage = location.pathname !== lastPathname.current;
     lastPathname.current = location.pathname;
 
-    const hashChanged = location.hash !== lastHash.current;
     lastHash.current = location.hash;
 
     if (location.hash) {
