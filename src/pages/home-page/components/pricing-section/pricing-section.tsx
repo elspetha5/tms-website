@@ -10,8 +10,7 @@ import { pageRoutes } from "../../../../shared/constants";
 import "./pricing-section.scss";
 
 const caveatsArr = [
-  "All prices based on at least 100 devices managed",
-  "Onboarding for initial devices only is $199/device",
+  "All prices based on 100+ devices managed",
   "Published pricing is per device/month and is all-inclusive",
 ];
 
@@ -19,13 +18,14 @@ const pricingCardsArr = [
   {
     title: "Simple",
     subtitle:
-      "We manage the full lifecycle of your devices with our turn-key solution.",
+      "We manage the full lifecycle of your devices with our turn-key system",
     price: "$14.99",
     items: [
       "Free device fleet audit",
       "Cellular carrier account setup, management, and full-service TEM procurement provider",
+      "Full migration services",
       "All staging services",
-      "Real-time help desk",
+      "Real-time nationwide help desk",
       "Full hardware, software, and services support",
       "Device spares inventory management",
       "Device fleet EOL management",

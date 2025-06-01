@@ -7,19 +7,22 @@ import {
   Link,
 } from "react-router-dom";
 
+import Layout from "./components/layout/layout";
+import PrivateRoute from "./components/private-route/private-route";
+
+import Blog from "./pages/blog/blog";
+import ContactUs from "./pages/contact-us/contact-us";
 import GetStartedPage from "./pages/get-started-page/get-started-page";
 import HomePage from "./pages/home-page/home-page";
 import IntoTheFuturePage from "./pages/into-the-future-page/into-the-future-page";
 import InvoiceForm from "./pages/invoice-form/invoice-form";
 import Login from "./pages/login/login";
-import Layout from "./components/layout/layout";
 import OurStoryPage from "./pages/our-story-page/our-story-page";
 import PartnersPage from "./pages/partners-page/partners-page";
 import SupportRequestPage from "./pages/support-request-page/support-request-page";
 import WhyTmsPage from "./pages/why-tms-page/why-tms-page";
-import PrivateRoute from "./components/private-route/private-route";
-import { AuthProvider } from "./shared/contexts/auth-context";
 
+import { AuthProvider } from "./shared/contexts/auth-context";
 import { pageRoutes } from "./shared/constants";
 
 function ScrollTo() {
@@ -68,31 +71,21 @@ function App() {
           <Route path={pageRoutes.home} element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path={pageRoutes.homeScroll} element={<HomePage />} />
+            <Route path={pageRoutes.ourStory} element={<OurStoryPage />} />
+            <Route path={pageRoutes.getStarted} element={<GetStartedPage />} />
             <Route
-              path={pageRoutes.ourStory.substring(1)}
-              element={<OurStoryPage />}
-            />
-            <Route
-              path={pageRoutes.getStarted.substring(1)}
-              element={<GetStartedPage />}
-            />
-            <Route
-              path={pageRoutes.supportRequest.substring(1)}
+              path={pageRoutes.supportRequest}
               element={<SupportRequestPage />}
             />
             <Route
-              path={pageRoutes.intoTheFuture.substring(1)}
+              path={pageRoutes.intoTheFuture}
               element={<IntoTheFuturePage />}
             />
-            <Route
-              path={pageRoutes.whyTms.substring(1)}
-              element={<WhyTmsPage />}
-            />
-            <Route
-              path={pageRoutes.partners.substring(1)}
-              element={<PartnersPage />}
-            />
-            <Route path={pageRoutes.login.substring(1)} element={<Login />} />
+            <Route path={pageRoutes.whyTms} element={<WhyTmsPage />} />
+            <Route path={pageRoutes.partners} element={<PartnersPage />} />
+            <Route path={pageRoutes.login} element={<Login />} />
+            <Route path={pageRoutes.blog} element={<Blog />} />
+            <Route path={pageRoutes.contactUs} element={<ContactUs />} />
           </Route>
 
           <Route path="/" element={<PrivateRoute />}>

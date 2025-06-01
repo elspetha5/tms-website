@@ -39,6 +39,15 @@
   }
 }
 
+.btn-tertiary {
+  color: styles.$link-blue;
+  font-weight: normal;
+
+  &:hover {
+    color: styles.$link-blue-hover;
+  }
+}
+
 .btn-primary-disabled,
 .btn-secondary-disabled {
   @extend %btn;

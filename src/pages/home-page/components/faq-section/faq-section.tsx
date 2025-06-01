@@ -21,7 +21,7 @@ const initFaqsArr: FaqItem[] = [
     isActive: false,
     question: "What is TMS?",
     answer:
-      "We exclusively support iOS & Android platforms. We provide a mobile device lifecycle management solution that helps organizations manage, secure, and streamline the Corporate-owned and BYOD smartphone and tablet devices that touch their environment.",
+      "We are an MSP with exclusive support for iOS and Android platforms. We provide a mobile device lifecycle management solution that helps organizations manage, secure, and streamline the Corporate-owned and BYOD smartphone and tablet devices that touch their environment.",
     height: "0px",
   },
   {

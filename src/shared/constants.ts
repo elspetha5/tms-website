@@ -5,17 +5,19 @@ export const getStartedGoogleSheetUrl =
   "https://script.google.com/macros/s/AKfycbwT7S3bt42oUicC5pAKciCbn3njpA_zYHOJEafx_17Bc_7a8h6HE8G5yNK-mie-IifY/exec";
 
 export const pageRoutes = {
+  blog: "/blog",
+  clientDashboard: "/client-dashboard",
+  contactUs: "/contact",
+  faqs: "/#faqs",
   home: "/",
   homeScroll: "/#home",
-  ourStory: "/our-story",
-  getStarted: "/get-started",
-  supportRequest: "/support-request",
   intoTheFuture: "/into-the-future",
-  whyTms: "/why-tms",
+  invoiceForm: "/invoice-form",
+  getStarted: "/get-started",
+  login: "/login",
+  ourStory: "/our-story",
   partners: "/partners",
   pricing: "/#pricing",
-  faqs: "/#faqs",
-  login: "/login",
-  clientDashboard: "/client-dashboard",
-  invoiceForm: "/invoice-form",
+  supportRequest: "/support-request",
+  whyTms: "/why-tms",
 };

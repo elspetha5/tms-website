@@ -1,0 +1,18 @@
+@use "../../shared//tms-styles.scss" as styles;
+
+ul {
+  list-style-type: circle;
+}
+
+li {
+  margin-bottom: 10px;
+  list-style-type: circle;
+}
+
+.ul-title {
+  font-weight: 600;
+}
+
+.ul-text {
+  font-size: styles.rem(15);
+}

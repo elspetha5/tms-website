@@ -1,1 +1,6 @@
 @use "../../shared/tms-styles.scss" as styles;
+
+.our-story-paragraph {
+  font-size: styles.rem(15);
+  margin: 25px 0;
+}

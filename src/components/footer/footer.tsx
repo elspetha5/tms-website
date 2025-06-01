@@ -41,14 +41,14 @@ const footerColumns = [
     title: "Company",
     links: [
       { label: "Our Story", to: pageRoutes.ourStory },
-      { label: "Into The Future", to: "#" },
-      { label: "Blog", to: "#" },
+      { label: "Into The Future", to: pageRoutes.intoTheFuture },
+      { label: "Blog", to: pageRoutes.blog },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Contact", href: "mailto:contact@totalmobilitysolution.com" },
+      { label: "Contact", to: pageRoutes.contactUs },
       { label: "Partners", to: pageRoutes.partners },
       { label: "Support Request", to: pageRoutes.supportRequest },
       // { label: "Login", to: pageRoutes.login },
@@ -88,11 +88,7 @@ function Footer() {
               <div className="footer-info-col-title bold">{col.title}</div>
               {col.links.map((link) => (
                 <div key={link.label}>
-                  <Button
-                    to={link.to}
-                    className="footer-link-btn"
-                    href={link.href}
-                  >
+                  <Button to={link.to} className="footer-link-btn">
                     {link.label}
                   </Button>
                 </div>

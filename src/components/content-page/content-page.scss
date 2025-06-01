@@ -1,0 +1,58 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.content-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+
+  background-image: linear-gradient(
+    styles.$extra-light-blue,
+    styles.$extra-light-grey,
+    styles.$extra-light-grey
+  );
+}
+
+.content-page-inner-container {
+  max-width: 800px;
+  background-color: white;
+  margin: 0 25px;
+  padding: 40px 20px;
+
+  @include styles.media(styles.$min-xs) {
+    margin: 0 40px;
+    padding: 40px;
+  }
+
+  @include styles.media(styles.$min-sm) {
+    margin: 0 60px;
+    padding: 40px 80px;
+  }
+}
+
+.content-page-title {
+  font-size: styles.rem(30);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.content-page-top-text {
+  font-size: styles.rem(15);
+}
+
+.content-page-section-title {
+  font-size: styles.rem(20);
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+.content-page-paragraph {
+  font-size: styles.rem(15);
+  margin: 15px 0 0;
+}
+
+.content-page-tagline {
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: styles.rem(15);
+}

@@ -1,1 +1,6 @@
 @use "../../shared/tms-styles.scss" as styles;
+
+.why-tms-tagline-explainer {
+  font-style: italic;
+  font-size: styles.rem(14);
+}

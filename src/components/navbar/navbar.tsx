@@ -56,7 +56,12 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="logo">
-          <Link to={pageRoutes.home} className="logo-link">
+          <Link
+            to={
+              hash || pathname === "/" ? pageRoutes.homeScroll : pageRoutes.home
+            }
+            className="logo-link"
+          >
             <img
               className="nav-logo"
               src={`${firebaseImgUrl}/TMS-logo-no-background.png?alt=media&token=cf8499c6-a5dd-4d14-9a67-85b2e98c87d8`}
