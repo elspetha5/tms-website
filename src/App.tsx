@@ -82,16 +82,16 @@ function App() {
             />
             <Route path={pageRoutes.whyTms} element={<WhyTmsPage />} />
             <Route path={pageRoutes.partners} element={<PartnersPage />} />
-            <Route path={pageRoutes.login} element={<Login />} />
+            {/* <Route path={pageRoutes.login} element={<Login />} /> */}
             <Route path={pageRoutes.blog} element={<Blog />} />
             <Route path={pageRoutes.contactUs} element={<ContactUs />} />
           </Route>
 
           <Route path="/" element={<PrivateRoute />}>
-            <Route
+            {/* <Route
               path={pageRoutes.invoiceForm.substring(1)}
               element={<InvoiceForm />}
-            />
+            /> */}
           </Route>
 
           <Route

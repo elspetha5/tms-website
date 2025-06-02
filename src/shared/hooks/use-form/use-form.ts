@@ -146,6 +146,9 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
           mode: "no-cors",
           cache: "no-cache",
           body: dataToSubmit,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         });
 
         setSubmitStatus("success");

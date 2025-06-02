@@ -62,7 +62,7 @@ function SupportRequestPage() {
     submitMessage,
   } = useForm(
     initSupportRequestFields,
-    import.meta.env.VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL
+    import.meta.env.VITE_NEW_GOOGLE_SHEET_SUPPORT_REQUEST_URL
   );
   const successMsg =
     "Thank you for your Support Request! TMS tech support will contact you very soon.";

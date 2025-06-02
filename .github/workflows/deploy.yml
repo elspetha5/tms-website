@@ -40,6 +40,7 @@ jobs:
           VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
           VITE_GOOGLE_SHEET_GET_STARTED_URL: ${{ secrets.GOOGLE_SHEET_GET_STARTED_URL }}
           VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL: ${{ secrets.GOOGLE_SHEET_SUPPORT_REQUEST_URL }}
+          VITE_NEW_GOOGLE_SHEET_SUPPORT_REQUEST_URL: ${{ secrets.GOOGLE_SHEET_SUPPORT_REQUEST_URL_NEW }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
