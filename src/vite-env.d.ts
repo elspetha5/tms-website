@@ -11,7 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_FIREBASE_DB_URL?: string;
   readonly VITE_GOOGLE_SHEET_GET_STARTED_URL: string;
   readonly VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL: string;
-  readonly VITE_NEW_GOOGLE_SHEET_SUPPORT_REQUEST_URL: string;
+  readonly VITE_GOOGLE_RECAPTCHA_SITE_KEY: string;
 }
 
 interface ImportMeta {

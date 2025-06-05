@@ -31,9 +31,9 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
   const [formFields, setFormFields] = useState(memoizedInitialState);
   const [isError, setIsError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
-    null
-  );
+  const [submitStatus, setSubmitStatus] = useState<
+    "success" | "error" | "warning" | null
+  >(null);
   const [submitMessage, setSubmitMessage] = useState("");
 
   function handleChange(e) {
@@ -134,28 +134,48 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
       return;
     }
 
+    const recaptchaToken = await new Promise((resolve) => {
+      grecaptcha.ready(function () {
+        grecaptcha
+          .execute(import.meta.env.VITE_GOOGLE_RECAPTCHA_SITE_KEY, {
+            action: "submit_form",
+          })
+          .then(function (token) {
+            resolve(token);
+          });
+      });
+    });
+
     const dataToSubmit = new URLSearchParams();
     formFields.forEach((field) => {
       dataToSubmit.append(field.name, field.value);
     });
+    dataToSubmit.append("recaptchaToken", recaptchaToken);
 
     if (webAppUrl) {
       try {
-        await fetch(webAppUrl, {
+        const response = await fetch(webAppUrl, {
           method: "POST",
-          mode: "no-cors",
           cache: "no-cache",
           body: dataToSubmit,
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
         });
 
-        setSubmitStatus("success");
-        setSubmitMessage("Your request has been sent successfully!");
-        setFormFields(memoizedInitialState);
+        const responseData = await response.json();
+        if (responseData.result === "success") {
+          setSubmitStatus("success");
+          setSubmitMessage("Your request has been sent successfully!");
+          setFormFields(memoizedInitialState);
+        } else if (responseData.result === "warning") {
+          setSubmitStatus("warning");
+          setSubmitMessage(responseData.message);
+        } else {
+          setIsError(true);
+          setSubmitStatus("error");
+          setSubmitMessage(responseData.message);
+        }
       } catch (error) {
         console.error("Submission error:", error);
+        setIsError(true);
         setSubmitStatus("error");
         setSubmitMessage("Failed to send request. Please try again later.");
       } finally {
