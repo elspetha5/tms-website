@@ -156,6 +156,7 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
       try {
         const response = await fetch(webAppUrl, {
           method: "POST",
+          mode: "no-cors",
           cache: "no-cache",
           body: dataToSubmit,
         });
