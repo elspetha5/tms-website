@@ -18,7 +18,7 @@ const initGetStartedFields: FormField[] = [
   {
     name: "Company title",
     placeholder: "Your company title",
-    isRequired: false,
+    isRequired: true,
   },
   {
     name: "Phone",
