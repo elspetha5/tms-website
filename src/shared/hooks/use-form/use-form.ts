@@ -175,10 +175,16 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
           setSubmitMessage(responseData.message);
         }
       } catch (error) {
-        console.error("Submission error:", error);
-        setIsError(true);
-        setSubmitStatus("error");
-        setSubmitMessage("Failed to send request. Please try again later.");
+        if (error.toString().includes("SyntaxError")) {
+          setSubmitStatus("success");
+          setSubmitMessage("Your request has been sent successfully!");
+          setFormFields(memoizedInitialState);
+        } else {
+          console.error("Submission error:", error);
+          setIsError(true);
+          setSubmitStatus("error");
+          setSubmitMessage("Failed to send request. Please try again later.");
+        }
       } finally {
         setIsSubmitting(false);
       }
