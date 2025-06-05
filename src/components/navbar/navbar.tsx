@@ -11,7 +11,8 @@ function Navbar() {
   const { pathname, hash } = useLocation();
   const showLinks =
     pathname !== pageRoutes.getStarted &&
-    pathname !== pageRoutes.supportRequest;
+    pathname !== pageRoutes.supportRequest &&
+    pathname !== pageRoutes.partnersForm;
 
   function scrollToTop() {
     if (hash === pageRoutes.homeScroll.substring(1)) {

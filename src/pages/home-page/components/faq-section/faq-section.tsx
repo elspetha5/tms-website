@@ -40,6 +40,14 @@ const initFaqsArr: FaqItem[] = [
       "This is through an app on each device that TMS will manage on your behalf for maximum security.",
     height: "0px",
   },
+  {
+    id: "faq4",
+    isActive: false,
+    question: "What does BYOD mean?",
+    answer:
+      "Great question! Let's start with what Bring Your Own Device (BYOD) does not mean. It does not mean that we can monitor, view, or control your device. The main benefits of BYOD are protecting your data, and consolidating your work and home life.",
+    height: "0px",
+  },
 ];
 
 function FaqSection() {

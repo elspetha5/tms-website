@@ -48,7 +48,7 @@ const footerColumns = [
   {
     title: "Resources",
     links: [
-      { label: "Contact", to: pageRoutes.contactUs },
+      { label: "Contact Us", to: pageRoutes.contactUs },
       { label: "Partners", to: pageRoutes.partners },
       { label: "Support Request", to: pageRoutes.supportRequest },
       // { label: "Login", to: pageRoutes.login },

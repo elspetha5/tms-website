@@ -1,5 +1,7 @@
+import Button from "../../library/button/button";
 import ContentPage from "../../components/content-page/content-page";
 import UnorderedList from "../../components/unordered-list/unordered-list";
+import { pageRoutes } from "../../shared/constants";
 
 import "./why-tms-page.scss";
 
@@ -45,6 +47,12 @@ function WhyTmsPage() {
       </div>
       <div className="why-tms-tagline-explainer">
         Your trusted partner for managed iOS & Android device solutions.
+      </div>
+
+      <div className="cta-center">
+        <Button to={pageRoutes.getStarted} isPrimary>
+          Get Started
+        </Button>
       </div>
     </ContentPage>
   );

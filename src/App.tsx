@@ -18,6 +18,7 @@ import IntoTheFuturePage from "./pages/into-the-future-page/into-the-future-page
 import InvoiceForm from "./pages/invoice-form/invoice-form";
 import Login from "./pages/login/login";
 import OurStoryPage from "./pages/our-story-page/our-story-page";
+import PartnersForm from "./pages/partners-page/partners-form/partners-form";
 import PartnersPage from "./pages/partners-page/partners-page";
 import SupportRequestPage from "./pages/support-request-page/support-request-page";
 import WhyTmsPage from "./pages/why-tms-page/why-tms-page";
@@ -81,6 +82,7 @@ function App() {
               element={<IntoTheFuturePage />}
             />
             <Route path={pageRoutes.whyTms} element={<WhyTmsPage />} />
+            <Route path={pageRoutes.partnersForm} element={<PartnersForm />} />
             <Route path={pageRoutes.partners} element={<PartnersPage />} />
             {/* <Route path={pageRoutes.login} element={<Login />} /> */}
             <Route path={pageRoutes.blog} element={<Blog />} />

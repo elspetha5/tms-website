@@ -2,14 +2,14 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 
-import Section from "../../components/section/section";
-import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
-import Button from "../../library/button/button";
-import Message from "../../components/message/message";
+import Section from "../../../components/section/section";
+import useForm, { FormField } from "../../../shared/hooks/use-form/use-form";
+import Button from "../../../library/button/button";
+import Message from "../../../components/message/message";
 
-import "./get-started-page.scss";
+import "./partners-form.scss";
 
-const initGetStartedFields: FormField[] = [
+const initPartnersFields: FormField[] = [
   {
     name: "Name",
     placeholder: "Your name",
@@ -43,45 +43,16 @@ const initGetStartedFields: FormField[] = [
     isRequired: true,
   },
   {
-    label: "# of company-owned devices",
-    name: "Corporate-owned",
+    label: "Which type of TMS partnership is more appealing?",
+    name: "Partner type",
     isRequired: true,
-    type: "number",
+    selectOptions: ["Referral", "Reseller"],
   },
   {
-    label: "# of employee-owned devices",
-    name: "BYOD",
-    isRequired: false,
-    type: "number",
-  },
-  {
-    label: "What is your preferred mobile platform?",
-    name: "Mobile platform",
+    label: "Do you have any current opportunities?",
+    name: "Opportunities",
     isRequired: true,
-    selectOptions: ["iOS", "Android"],
-  },
-  {
-    label: "Are you concerned about on-device security?",
-    name: "Security",
-    isRequired: true,
-    selectOptions: ["Yes very!", "Not really", "Tell me more"],
-  },
-  {
-    label:
-      "Do you have an on-device real-time backup and recovery solution in place?",
-    name: "Backup and recovery",
-    isRequired: true,
-    selectOptions: [
-      "I use M365 or Google Workspace",
-      "I don't know",
-      "Tell me more",
-    ],
-  },
-  {
-    label: "When would you like to get started?",
-    name: "Get started",
-    isRequired: true,
-    selectOptions: ["I'm ready now", "Within 30 days", "Exploring my options"],
+    selectOptions: ["Yes", "No"],
   },
   {
     name: "More details",
@@ -92,7 +63,7 @@ const initGetStartedFields: FormField[] = [
   },
 ];
 
-function GetStartedPage() {
+function PartnersForm() {
   const {
     formFields,
     handleBlur,
@@ -104,12 +75,12 @@ function GetStartedPage() {
     submitStatus,
     submitMessage,
   } = useForm(
-    initGetStartedFields,
-    import.meta.env.VITE_GOOGLE_SHEET_GET_STARTED_URL
+    initPartnersFields,
+    import.meta.env.VITE_GOOGLE_SHEET_PARTNERS_URL
   );
 
   return (
-    <Section title="Get Started with TMS">
+    <Section title="Become a Partner">
       {submitStatus && submitMessage && (
         <Message type={submitStatus} message={submitMessage} />
       )}
@@ -123,9 +94,6 @@ function GetStartedPage() {
           >
             <div className="form-group-container">
               <div className="form-group">
-                <div className="get-started-major-label get-started-first-major-label">
-                  Info:
-                </div>
                 {formFields.map((field, i) => {
                   if (i < 2)
                     return (
@@ -162,13 +130,13 @@ function GetStartedPage() {
               </div>
               <div className="form-group">
                 {formFields.map((field, i) => {
-                  if (i === 2 || i === 3)
+                  if (i == 2 || i === 3)
                     return (
                       <TextField
                         disabled={isSubmitting}
-                        error={field.error || field.label}
+                        error={field.error}
                         fullWidth
-                        helperText={field.errorMessage}
+                        helperText={field.errorMessage || field.label}
                         id={field.name}
                         key={field.name}
                         label={field.name}
@@ -201,9 +169,9 @@ function GetStartedPage() {
                     return (
                       <TextField
                         disabled={isSubmitting}
-                        error={field.error || field.label}
+                        error={field.error}
                         fullWidth
-                        helperText={field.errorMessage}
+                        helperText={field.errorMessage || field.label}
                         id={field.name}
                         key={field.name}
                         label={field.name}
@@ -231,9 +199,6 @@ function GetStartedPage() {
                 })}
               </div>
               <div className="form-group">
-                <div className="get-started-major-label">
-                  Number of devices:
-                </div>
                 {formFields.map((field, i) => {
                   if (i === 6 || i === 7)
                     return (
@@ -269,79 +234,8 @@ function GetStartedPage() {
                 })}
               </div>
               <div className="form-group">
-                <div className="get-started-major-label">Preferences:</div>
                 {formFields.map((field, i) => {
-                  if (i === 8 || i === 9)
-                    return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
-                        key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
-                    );
-                })}
-              </div>
-              <div className="form-group">
-                {formFields.map((field, i) => {
-                  if (i === 10 || i === 11)
-                    return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
-                        key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
-                    );
-                })}
-              </div>
-              <div className="form-group">
-                {formFields.map((field, i) => {
-                  if (i === 12)
+                  if (i === 8)
                     return (
                       <TextField
                         disabled={isSubmitting}
@@ -391,4 +285,4 @@ function GetStartedPage() {
   );
 }
 
-export default GetStartedPage;
+export default PartnersForm;

@@ -73,7 +73,6 @@ function ContactUs() {
         <div className="bold">
           Thank you for choosing Total Mobility Solution.
         </div>
-        <div>Your mobility, our mission.</div>
       </div>
     </ContentPage>
   );

@@ -17,6 +17,7 @@ export const pageRoutes = {
   login: "/login",
   ourStory: "/our-story",
   partners: "/partners",
+  partnersForm: "/partners/form",
   pricing: "/#pricing",
   supportRequest: "/support-request",
   whyTms: "/why-tms",

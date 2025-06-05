@@ -1,5 +1,7 @@
 import ContentPage from "../../components/content-page/content-page";
+import Button from "../../library/button/button";
 import UnorderedList from "../../components/unordered-list/unordered-list";
+import { pageRoutes } from "../../shared/constants";
 
 import "./our-story-page.scss";
 
@@ -51,19 +53,25 @@ function OurStoryPage() {
       </div>
       <div className="content-page-paragraph">
         We started this company because we genuinely care— not just about
-        technology, but about people. We want to see your business succeed. TMS
-        exists to make you and your team more efficient and thus, more
-        profitable. It’s that simple.
+        technology, but about people. We want to see your business succeed.
+        Since 2019 TMS has existed to make you and your team more efficient and
+        thus, more profitable. It’s that simple.
       </div>
       <div className="content-page-paragraph">
         Our passion for smartphones and tablets isn’t just about loving cool
         devices (though we really do). It’s about what those devices let you
         accomplish when everything is smooth, safe, and stress-free.
         <UnorderedList list={stressFreeListItems} listName="stress-free" />
-        <div className="content-page-tagline">
-          Let us handle the technical headaches, so you can focus on the work
-          (and the wins) that matter most.
-        </div>
+      </div>
+      <div className="content-page-tagline">
+        Let us handle the technical headaches, so you can focus on the work (and
+        the wins) that matter most.
+      </div>
+
+      <div className="cta-center">
+        <Button to={pageRoutes.getStarted} isPrimary>
+          Get Started
+        </Button>
       </div>
     </ContentPage>
   );

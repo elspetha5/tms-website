@@ -10,8 +10,7 @@ import { pageRoutes } from "../../../../shared/constants";
 import "./pricing-section.scss";
 
 const caveatsArr = [
-  "All prices based on 100+ devices managed",
-  "Published pricing is per device/month and is all-inclusive",
+  "All prices based on 100+ devices managed, are per device/moth and all-inclusive",
 ];
 
 const pricingCardsArr = [
@@ -19,7 +18,7 @@ const pricingCardsArr = [
     title: "Simple",
     subtitle:
       "We manage the full lifecycle of your devices with our turn-key system",
-    price: "$14.99",
+    price: "$24.99",
     items: [
       "Free device fleet audit",
       "Cellular carrier account setup, management, and full-service TEM procurement provider",
@@ -29,7 +28,6 @@ const pricingCardsArr = [
       "Full hardware, software, and services support",
       "Device spares inventory management",
       "Device fleet EOL management",
-      "Billing consolidation",
       "And more!",
     ],
     check: true,
@@ -38,7 +36,7 @@ const pricingCardsArr = [
   {
     title: "Add ons",
     subtitle: "What about device security and data backup?",
-    price: "+$5.99",
+    price: "+$7.99",
     items: [
       "On-device security and SMS-phishing prevention",
       "On-device real-time backup and recovery",

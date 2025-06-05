@@ -1,5 +1,7 @@
+import Button from "../../library/button/button";
 import ContentPage from "../../components/content-page/content-page";
 import UnorderedList from "../../components/unordered-list/unordered-list";
+import { pageRoutes } from "../../shared/constants";
 
 import "./partners-page.scss";
 
@@ -70,6 +72,12 @@ function PartnersPage() {
       <div className="content-page-paragraph">
         Ready to get started, or have questions about which partnership is the
         best fit? Let’s talk—and let’s win together.
+      </div>
+
+      <div className="cta-center">
+        <Button to={pageRoutes.partnersForm} isPrimary>
+          Become a Partner
+        </Button>
       </div>
     </ContentPage>
   );

@@ -19,6 +19,7 @@ const initSupportRequestFields: FormField[] = [
     name: "Phone",
     placeholder: "Your phone",
     isRequired: true,
+    type: "tel",
   },
   {
     name: "Company name",
@@ -55,6 +56,7 @@ function SupportRequestPage() {
     formFields,
     handleBlur,
     handleChange,
+    handleKeyDown,
     handleSheetSubmit,
     isError,
     isSubmitting,
@@ -100,6 +102,7 @@ function SupportRequestPage() {
                     name={field.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
                     rows={5}
@@ -134,6 +137,7 @@ function SupportRequestPage() {
                     name={field.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
                     rows={5}
@@ -168,6 +172,7 @@ function SupportRequestPage() {
                     name={field.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
                     rows={5}
@@ -202,6 +207,7 @@ function SupportRequestPage() {
                     name={field.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
                     rows={5}

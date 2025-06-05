@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 
+import { handleFormatPhoneNumber, handleValidation } from "./validation-util";
+
 function createInitialFormState(fieldsBlueprint) {
   return fieldsBlueprint.map((field) => ({
     ...field,
@@ -39,15 +41,24 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
   function handleChange(e) {
     const { name, value } = e.target;
     setFormFields((prevFields) =>
-      prevFields.map((field) =>
-        field.name === name
-          ? { ...field, value: value, error: false, errorMessage: "" }
-          : field
-      )
+      prevFields.map((field) => {
+        let telValue;
+        if (field.type === "tel") {
+          telValue = handleFormatPhoneNumber(value);
+        }
+        return field.name === name
+          ? {
+              ...field,
+              value: telValue || value,
+              error: false,
+              errorMessage: "",
+            }
+          : field;
+      })
     );
   }
 
-  function handleNumberKeyDown(e) {
+  function handleKeyDown(e) {
     if (
       e.key === "Backspace" ||
       e.key === "Delete" ||
@@ -57,39 +68,13 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
       return;
     }
 
-    if (/[^0-9]/.test(e.key)) {
-      e.preventDefault();
-    }
-  }
-
-  function handleValidation(field) {
-    let updatedField = { ...field, error: false, errorMessage: "" };
-    let isError = false;
-
     if (
-      updatedField.type === "email" &&
-      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(
-        updatedField.value
-      )
+      (e.target.type === "number" || e.target.type === "tel") &&
+      /[^0-9]/.test(e.key)
     ) {
-      updatedField = {
-        ...updatedField,
-        error: true,
-        errorMessage: "Not a valid email address",
-      };
-      isError = true;
+      e.preventDefault();
+      return;
     }
-    if (updatedField.isRequired && !updatedField.value.trim()) {
-      updatedField = {
-        ...updatedField,
-        error: true,
-        errorMessage: "This field is required.",
-      };
-      isError = true;
-    }
-
-    setIsError(isError);
-    return updatedField;
   }
 
   function handleBlur(e) {
@@ -98,7 +83,7 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
     setFormFields((prevFields) => {
       return prevFields.map((field) => {
         if (field.name === name) {
-          return handleValidation(field);
+          return handleValidation(field, setIsError);
         }
         return field;
       });
@@ -116,7 +101,7 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
 
     await setFormFields((prevFields) => {
       const validatedFields = prevFields.map((field) => {
-        const updatedField = handleValidation(field);
+        const updatedField = handleValidation(field, setIsError);
         if (updatedField.error) {
           isFormValid = false;
         }
@@ -202,7 +187,7 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
     formFields,
     handleBlur,
     handleChange,
-    handleNumberKeyDown,
+    handleKeyDown,
     handleSheetSubmit,
     isError,
     isSubmitting,
