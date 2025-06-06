@@ -54,7 +54,7 @@ function OurStoryPage() {
       <div className="content-page-paragraph">
         We started this company because we genuinely care— not just about
         technology, but about people. We want to see your business succeed.
-        Since 2019 TMS has existed to make you and your team more efficient and
+        Since 2019, TMS has existed to make you and your team more efficient and
         thus, more profitable. It’s that simple.
       </div>
       <div className="content-page-paragraph">

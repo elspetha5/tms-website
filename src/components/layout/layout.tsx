@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 
+import PromoBanner from "../navbar/promo-banner/promo-banner";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
 
@@ -7,10 +8,8 @@ import "./layout.scss";
 
 function Layout() {
   return (
-    // Make a toast notification that pops from right bottom after 30s
-    // Ready to get started with button
-    // user closes it, but they can pull it back out again if they click
     <div className="layout-container">
+      <PromoBanner />
       <Navbar />
       <div className="layout-inner-container">
         <div className="layout-content">

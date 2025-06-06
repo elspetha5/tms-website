@@ -1,4 +1,5 @@
 import HeroSection from "./components/hero-section/hero-section";
+import VideoSection from "./components/video-section/video-section";
 import InfographicSection from "./components/infographic-section/infographic-section";
 // import TestimonialsSection from "./components/testimonials-section/testimonials-section";
 import PricingSection from "./components/pricing-section/pricing-section";
@@ -11,6 +12,7 @@ function HomePage() {
   return (
     <div id="home" className="home-page-container">
       <HeroSection />
+      <VideoSection />
       <InfographicSection />
       {/* <TestimonialsSection /> */}
       <PricingSection />

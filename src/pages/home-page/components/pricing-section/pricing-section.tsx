@@ -10,7 +10,7 @@ import { pageRoutes } from "../../../../shared/constants";
 import "./pricing-section.scss";
 
 const caveatsArr = [
-  "All prices based on 100+ devices managed, are per device/moth and all-inclusive",
+  "All prices based on 100+ devices managed, are per device/month and all-inclusive",
 ];
 
 const pricingCardsArr = [
