@@ -7,9 +7,5 @@ export default defineConfig(() => {
     plugins: [react()],
   };
 
-  // if (command === "build") {
-  //   config.base = "/tms-website/";
-  // }
-
   return config;
 });

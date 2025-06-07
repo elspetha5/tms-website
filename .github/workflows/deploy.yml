@@ -43,6 +43,9 @@ jobs:
           VITE_GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
           VITE_GOOGLE_SHEET_PARTNERS_URL: ${{ secrets.GOOGLE_SHEET_PARTNERS_URL }}
 
+      - name: Create CNAME file
+        run: echo "totalmobilitysolution.com" > ./dist/CNAME
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
