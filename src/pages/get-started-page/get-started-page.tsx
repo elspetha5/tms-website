@@ -110,7 +110,12 @@ function GetStartedPage() {
 
   return (
     <Section title="Get Started with TMS">
-      <div>*Summer Special: first 30 days free for new clients</div>
+      <div className="get-started-promo">
+        <div>*SUMMER SPECIAL*</div>
+        <div className="get-started-promo-description">
+          first 30 days free for new clients
+        </div>
+      </div>
       {submitStatus && submitMessage && (
         <Message type={submitStatus} message={submitMessage} />
       )}

@@ -2,7 +2,7 @@
 
 .promo-banner-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/flame-clip-art-no-background.png?alt=media&token=4993438f-d5e8-4dfb-b8b6-cd78b66eb3e2"),
     linear-gradient(
@@ -12,6 +12,11 @@
     );
   background-position: center center, 0% 0%;
   background-size: auto, cover;
+  color: white;
+
+  &:hover {
+    color: styles.$tms-blue;
+  }
 }
 
 .promo-banner-title {
@@ -19,11 +24,6 @@
   font-size: styles.rem(30);
   font-weight: bold;
   text-align: center;
-  color: white;
-
-  &:hover {
-    color: styles.$tms-blue;
-  }
 
   @include styles.media(styles.$min-md) {
     font-size: styles.rem(40);
@@ -34,6 +34,6 @@ promo-banner-asterisk .promo-subtitle {
   font-size: styles.rem(16);
 }
 
-.promo-flame-img {
-  width: 60px;
+.promo-banner-arrow {
+  font-size: styles.rem(30);
 }
