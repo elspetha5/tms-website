@@ -113,7 +113,7 @@ function GetStartedPage() {
       <div className="get-started-promo">
         <div>*SUMMER SPECIAL*</div>
         <div className="get-started-promo-description">
-          first 30 days free for new clients
+          1st month free for new clients
         </div>
       </div>
       {submitStatus && submitMessage && (
