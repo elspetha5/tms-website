@@ -6,6 +6,7 @@ import Section from "../../components/section/section";
 import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
 import Button from "../../library/button/button";
 import Message from "../../components/message/message";
+import PromoCard from "./promo-card/promo-card";
 
 import "./get-started-page.scss";
 
@@ -110,12 +111,7 @@ function GetStartedPage() {
 
   return (
     <Section title="Get Started with TMS">
-      <div className="get-started-promo">
-        <div>*SUMMER SPECIAL*</div>
-        <div className="get-started-promo-description">
-          1st month free for new clients
-        </div>
-      </div>
+      <PromoCard />
       {submitStatus && submitMessage && (
         <Message type={submitStatus} message={submitMessage} />
       )}
