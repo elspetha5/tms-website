@@ -11,6 +11,7 @@ function InfographicSection() {
       <div className="infographic-title bold">
         TMS gives you
         <br /> all of this
+        <br /> & more
         <br />
         <FontAwesomeIcon
           className="infographic-arrow-icon-down"

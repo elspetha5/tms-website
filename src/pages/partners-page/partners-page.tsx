@@ -51,7 +51,8 @@ function PartnersPage() {
         <div className="bold">1. Become a Referral Partner</div>
         Just send us the introduction. We’ll take it from there—consultation,
         setup, support, everything. You help your clients solve a problem, and
-        you get paid for every referral. Simple, hands-off, and profitable.
+        you get paid for every referral that becomes a TMS client. Simple,
+        hands-off, and profitable.
       </div>
       <div className="content-page-paragraph">
         <div className="bold">

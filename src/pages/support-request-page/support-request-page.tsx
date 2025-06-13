@@ -210,7 +210,7 @@ function SupportRequestPage() {
                     onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
-                    rows={5}
+                    rows={8}
                     select={Boolean(field.selectOptions)}
                     type={field.type || "text"}
                     value={field.value}
