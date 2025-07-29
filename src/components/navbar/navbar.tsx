@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../shared/contexts/auth-context";
 
 import Button from "../../library/button/button";
 import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
@@ -7,6 +9,8 @@ import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
 import "./navbar.scss";
 
 function Navbar() {
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { pathname, hash } = useLocation();
   const ctaText = "Let's talk";
@@ -23,6 +27,18 @@ function Navbar() {
         behavior: "smooth",
       });
     }
+  }
+
+  async function handleLogout(e) {
+    e.preventDefault();
+
+    try {
+      await logout();
+    } catch (firebaseError) {
+      console.error("Logout component caught error:", firebaseError);
+    }
+
+    navigate(pageRoutes.home);
   }
 
   const navbarLinks = [
@@ -47,6 +63,11 @@ function Navbar() {
       label: "FAQ's",
       to: pageRoutes.faqs,
       isActive: hash === pageRoutes.faqs.substring(1),
+    },
+    {
+      label: "Login",
+      to: pageRoutes.login,
+      isActive: pathname === pageRoutes.login,
     },
     {
       label: ctaText,
@@ -75,18 +96,35 @@ function Navbar() {
         <div className="nav-links-container">
           {showLinks ? (
             <>
-              {navbarLinks.map((link) => (
-                <Button
-                  className={`nav-link${link.isActive ? "-active" : ""} bold`}
-                  to={link.to}
-                  href={link.href}
-                  isPrimary={link.label === ctaText}
-                  key={link.label}
-                  onClick={scrollToTop}
-                >
-                  {link.label}
-                </Button>
-              ))}
+              {navbarLinks.map((link) => {
+                if (currentUser && link.to === pageRoutes.login) {
+                  return (
+                    <div
+                      className={`nav-link${
+                        link.isActive ? "-active" : ""
+                      } bold`}
+                      key="Logout"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </div>
+                  );
+                } else {
+                  return (
+                    <Button
+                      className={`nav-link${
+                        link.isActive ? "-active" : ""
+                      } bold`}
+                      to={link.to}
+                      isPrimary={link.label === "Get Started"}
+                      key={link.label}
+                      onClick={scrollToTop}
+                    >
+                      {link.label}
+                    </Button>
+                  );
+                }
+              })}
             </>
           ) : (
             <Button

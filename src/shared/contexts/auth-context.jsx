@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -11,6 +12,7 @@ const AuthContext = createContext({
   signup: async () => {},
   login: async () => {},
   logout: async () => {},
+  resetPassword: async () => {},
   authError: "",
 });
 
@@ -25,20 +27,45 @@ export function AuthProvider({ children }) {
 
   async function login(email, password) {
     setAuthError("");
+
     try {
+      const tenantLookupUrl = `${
+        import.meta.env.VITE_APPS_SCRIPT_URL
+      }?dataType=tenantId&userEmail=${encodeURIComponent(email)}`;
+
+      const response = await fetch(tenantLookupUrl, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+      });
+
+      const text = await response.text();
+      if (!response.ok || !text) {
+        console.error("Apps Script lookup failed:", response.status, text);
+        setAuthError("Failed to log in");
+        throw new Error("Apps Script call failed or returned empty response");
+      }
+
+      const result = JSON.parse(text);
+
+      if (result.error) {
+        setAuthError("Failed to log in");
+        throw result.error;
+      }
+
+      const tenantId = result.tenantId;
+      auth.tenantId = tenantId ?? null;
+
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
+
       return userCredential.user;
     } catch (error) {
       console.error("Firebase login error:", error);
-      if (error.code && error.message) {
-        setAuthError(error.message);
-      } else {
-        setAuthError("Failed to log in.");
-      }
+      setAuthError(error.message ?? "Failed to log in");
       throw error;
     }
   }
@@ -52,7 +79,25 @@ export function AuthProvider({ children }) {
       if (error.code && error.message) {
         setAuthError(error.message);
       } else {
-        setAuthError("Failed to log out.");
+        setAuthError("Failed to log out");
+      }
+      throw error;
+    }
+  }
+
+  async function resetPassword(email) {
+    setAuthError("");
+    try {
+      await sendPasswordResetEmail(auth, email);
+      return true;
+    } catch (error) {
+      console.error("Firebase password reset error:", error);
+      if (error.code && error.message) {
+        setAuthError(error.message);
+      } else {
+        setAuthError(
+          "Failed to send password reset email, please try again later"
+        );
       }
       throw error;
     }
@@ -71,6 +116,7 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     logout,
+    resetPassword,
     authError,
   };
 
