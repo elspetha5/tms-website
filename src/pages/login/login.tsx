@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../shared/contexts/auth-context";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -36,17 +36,20 @@ const initLoginFields: FormField[] = [
 function Login() {
   const { formFields, handleBlur, handleChange, isError } =
     useForm(initLoginFields);
-  const emailField = formFields.find((field) => field.name === "email")[0];
-  const passwordField = formFields.find(
-    (field) => field.name === "password"
-  )[0];
+  const emailField = formFields.find((field) => field.name === "email");
+  const passwordField = formFields.find((field) => field.name === "password");
   const [showPassword, setShowPassword] = useState(false);
-  const { login, authError } = useAuth() as {
+  const [showPasswordResetSuccess, setShowPasswordResetSuccess] =
+    useState(false);
+  const { currentUser, login, resetPassword, authError } = useAuth() as {
+    currentUser: any;
     login: (email: string, password: string) => {};
+    resetPassword: (email: string) => {};
     authError: any;
   };
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -67,76 +70,159 @@ function Login() {
     }
   }
 
+  async function handleSubmitResetPassword(e: React.FormEvent) {
+    e.preventDefault();
+    setIsSubmitting(true);
+    if (isError) {
+      return;
+    }
+
+    try {
+      await resetPassword(emailField.value);
+      setShowPasswordResetSuccess(true);
+    } catch (firebaseError: any) {
+      console.error("Reset password error:", firebaseError);
+      setError(
+        authError || "Failed to send password reset email. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate(pageRoutes.home);
+    }
+  }, [currentUser]);
+
   return (
-    <Section title="Login">
-      <Box
-        component="form"
-        sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
-        noValidate
-        autoComplete="off"
-      >
-        <div>
-          <TextField
-            disabled={isSubmitting}
-            error={Boolean(error)}
-            fullWidth
-            helperText={error}
-            id={emailField.name}
-            label={emailField.label}
-            name={emailField.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            required
-            type={emailField.type}
-            value={emailField.value}
-            variant="outlined"
-          />
-        </div>
-        <div>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined" required>
-            <InputLabel htmlFor="login-password">Password</InputLabel>
-            <OutlinedInput
-              id="login-password"
-              label={passwordField.label}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={passwordField.value}
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label={
-                      showPassword
-                        ? "hide the password"
-                        : "display the password"
+    <Section title={showPasswordResetSuccess ? "Success!" : "Login"}>
+      {showPasswordResetSuccess ? (
+        <>
+          <div className="login-reset-success-text">
+            If there is an account with this email address you should get a
+            password reset email shortly.
+          </div>
+          <Button
+            isPrimary
+            onClick={() => {
+              setShowPasswordResetSuccess(false);
+              setShowResetPassword(false);
+            }}
+          >
+            Back to Login
+          </Button>
+        </>
+      ) : (
+        <>
+          <Box
+            component="form"
+            sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                disabled={isSubmitting}
+                error={Boolean(error) || emailField.error}
+                fullWidth
+                helperText={error || emailField.errorMessage}
+                id={emailField.name}
+                label={emailField.label}
+                name={emailField.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                required
+                type={emailField.type}
+                value={emailField.value}
+                variant="outlined"
+              />
+            </div>
+            {!showResetPassword && (
+              <div>
+                <FormControl
+                  sx={{ m: 1, width: "25ch" }}
+                  variant="outlined"
+                  required
+                >
+                  <InputLabel htmlFor="login-password">Password</InputLabel>
+                  <OutlinedInput
+                    id="login-password"
+                    label={passwordField.label}
+                    name={passwordField.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={passwordField.value}
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label={
+                            showPassword
+                              ? "hide the password"
+                              : "display the password"
+                          }
+                          component="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onMouseUp={(e) => e.preventDefault()}
+                          edge="end"
+                          size="small"
+                        >
+                          {showPassword ? (
+                            <FontAwesomeIcon icon={faEyeSlash} />
+                          ) : (
+                            <FontAwesomeIcon icon={faEye} />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
                     }
-                    component="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    onMouseDown={(e) => e.preventDefault()}
-                    onMouseUp={(e) => e.preventDefault()}
-                    edge="end"
-                    size="small"
-                  >
-                    {showPassword ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </div>
-      </Box>
-      <Button
-        type="submit"
-        isPrimary
-        isDisabled={isSubmitting || isError}
-        onClick={handleSubmit}
-      >
-        {isSubmitting ? "Logging in..." : "Login"}
-      </Button>
+                  />
+                </FormControl>
+              </div>
+            )}
+          </Box>
+          {!showResetPassword && (
+            <>
+              <Button
+                className="login-forgot-password"
+                isTertiary
+                onClick={() => setShowResetPassword(true)}
+              >
+                Forgot password?
+              </Button>
+              <Button
+                type="submit"
+                isPrimary
+                isDisabled={isSubmitting || isError}
+                onClick={handleSubmit}
+              >
+                {isSubmitting ? "Logging in..." : "Login"}
+              </Button>
+            </>
+          )}
+          {showResetPassword && (
+            <>
+              <Button
+                className="login-forgot-password"
+                isTertiary
+                onClick={() => setShowResetPassword(false)}
+              >
+                Back to login
+              </Button>
+              <Button
+                type="submit"
+                isPrimary
+                isDisabled={isSubmitting || isError}
+                onClick={handleSubmitResetPassword}
+              >
+                Send Reset Email
+              </Button>
+            </>
+          )}
+        </>
+      )}
     </Section>
   );
 }
