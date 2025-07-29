@@ -7,6 +7,7 @@ export const getStartedGoogleSheetUrl =
 export const pageRoutes = {
   blog: "/blog",
   clientDashboard: "/client-dashboard",
+  comingSoon: "/coming-soon",
   contactUs: "/contact",
   faqs: "/#faqs",
   home: "/",
