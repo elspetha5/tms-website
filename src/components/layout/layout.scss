@@ -10,6 +10,7 @@
 
 .layout-inner-container {
   position: relative;
+  flex-grow: 1;
   overflow-y: auto;
   height: 100%;
 }
