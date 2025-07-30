@@ -52,6 +52,17 @@ function Login() {
   const [showResetPassword, setShowResetPassword] = useState(false);
   const navigate = useNavigate();
 
+  function getPageTitle() {
+    if (showPasswordResetSuccess) {
+      return "Success!";
+    }
+    if (currentUser) {
+      return "Already logged in";
+    }
+
+    return "Login";
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsSubmitting(true);
@@ -61,7 +72,7 @@ function Login() {
 
     try {
       await login(emailField.value, passwordField.value);
-      navigate(pageRoutes.invoiceForm);
+      navigate(pageRoutes.clientDashboard);
     } catch (firebaseError: any) {
       console.error("Login component caught error:", firebaseError);
       setError(authError || "Failed to log in. Please check your credentials.");
@@ -90,135 +101,135 @@ function Login() {
     }
   }
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate(pageRoutes.home);
-    }
-  }, [currentUser]);
-
   return (
-    <Section title={showPasswordResetSuccess ? "Success!" : "Login"}>
-      {showPasswordResetSuccess ? (
-        <>
-          <div className="login-reset-success-text">
-            If there is an account with this email address you should get a
-            password reset email shortly.
-          </div>
-          <Button
-            isPrimary
-            onClick={() => {
-              setShowPasswordResetSuccess(false);
-              setShowResetPassword(false);
-            }}
-          >
-            Back to Login
-          </Button>
-        </>
+    <Section title={getPageTitle()}>
+      {currentUser ? (
+        <div>Logged in with user: {currentUser.email}</div>
       ) : (
         <>
-          <Box
-            component="form"
-            sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                disabled={isSubmitting}
-                error={Boolean(error) || emailField.error}
-                fullWidth
-                helperText={error || emailField.errorMessage}
-                id={emailField.name}
-                label={emailField.label}
-                name={emailField.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                required
-                type={emailField.type}
-                value={emailField.value}
-                variant="outlined"
-              />
-            </div>
-            {!showResetPassword && (
-              <div>
-                <FormControl
-                  sx={{ m: 1, width: "25ch" }}
-                  variant="outlined"
-                  required
-                >
-                  <InputLabel htmlFor="login-password">Password</InputLabel>
-                  <OutlinedInput
-                    id="login-password"
-                    label={passwordField.label}
-                    name={passwordField.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={passwordField.value}
-                    type={showPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label={
-                            showPassword
-                              ? "hide the password"
-                              : "display the password"
-                          }
-                          component="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          onMouseDown={(e) => e.preventDefault()}
-                          onMouseUp={(e) => e.preventDefault()}
-                          edge="end"
-                          size="small"
-                        >
-                          {showPassword ? (
-                            <FontAwesomeIcon icon={faEyeSlash} />
-                          ) : (
-                            <FontAwesomeIcon icon={faEye} />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-              </div>
-            )}
-          </Box>
-          {!showResetPassword && (
+          {showPasswordResetSuccess ? (
             <>
+              <div className="login-reset-success-text">
+                If there is an account with this email address you should get a
+                password reset email shortly.
+              </div>
               <Button
-                className="login-forgot-password"
-                isTertiary
-                onClick={() => setShowResetPassword(true)}
-              >
-                Forgot password?
-              </Button>
-              <Button
-                type="submit"
                 isPrimary
-                isDisabled={isSubmitting || isError}
-                onClick={handleSubmit}
+                onClick={() => {
+                  setShowPasswordResetSuccess(false);
+                  setShowResetPassword(false);
+                }}
               >
-                {isSubmitting ? "Logging in..." : "Login"}
+                Back to Login
               </Button>
             </>
-          )}
-          {showResetPassword && (
+          ) : (
             <>
-              <Button
-                className="login-forgot-password"
-                isTertiary
-                onClick={() => setShowResetPassword(false)}
+              <Box
+                component="form"
+                sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+                noValidate
+                autoComplete="off"
               >
-                Back to login
-              </Button>
-              <Button
-                type="submit"
-                isPrimary
-                isDisabled={isSubmitting || isError}
-                onClick={handleSubmitResetPassword}
-              >
-                Send Reset Email
-              </Button>
+                <div>
+                  <TextField
+                    disabled={isSubmitting}
+                    error={Boolean(error) || emailField.error}
+                    fullWidth
+                    helperText={error || emailField.errorMessage}
+                    id={emailField.name}
+                    label={emailField.label}
+                    name={emailField.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    type={emailField.type}
+                    value={emailField.value}
+                    variant="outlined"
+                  />
+                </div>
+                {!showResetPassword && (
+                  <div>
+                    <FormControl
+                      sx={{ m: 1, width: "25ch" }}
+                      variant="outlined"
+                      required
+                    >
+                      <InputLabel htmlFor="login-password">Password</InputLabel>
+                      <OutlinedInput
+                        id="login-password"
+                        label={passwordField.label}
+                        name={passwordField.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={passwordField.value}
+                        type={showPassword ? "text" : "password"}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label={
+                                showPassword
+                                  ? "hide the password"
+                                  : "display the password"
+                              }
+                              component="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              onMouseDown={(e) => e.preventDefault()}
+                              onMouseUp={(e) => e.preventDefault()}
+                              edge="end"
+                              size="small"
+                            >
+                              {showPassword ? (
+                                <FontAwesomeIcon icon={faEyeSlash} />
+                              ) : (
+                                <FontAwesomeIcon icon={faEye} />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
+                  </div>
+                )}
+              </Box>
+              {!showResetPassword && (
+                <>
+                  <Button
+                    className="login-forgot-password"
+                    isTertiary
+                    onClick={() => setShowResetPassword(true)}
+                  >
+                    Forgot password?
+                  </Button>
+                  <Button
+                    type="submit"
+                    isPrimary
+                    isDisabled={isSubmitting || isError}
+                    onClick={handleSubmit}
+                  >
+                    {isSubmitting ? "Logging in..." : "Login"}
+                  </Button>
+                </>
+              )}
+              {showResetPassword && (
+                <>
+                  <Button
+                    className="login-forgot-password"
+                    isTertiary
+                    onClick={() => setShowResetPassword(false)}
+                  >
+                    Back to login
+                  </Button>
+                  <Button
+                    type="submit"
+                    isPrimary
+                    isDisabled={isSubmitting || isError}
+                    onClick={handleSubmitResetPassword}
+                  >
+                    Send Reset Email
+                  </Button>
+                </>
+              )}
             </>
           )}
         </>

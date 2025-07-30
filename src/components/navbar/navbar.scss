@@ -146,3 +146,21 @@
     display: none;
   }
 }
+
+.nav-logout-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logout-btns-wrapper {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logout-modal-btn {
+  margin-left: 15px;
+}

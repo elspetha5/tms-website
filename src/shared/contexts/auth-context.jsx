@@ -23,10 +23,12 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthChanging, setIsAuthChanging] = useState(false);
   const [authError, setAuthError] = useState("");
 
   async function login(email, password) {
     setAuthError("");
+    setIsAuthChanging(true);
 
     try {
       const tenantLookupUrl = `${
@@ -67,11 +69,14 @@ export function AuthProvider({ children }) {
       console.error("Firebase login error:", error);
       setAuthError(error.message ?? "Failed to log in");
       throw error;
+    } finally {
+      setIsAuthChanging(false);
     }
   }
 
   async function logout() {
     setAuthError("");
+    setIsAuthChanging(true);
     try {
       await signOut(auth);
     } catch (error) {
@@ -82,11 +87,14 @@ export function AuthProvider({ children }) {
         setAuthError("Failed to log out");
       }
       throw error;
+    } finally {
+      setIsAuthChanging(false);
     }
   }
 
   async function resetPassword(email) {
     setAuthError("");
+    setIsAuthChanging(true);
     try {
       await sendPasswordResetEmail(auth, email);
       return true;
@@ -100,6 +108,8 @@ export function AuthProvider({ children }) {
         );
       }
       throw error;
+    } finally {
+      setIsAuthChanging(false);
     }
   }
 
@@ -114,6 +124,8 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    isAuthChanging,
+    loading,
     login,
     logout,
     resetPassword,
