@@ -10,19 +10,23 @@ import {
 import Layout from "./components/layout/layout";
 import PrivateRoute from "./components/private-route/private-route";
 
+// Public routes
 import Blog from "./pages/blog/blog";
 import ComingSoon from "./pages/coming-soon/coming-soon";
 import ContactUs from "./pages/contact-us/contact-us";
 import GetStartedPage from "./pages/get-started-page/get-started-page";
 import HomePage from "./pages/home-page/home-page";
 import IntoTheFuturePage from "./pages/into-the-future-page/into-the-future-page";
-import InvoiceForm from "./pages/invoice-form/invoice-form";
 import Login from "./pages/login/login";
 import OurStoryPage from "./pages/our-story-page/our-story-page";
 import PartnersForm from "./pages/partners-page/partners-form/partners-form";
 import PartnersPage from "./pages/partners-page/partners-page";
 import SupportRequestPage from "./pages/support-request-page/support-request-page";
 import WhyTmsPage from "./pages/why-tms-page/why-tms-page";
+
+// Private Routes
+import ClientDashboard from "./pages/client-dashboard/client-dashboard";
+import InvoiceForm from "./pages/invoice-form/invoice-form";
 
 import { AuthProvider } from "./shared/contexts/auth-context";
 import { pageRoutes } from "./shared/constants";
@@ -69,7 +73,7 @@ function App() {
       <AuthProvider>
         <ScrollTo />
         <Routes>
-          <Route path={pageRoutes.home} element={<Layout />}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path={pageRoutes.homeScroll} element={<HomePage />} />
             <Route path={pageRoutes.ourStory} element={<OurStoryPage />} />
@@ -85,25 +89,29 @@ function App() {
             <Route path={pageRoutes.whyTms} element={<WhyTmsPage />} />
             <Route path={pageRoutes.partnersForm} element={<PartnersForm />} />
             <Route path={pageRoutes.partners} element={<PartnersPage />} />
-            <Route path={pageRoutes.login} element={<Login />} />
             <Route path={pageRoutes.blog} element={<Blog />} />
             <Route path={pageRoutes.contactUs} element={<ContactUs />} />
             <Route path={pageRoutes.comingSoon} element={<ComingSoon />} />
-          </Route>
+            <Route path={pageRoutes.login} element={<Login />} />
 
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path={pageRoutes.invoiceForm} element={<InvoiceForm />} />
-          </Route>
+            <Route element={<PrivateRoute />}>
+              <Route
+                path={pageRoutes.clientDashboard}
+                element={<ClientDashboard />}
+              />
+              {/* <Route path={pageRoutes.invoiceForm} element={<InvoiceForm />} /> */}
+            </Route>
 
-          <Route
-            path="*"
-            element={
-              <div>
-                <h1>404 - Page Not Found</h1>
-                <Link to={pageRoutes.home}>Go Home</Link>
-              </div>
-            }
-          />
+            <Route
+              path="*"
+              element={
+                <div>
+                  <h1>404 - Page Not Found</h1>
+                  <Link to={pageRoutes.home}>Go Home</Link>
+                </div>
+              }
+            />
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

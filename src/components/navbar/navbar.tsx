@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../shared/contexts/auth-context";
 
 import Button from "../../library/button/button";
+import Modal from "../../library/modal/modal";
 import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
 
 import "./navbar.scss";
 
 function Navbar() {
   const { currentUser, logout } = useAuth();
+  useEffect(() => console.log(currentUser), [currentUser]);
   const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { pathname, hash } = useLocation();
   const showLinks =
     pathname !== pageRoutes.getStarted &&
@@ -32,6 +35,7 @@ function Navbar() {
 
     try {
       await logout();
+      setShowLogoutModal(false);
     } catch (firebaseError) {
       console.error("Logout component caught error:", firebaseError);
     }
@@ -39,7 +43,7 @@ function Navbar() {
     navigate(pageRoutes.home);
   }
 
-  const navbarLinks = [
+  const publicNavbarLinks = [
     {
       label: "Home",
       to: hash || pathname === "/" ? pageRoutes.homeScroll : pageRoutes.home,
@@ -74,6 +78,18 @@ function Navbar() {
     },
   ];
 
+  const privateNavbarLinks = [
+    {
+      label: "Dashboard",
+      to: pageRoutes.clientDashboard,
+      isActive: pathname === pageRoutes.clientDashboard,
+    },
+    {
+      label: "Logout",
+      isActive: pathname === pageRoutes.login,
+    },
+  ];
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -95,35 +111,37 @@ function Navbar() {
         {showLinks && (
           <>
             <div className="nav-links-container">
-              {navbarLinks.map((link) => {
-                if (currentUser && link.to === pageRoutes.login) {
-                  return (
-                    <div
-                      className={`nav-link${
-                        link.isActive ? "-active" : ""
-                      } bold`}
-                      key="Logout"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </div>
-                  );
-                } else {
-                  return (
-                    <Button
-                      className={`nav-link${
-                        link.isActive ? "-active" : ""
-                      } bold`}
-                      to={link.to}
-                      isPrimary={link.label === "Get Started"}
-                      key={link.label}
-                      onClick={scrollToTop}
-                    >
-                      {link.label}
-                    </Button>
-                  );
+              {(currentUser ? privateNavbarLinks : publicNavbarLinks).map(
+                (link) => {
+                  if (link.label === "Logout") {
+                    return (
+                      <div
+                        className={`nav-link${
+                          link.isActive ? "-active" : ""
+                        } bold`}
+                        key="Logout"
+                        onClick={() => setShowLogoutModal(true)}
+                      >
+                        Logout
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <Button
+                        className={`nav-link${
+                          link.isActive ? "-active" : ""
+                        } bold`}
+                        to={link.to}
+                        isPrimary={link.label === "Get Started"}
+                        key={link.label}
+                        onClick={scrollToTop}
+                      >
+                        {link.label}
+                      </Button>
+                    );
+                  }
                 }
-              })}
+              )}
             </div>
 
             <Button
@@ -150,21 +168,57 @@ function Navbar() {
             <div
               className={`nav-mobile-menu${showMobileMenu ? "-active" : ""}`}
             >
-              {navbarLinks.map((link) => (
-                <Button
-                  className={`nav-link${link.isActive ? "-active" : ""}`}
-                  to={link.to}
-                  isPrimary={link.label === "Get Started"}
-                  key={link.label}
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}
-                >
-                  {link.label}
-                </Button>
-              ))}
+              {(currentUser ? privateNavbarLinks : publicNavbarLinks).map(
+                (link) => {
+                  if (link.label === "Logout") {
+                    return (
+                      <div
+                        className={`nav-link${
+                          link.isActive ? "-active" : ""
+                        } bold`}
+                        key="Logout"
+                        onClick={() => setShowLogoutModal(true)}
+                      >
+                        Logout
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <Button
+                        className={`nav-link${link.isActive ? "-active" : ""}`}
+                        to={link.to}
+                        isPrimary={link.label === "Get Started"}
+                        key={link.label}
+                        onClick={() => setShowMobileMenu(!showMobileMenu)}
+                      >
+                        {link.label}
+                      </Button>
+                    );
+                  }
+                }
+              )}
             </div>
           </>
         )}
       </div>
+
+      <Modal open={showLogoutModal} onClose={() => setShowLogoutModal(false)}>
+        <div className="nav-logout-modal">
+          <div>Are you sure you want to logout?</div>
+          <div className="nav-logout-btns-wrapper">
+            <Button isSecondary onClick={() => setShowLogoutModal(false)}>
+              Cancel
+            </Button>
+            <Button
+              className="nav-logout-modal-btn"
+              isPrimary
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </nav>
   );
 }
