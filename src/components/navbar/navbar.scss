@@ -139,3 +139,9 @@
     display: none;
   }
 }
+
+.nav-mobile-talk-link {
+  @include styles.media(styles.$min-sm) {
+    display: none;
+  }
+}

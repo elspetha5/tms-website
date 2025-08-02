@@ -42,6 +42,7 @@ const footerColumns = [
     links: [
       { label: "Our Story", to: pageRoutes.ourStory },
       { label: "Into The Future", to: pageRoutes.intoTheFuture },
+      { label: "Device Security", to: pageRoutes.deviceSecurity },
       { label: "Blog", to: pageRoutes.blog },
     ],
   },

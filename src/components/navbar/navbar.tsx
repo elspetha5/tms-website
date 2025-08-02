@@ -9,6 +9,8 @@ import "./navbar.scss";
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { pathname, hash } = useLocation();
+  const ctaText = "Let's talk";
+  const ctaLink = "https://calendar.app.google/8CCxv7c79X3JY7PZ9";
   const showLinks =
     pathname !== pageRoutes.getStarted &&
     pathname !== pageRoutes.supportRequest &&
@@ -47,9 +49,8 @@ function Navbar() {
       isActive: hash === pageRoutes.faqs.substring(1),
     },
     {
-      label: "Get Started",
-      to: pageRoutes.getStarted,
-      isActive: pathname === pageRoutes.getStarted,
+      label: ctaText,
+      href: ctaLink,
     },
   ];
 
@@ -71,22 +72,36 @@ function Navbar() {
           </Link>
         </div>
 
-        {showLinks && (
-          <>
-            <div className="nav-links-container">
+        <div className="nav-links-container">
+          {showLinks ? (
+            <>
               {navbarLinks.map((link) => (
                 <Button
                   className={`nav-link${link.isActive ? "-active" : ""} bold`}
                   to={link.to}
-                  isPrimary={link.label === "Get Started"}
+                  href={link.href}
+                  isPrimary={link.label === ctaText}
                   key={link.label}
                   onClick={scrollToTop}
                 >
                   {link.label}
                 </Button>
               ))}
-            </div>
+            </>
+          ) : (
+            <Button
+              className={`nav-link bold`}
+              href={ctaLink}
+              isPrimary
+              onClick={scrollToTop}
+            >
+              {ctaText}
+            </Button>
+          )}
+        </div>
 
+        {showLinks ? (
+          <>
             <Button
               className="nav-hangurger-container"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -115,7 +130,8 @@ function Navbar() {
                 <Button
                   className={`nav-link${link.isActive ? "-active" : ""}`}
                   to={link.to}
-                  isPrimary={link.label === "Get Started"}
+                  href={link.href}
+                  isPrimary={link.label === ctaText}
                   key={link.label}
                   onClick={() => setShowMobileMenu(!showMobileMenu)}
                 >
@@ -124,6 +140,15 @@ function Navbar() {
               ))}
             </div>
           </>
+        ) : (
+          <Button
+            className={`nav-link nav-mobile-talk-link bold`}
+            href={ctaLink}
+            isPrimary
+            onClick={scrollToTop}
+          >
+            {ctaText}
+          </Button>
         )}
       </div>
     </nav>

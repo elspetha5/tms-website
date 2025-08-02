@@ -38,7 +38,7 @@ const pricingCardsArr = [
     subtitle: "What about device security and data backup?",
     price: "+$7.99",
     items: [
-      "On-device security and SMS-phishing prevention",
+      "On-device security, network compliance and SMS-phishing prevention",
       "On-device real-time backup and recovery",
       "24/7/365 support",
     ],

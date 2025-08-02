@@ -13,6 +13,7 @@ import PrivateRoute from "./components/private-route/private-route";
 import Blog from "./pages/blog/blog";
 import ComingSoon from "./pages/coming-soon/coming-soon";
 import ContactUs from "./pages/contact-us/contact-us";
+import DeviceSecurity from "./pages/device-security/device-security";
 import GetStartedPage from "./pages/get-started-page/get-started-page";
 import HomePage from "./pages/home-page/home-page";
 import IntoTheFuturePage from "./pages/into-the-future-page/into-the-future-page";
@@ -89,6 +90,10 @@ function App() {
             <Route path={pageRoutes.blog} element={<Blog />} />
             <Route path={pageRoutes.contactUs} element={<ContactUs />} />
             <Route path={pageRoutes.comingSoon} element={<ComingSoon />} />
+            <Route
+              path={pageRoutes.deviceSecurity}
+              element={<DeviceSecurity />}
+            />
           </Route>
 
           <Route path="/" element={<PrivateRoute />}>

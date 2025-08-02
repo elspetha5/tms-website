@@ -19,10 +19,10 @@ function HeroSection() {
             </div>
             <Button
               className="hero-section-cta bold"
-              to={pageRoutes.getStarted}
+              href="https://calendar.app.google/8CCxv7c79X3JY7PZ9"
               isPrimary
             >
-              Get Started
+              Connect Now
             </Button>
           </div>
         </div>
