@@ -133,7 +133,8 @@ function Navbar() {
                           link.isActive ? "-active" : ""
                         } bold`}
                         to={link.to}
-                        isPrimary={link.label === "Get Started"}
+                        href={link.href}
+                        isPrimary={link.label === ctaText}
                         key={link.label}
                         onClick={scrollToTop}
                       >
@@ -201,7 +202,8 @@ function Navbar() {
                       <Button
                         className={`nav-link${link.isActive ? "-active" : ""}`}
                         to={link.to}
-                        isPrimary={link.label === "Get Started"}
+                        href={link.href}
+                        isPrimary={link.label === ctaText}
                         key={link.label}
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                       >
