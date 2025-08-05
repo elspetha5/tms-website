@@ -1,0 +1,52 @@
+.loader {
+  animation: loader-turn 1s linear infinite;
+}
+
+@keyframes loader-turn {
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+.loader__value {
+  animation: loader-stroke 6s linear infinite;
+  fill: none;
+  stroke: currentColor;
+  stroke-dasharray: 63;
+  stroke-dashoffset: 63;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.loader__value:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.loader__value:nth-child(3) {
+  animation-delay: 2s;
+}
+
+.loader__value:nth-child(4) {
+  animation-delay: 3s;
+}
+
+.loader__value:nth-child(5) {
+  animation-delay: 4s;
+}
+
+.loader__value:nth-child(6) {
+  animation-delay: 5s;
+}
+
+@keyframes loader-stroke {
+  8.3333333333% {
+    stroke-dashoffset: 0;
+  }
+  16.6666666667%,
+  100% {
+    stroke-dashoffset: 63;
+  }
+}

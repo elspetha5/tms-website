@@ -26,8 +26,9 @@ import SupportRequestPage from "./pages/support-request-page/support-request-pag
 import WhyTmsPage from "./pages/why-tms-page/why-tms-page";
 
 // Private Routes
-import ClientDashboard from "./pages/client-dashboard/client-dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 import InvoiceForm from "./pages/invoice-form/invoice-form";
+import Invoices from "./pages/invoices/invoices";
 
 import { AuthProvider } from "./shared/contexts/auth-context";
 import { pageRoutes } from "./shared/constants";
@@ -100,10 +101,8 @@ function App() {
             <Route path={pageRoutes.login} element={<Login />} />
 
             <Route element={<PrivateRoute />}>
-              <Route
-                path={pageRoutes.clientDashboard}
-                element={<ClientDashboard />}
-              />
+              <Route path={pageRoutes.dashboard} element={<Dashboard />} />
+              <Route path={pageRoutes.invoices} element={<Invoices />} />
               {/* <Route path={pageRoutes.invoiceForm} element={<InvoiceForm />} /> */}
             </Route>
 

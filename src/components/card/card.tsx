@@ -12,14 +12,20 @@ export enum backgroundColors {
 interface CardProps {
   backgroundColor?: backgroundColors;
   className?: string;
+  onClick?: () => void;
 }
 
 function Card({ children, ...props }: PropsWithChildren<CardProps>) {
-  const { backgroundColor = backgroundColors.white, className } = props;
+  const {
+    backgroundColor = backgroundColors.white,
+    className,
+    onClick,
+  } = props;
 
   return (
     <div
       className={`card-container card-background-${backgroundColor} ${className}`}
+      onClick={onClick}
     >
       {children}
     </div>

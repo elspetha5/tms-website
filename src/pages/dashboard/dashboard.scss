@@ -1,6 +1,15 @@
 @use "../../shared/tms-styles.scss" as styles;
 
-.dashboard-card-container {
+.dash-logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dash-logo {
+  max-width: 300px;
+}
+
+.dash-card-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -11,7 +20,7 @@
   }
 }
 
-.dashboard-card {
+.dash-card {
   width: 100px;
   height: 100px;
   margin: 10px;
@@ -32,8 +41,22 @@
   }
 }
 
-.dashboard-icon {
-  //   color: styles.$darker-blue;
+.dash-icon {
   font-size: 20px;
   margin: 5px 0 10px;
+}
+
+.dash-info-container {
+  width: 90%;
+  margin: 70px auto 50px;
+}
+
+.dash-info-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.alpha-logo {
+  background-color: styles.$dark-grey;
 }
