@@ -15,7 +15,6 @@ import "./navbar.scss";
 
 function Navbar() {
   const { currentUser, logout } = useAuth();
-  useEffect(() => console.log(currentUser), [currentUser]);
   const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -85,8 +84,8 @@ function Navbar() {
   const privateNavbarLinks = [
     {
       label: "Dashboard",
-      to: pageRoutes.clientDashboard,
-      isActive: pathname === pageRoutes.clientDashboard,
+      to: pageRoutes.dashboard,
+      isActive: pathname === pageRoutes.dashboard,
     },
     {
       label: "Logout",

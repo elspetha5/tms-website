@@ -15,6 +15,7 @@ import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
 import Button from "../../library/button/button";
 import Section from "../../components/section/section";
 import { pageRoutes } from "../../shared/constants";
+import { UseAuth } from "../../shared/types";
 
 import "./login.scss";
 
@@ -41,12 +42,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordResetSuccess, setShowPasswordResetSuccess] =
     useState(false);
-  const { currentUser, login, resetPassword, authError } = useAuth() as {
-    currentUser: any;
-    login: (email: string, password: string) => {};
-    resetPassword: (email: string) => {};
-    authError: any;
-  };
+  const { currentUser, login, resetPassword, authError } = useAuth() as UseAuth;
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(false);
@@ -72,7 +68,7 @@ function Login() {
 
     try {
       await login(emailField.value, passwordField.value);
-      navigate(pageRoutes.clientDashboard);
+      navigate(pageRoutes.dashboard);
     } catch (firebaseError: any) {
       console.error("Login component caught error:", firebaseError);
       setError(authError || "Failed to log in. Please check your credentials.");
