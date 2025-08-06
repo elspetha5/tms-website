@@ -1,15 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import { getStatments } from "./invoices-queries";
+
+import Section from "../../components/section/section";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
 import { getTenantId } from "../../shared/utils";
-import { getCompanyInvoices } from "./invoices-queries";
 
 function Invoices() {
   const { currentUser } = useAuth() as UseAuth;
+  const [invoices, setInvoices] = useState();
 
   async function getInvoices() {
-    const invoices = await getCompanyInvoices(getTenantId(currentUser));
-    console.log(invoices);
+    const data = await getStatments(getTenantId(currentUser));
+    setInvoices(data);
   }
 
   useEffect(() => {
@@ -18,7 +23,17 @@ function Invoices() {
     }
   }, [currentUser]);
 
-  return <div>invoices</div>;
+  useEffect(() => {
+    if (invoices) {
+      console.log(invoices);
+    }
+  }, [invoices]);
+
+  return (
+    <Section title="Invoices">
+      {invoices ? <div>invoices</div> : <LoadingSpinner />}
+    </Section>
+  );
 }
 
 export default Invoices;

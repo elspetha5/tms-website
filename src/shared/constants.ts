@@ -25,3 +25,7 @@ export const pageRoutes = {
   supportRequest: "/support-request",
   whyTms: "/why-tms",
 };
+
+export const storageKeys = {
+  companyInfo: "companyInfo",
+};
