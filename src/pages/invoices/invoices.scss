@@ -1,0 +1,33 @@
+@use "../../shared//tms-styles.scss" as styles;
+
+.invoices-collapsible-container {
+  width: 100%;
+  max-width: 550px;
+}
+
+.invoices-link-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoices-link {
+  font-weight: normal;
+  margin-bottom: 15px;
+  line-height: 1.25;
+  font-size: 14px;
+
+  &:hover {
+    color: styles.$dark-blue;
+  }
+}
+
+.invoices-by-company-container {
+  > :not(:first-child) {
+    margin-top: 50px;
+  }
+}
+
+.invoices-by-company-name {
+  margin-bottom: -10px;
+  font-style: italic;
+}
