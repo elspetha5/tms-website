@@ -7,6 +7,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 
+import { storageKeys } from "../constants";
+
 const AuthContext = createContext({
   currentUser: null,
   signup: async () => {},
@@ -89,6 +91,7 @@ export function AuthProvider({ children }) {
       throw error;
     } finally {
       setIsAuthChanging(false);
+      sessionStorage.removeItem(storageKeys.companyInfo);
     }
   }
 
@@ -121,6 +124,12 @@ export function AuthProvider({ children }) {
 
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    if (!currentUser) {
+      sessionStorage.removeItem(storageKeys.companyInfo);
+    }
+  }, [currentUser]);
 
   const value = {
     currentUser,

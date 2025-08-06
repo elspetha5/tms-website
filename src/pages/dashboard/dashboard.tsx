@@ -17,7 +17,7 @@ import { getCompanyInfo } from "./dashboard-queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { getTenantId } from "../../shared/utils";
 import { CompanyInfo, UseAuth } from "../../shared/types";
-import { pageRoutes } from "../../shared/constants";
+import { pageRoutes, storageKeys } from "../../shared/constants";
 
 import "./dashboard.scss";
 
@@ -50,8 +50,18 @@ function Dashboard() {
   const navigate = useNavigate();
 
   async function getInfo() {
+    const storedUser = sessionStorage.getItem(storageKeys.companyInfo);
+    const newCompanyInfo = storedUser ? JSON.parse(storedUser) : null;
+
+    if (newCompanyInfo) {
+      setCompanyInfo(newCompanyInfo);
+    }
+
     const info = await getCompanyInfo(getTenantId(currentUser));
-    setCompanyInfo(info);
+    if (!newCompanyInfo || newCompanyInfo.name !== info.name) {
+      setCompanyInfo(info);
+      sessionStorage.setItem(storageKeys.companyInfo, JSON.stringify(info));
+    }
   }
 
   useEffect(() => {

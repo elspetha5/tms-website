@@ -28,3 +28,6 @@ export const pageRoutes = {
 };
 
 export const calendlyLink = "https://calendly.com/totalmobilitysolution/15min";
+export const storageKeys = {
+  companyInfo: "companyInfo",
+};
