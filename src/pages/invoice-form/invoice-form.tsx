@@ -8,7 +8,6 @@ import "./invoice-form.scss";
 
 function InvoiceForm() {
   const { currentUser } = useAuth() as UseAuth;
-  console.log(currentUser);
   const isTmsUser = currentUser
     ? Boolean(
         currentUser.tenantId === "tms-group-3ovbh" ||
