@@ -41,6 +41,18 @@
   }
 }
 
+.dash-card--disabled {
+  @extend .dash-card;
+  border: 1px solid styles.$light-grey;
+  color: white;
+  cursor: default;
+
+  &:hover {
+    border: 1px solid styles.$light-grey;
+    color: white;
+  }
+}
+
 .dash-icon {
   font-size: 20px;
   margin: 5px 0 10px;

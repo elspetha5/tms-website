@@ -21,33 +21,35 @@ import { pageRoutes, storageKeys } from "../../shared/constants";
 
 import "./dashboard.scss";
 
-const dashboardButtons = [
-  {
-    label: "Support Tickets",
-    icon: faTicket,
-    link: "/",
-  },
-  {
-    label: "Spares Inventory",
-    icon: faWarehouse,
-    link: "/",
-  },
-  {
-    label: "Invoices",
-    icon: faReceipt,
-    link: pageRoutes.invoices,
-  },
-  {
-    label: "Contract",
-    icon: faFileContract,
-    link: "/",
-  },
-];
-
 function Dashboard() {
   const { currentUser } = useAuth() as UseAuth;
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>();
   const navigate = useNavigate();
+
+  const dashboardButtons = [
+    {
+      label: "Support Tickets",
+      icon: faTicket,
+      link: "/",
+    },
+    {
+      disabled: !companyInfo?.hasSpares,
+      label: "Spares Inventory",
+      icon: faWarehouse,
+      link: "/",
+    },
+    {
+      label: "Invoices",
+      icon: faReceipt,
+      link: pageRoutes.invoices,
+    },
+    {
+      disabled: !Boolean(companyInfo?.contractUrl),
+      label: "Contract",
+      icon: faFileContract,
+      href: companyInfo?.contractUrl,
+    },
+  ];
 
   async function getInfo() {
     const storedUser = sessionStorage.getItem(storageKeys.companyInfo);
@@ -84,16 +86,47 @@ function Dashboard() {
             />
           </div>
           <div className="dash-card-container">
-            {dashboardButtons.map((button) => (
-              <Card
-                key={button.label}
-                className="dash-card"
-                onClick={() => navigate(button.link)}
-              >
-                <FontAwesomeIcon className="dash-icon" icon={button.icon} />
-                <div>{button.label}</div>
-              </Card>
-            ))}
+            {dashboardButtons.map((button) => {
+              if (button.href) {
+                return (
+                  <a
+                    href={button.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Card
+                      key={button.label}
+                      className={`dash-card${
+                        button.disabled ? "--disabled" : ""
+                      }`}
+                      disabled={button.disabled}
+                    >
+                      <FontAwesomeIcon
+                        className="dash-icon"
+                        icon={button.icon}
+                      />
+                      <div>{button.label}</div>
+                    </Card>
+                  </a>
+                );
+              } else {
+                return (
+                  <Card
+                    key={button.label}
+                    className={`dash-card${
+                      button.disabled ? "--disabled" : ""
+                    }`}
+                    disabled={button.disabled}
+                    onClick={
+                      button.link ? () => navigate(button.link) : undefined
+                    }
+                  >
+                    <FontAwesomeIcon className="dash-icon" icon={button.icon} />
+                    <div>{button.label}</div>
+                  </Card>
+                );
+              }
+            })}
           </div>
           <div className="dash-info-container">
             <div className="dash-info-name">{companyInfo?.name}</div>

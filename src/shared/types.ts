@@ -19,6 +19,8 @@ export interface CompanyInfo {
     line1: string;
     line2: string;
   };
+  contractUrl: string;
+  hasSpares: boolean;
   logo: string;
   name: string;
   numOfDevices: number;
