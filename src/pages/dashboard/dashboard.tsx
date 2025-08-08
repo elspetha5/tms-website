@@ -98,10 +98,10 @@ function Dashboard() {
           <div className="dash-info-container">
             <div className="dash-info-name">{companyInfo?.name}</div>
             <div className="dash-info-devices">
-              # of devices: <b>{companyInfo?.numOfDevices}</b>
+              Total Devices Managed: <b>{companyInfo?.numOfDevices}</b>
             </div>
             <div>
-              Support level: <b>{companyInfo?.supportLevelText}</b>
+              Support Level: <b>{companyInfo?.supportLevelText}</b>
             </div>
           </div>
         </div>
