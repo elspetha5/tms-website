@@ -22,6 +22,11 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
 }
 
+.card-background-grey {
+  background-color: styles.$light-grey;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
+}
+
 .card-background-black {
   background-color: black;
   color: white;
