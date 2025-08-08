@@ -83,6 +83,13 @@ function Footer() {
                 </Button>
               ))}
             </div>
+            <Button
+              className="footer-get-started"
+              to={pageRoutes.getStarted}
+              isPrimary
+            >
+              Get Started
+            </Button>
           </div>
           {footerColumns.map((col) => (
             <div className="footer-info-col-container" key={col.title}>

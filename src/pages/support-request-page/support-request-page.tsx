@@ -44,6 +44,12 @@ const initSupportRequestFields: FormField[] = [
     ],
   },
   {
+    name: "Device info",
+    placeholder: "Please add device info if known",
+    isRequired: false,
+    isTextArea: true,
+  },
+  {
     name: "More details",
     placeholder: "Please share any additional details",
     isRequired: false,
@@ -175,7 +181,7 @@ function SupportRequestPage() {
                     onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
-                    rows={5}
+                    rows={3}
                     select={Boolean(field.selectOptions)}
                     type={field.type || "text"}
                     value={field.value}
@@ -210,7 +216,42 @@ function SupportRequestPage() {
                     onKeyDown={handleKeyDown}
                     placeholder={field.placeholder}
                     required={field.isRequired}
-                    rows={8}
+                    rows={3}
+                    select={Boolean(field.selectOptions)}
+                    type={field.type || "text"}
+                    value={field.value}
+                    variant="outlined"
+                  >
+                    {Boolean(field.selectOptions) &&
+                      field.selectOptions.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                );
+            })}
+          </div>
+          <div className="form-group">
+            {formFields.map((field, i) => {
+              if (i === 6)
+                return (
+                  <TextField
+                    disabled={isSubmitting}
+                    error={field.error}
+                    fullWidth
+                    helperText={field.errorMessage || field.label}
+                    id={field.name}
+                    key={field.name}
+                    label={field.name}
+                    multiline={field.isTextArea}
+                    name={field.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
+                    placeholder={field.placeholder}
+                    required={field.isRequired}
+                    rows={5}
                     select={Boolean(field.selectOptions)}
                     type={field.type || "text"}
                     value={field.value}
