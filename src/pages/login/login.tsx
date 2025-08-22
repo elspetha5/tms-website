@@ -68,7 +68,7 @@ function Login() {
 
     try {
       await login(emailField.value, passwordField.value);
-      navigate(pageRoutes.dashboard);
+      navigate(pageRoutes.privateRoutes.dashboard);
     } catch (firebaseError: any) {
       console.error("Login component caught error:", firebaseError);
       setError(authError || "Failed to log in. Please check your credentials.");

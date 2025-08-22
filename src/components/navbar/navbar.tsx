@@ -84,8 +84,8 @@ function Navbar() {
   const privateNavbarLinks = [
     {
       label: "Dashboard",
-      to: pageRoutes.dashboard,
-      isActive: pathname === pageRoutes.dashboard,
+      to: pageRoutes.privateRoutes.dashboard,
+      isActive: pathname === pageRoutes.privateRoutes.dashboard,
     },
     {
       label: "Logout",

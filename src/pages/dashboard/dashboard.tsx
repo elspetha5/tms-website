@@ -12,8 +12,7 @@ import Card from "../../components/card/card";
 import Section from "../../components/section/section";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
 
-import { getCompanyInfo } from "./dashboard-queries";
-
+import { getCompanyInfo } from "../../shared/queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { getTenantId } from "../../shared/utils";
 import { CompanyInfo, UseAuth } from "../../shared/types";
@@ -30,18 +29,18 @@ function Dashboard() {
     {
       label: "Support Tickets",
       icon: faTicket,
-      link: "/",
+      link: pageRoutes.privateRoutes.supportTickets,
     },
     {
       disabled: !companyInfo?.hasSpares,
       label: "Spares Inventory",
       icon: faWarehouse,
-      link: "/",
+      link: pageRoutes.privateRoutes.sparesInventory,
     },
     {
       label: "Invoices",
       icon: faReceipt,
-      link: pageRoutes.invoices,
+      link: pageRoutes.privateRoutes.invoices,
     },
     {
       disabled: !Boolean(companyInfo?.contractUrl),
@@ -118,7 +117,9 @@ function Dashboard() {
                     }`}
                     disabled={button.disabled}
                     onClick={
-                      button.link ? () => navigate(button.link) : undefined
+                      button.link && !button.disabled
+                        ? () => navigate(button.link)
+                        : undefined
                     }
                   >
                     <FontAwesomeIcon className="dash-icon" icon={button.icon} />
