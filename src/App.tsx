@@ -29,6 +29,8 @@ import WhyTmsPage from "./pages/why-tms-page/why-tms-page";
 import Dashboard from "./pages/dashboard/dashboard";
 import InvoiceForm from "./pages/invoice-form/invoice-form";
 import Invoices from "./pages/invoices/invoices";
+import SparesInventory from "./pages/spares-inventory/spares-inventory";
+import SupportTickets from "./pages/support-tickets/support-tickets";
 
 import { AuthProvider } from "./shared/contexts/auth-context";
 import { pageRoutes } from "./shared/constants";
@@ -101,9 +103,23 @@ function App() {
             <Route path={pageRoutes.login} element={<Login />} />
 
             <Route element={<PrivateRoute />}>
-              <Route path={pageRoutes.dashboard} element={<Dashboard />} />
-              <Route path={pageRoutes.invoices} element={<Invoices />} />
-              {/* <Route path={pageRoutes.invoiceForm} element={<InvoiceForm />} /> */}
+              <Route
+                path={pageRoutes.privateRoutes.dashboard}
+                element={<Dashboard />}
+              />
+              <Route
+                path={pageRoutes.privateRoutes.invoices}
+                element={<Invoices />}
+              />
+              <Route
+                path={pageRoutes.privateRoutes.sparesInventory}
+                element={<SparesInventory />}
+              />
+              <Route
+                path={pageRoutes.privateRoutes.supportTickets}
+                element={<SupportTickets />}
+              />
+              {/* <Route path={pageRoutes.privateRoutes.invoiceForm} element={<InvoiceForm />} /> */}
             </Route>
 
             <Route

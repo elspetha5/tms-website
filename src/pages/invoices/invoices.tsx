@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { getStatments } from "./invoices-queries";
-
 import Section from "../../components/section/section";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
 import Collapsible, {
   CollapsibleItem,
 } from "../../library/collapsible/collapsible";
 import Button from "../../library/button/button";
+
+import { getStatments } from "../../shared/queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
 import { getTenantId } from "../../shared/utils";
