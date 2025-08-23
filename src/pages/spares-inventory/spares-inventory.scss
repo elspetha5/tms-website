@@ -1,0 +1,37 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.spares-collapsible-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+.spares-device-info-container {
+  font-size: 14px;
+  margin: 5px 0 25px 30px;
+  line-height: 1.75;
+}
+
+.spares-request-button {
+  margin-top: 20px;
+}
+
+.spares-label-text {
+  margin-left: 10px;
+}
+
+.spares-device-icon-green {
+  color: styles.$green;
+}
+
+.spares-device-icon-grey {
+  color: styles.$light-grey;
+}
+
+.spares-device-icon-blue {
+  color: styles.$tms-blue;
+}
+
+.spares-modal-subheader {
+  font-size: styles.rem(14);
+  margin: 5px 0 0 10px;
+}
