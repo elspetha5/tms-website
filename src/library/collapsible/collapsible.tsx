@@ -5,20 +5,26 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
 
 import "./collapsible.scss";
 
+export enum CollapsibleStyle {
+  regular = "regular",
+  small = "small",
+}
+
 export interface CollapsibleItem {
-  content: any;
+  content: React.ReactNode;
   height: string;
   id: string;
   isActive: boolean;
-  label: string;
+  label: React.ReactNode;
 }
 
 interface CollapsibleProps {
   arr: CollapsibleItem[];
+  style?: CollapsibleStyle;
 }
 
 function Collapsible(props: CollapsibleProps) {
-  const { arr: propsArr } = props;
+  const { arr: propsArr, style = CollapsibleStyle.regular } = props;
   const [arr, setArr] = useState(propsArr);
   const itemRefs = useRef(new Map());
 
@@ -45,8 +51,18 @@ function Collapsible(props: CollapsibleProps) {
   return (
     <>
       {arr.map((item, i) => (
-        <div key={item.id} className="collapsible-container">
-          <div className="collapsible-header" onClick={() => setActiveItem(i)}>
+        <div
+          key={item.id}
+          className={`collapsible-container${
+            style === CollapsibleStyle.small ? "-small" : ""
+          }`}
+        >
+          <div
+            className={`collapsible-header${
+              style === CollapsibleStyle.small ? "-small" : ""
+            }`}
+            onClick={() => setActiveItem(i)}
+          >
             <div className="collapsible-label">{item.label}</div>
             <FontAwesomeIcon icon={item.isActive ? faMinus : faPlus} />
           </div>
