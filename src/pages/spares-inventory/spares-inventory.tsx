@@ -4,6 +4,9 @@ import {
   faMobileScreen,
   faTabletScreenButton,
 } from "@fortawesome/free-solid-svg-icons";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 
 import Button from "../../library/button/button";
 import Modal from "../../library/modal/modal";
@@ -32,6 +35,7 @@ const initSparesInventoryRequestFields: FormField[] = [
     name: "Requested by Email",
     placeholder: "Your email",
     isRequired: true,
+    type: "email",
   },
   {
     name: "Requested for Name",
@@ -42,17 +46,13 @@ const initSparesInventoryRequestFields: FormField[] = [
     name: "Requested for Email",
     placeholder: "Email address for person receiving device",
     isRequired: true,
+    type: "email",
   },
   {
     name: "Recieve by Date",
     placeholder: "When do you want to get this device?",
     isRequired: true,
-  },
-  {
-    name: "Shipping Address",
-    placeholder: "",
-    isRequired: true,
-    isTextArea: true,
+    // type: 'date' TODO: MAKE THIS WORK FOR A SELECT DATE
   },
   {
     name: "Is this replacing a device?",
@@ -60,6 +60,12 @@ const initSparesInventoryRequestFields: FormField[] = [
     placeholder: "",
     isRequired: true,
     selectOptions: ["Yes", "No"],
+  },
+  {
+    name: "Shipping Address",
+    placeholder: "",
+    isRequired: true,
+    isTextArea: true,
   },
   {
     name: "Notes",
@@ -74,6 +80,20 @@ function SparesInventory() {
   const [sparesData, setSparesData] = useState<[]>();
   const [sparesArr, setSparesArr] = useState<CollapsibleItem[]>();
   const [modalInfo, setModalInfo] = useState();
+  const {
+    formFields,
+    handleBlur,
+    handleChange,
+    handleKeyDown,
+    handleSheetSubmit,
+    isError,
+    isSubmitting,
+    submitStatus,
+    submitMessage,
+  } = useForm(
+    initSparesInventoryRequestFields,
+    import.meta.env.VITE_GOOGLE_SHEET_SPARES_INVENTORY_REQUEST_URL
+  );
 
   async function getSpares() {
     const data = await getSparesInventory(getTenantId(currentUser));
@@ -172,7 +192,7 @@ function SparesInventory() {
 
       <Modal open={Boolean(modalInfo)} onClose={() => setModalInfo(undefined)}>
         {modalInfo && (
-          <div>
+          <div className="spares-modal-container">
             <div>
               Requesting <b>{modalInfo["Device model"]}</b>
             </div>
@@ -187,6 +207,157 @@ function SparesInventory() {
                 <b>IMEI#:</b> {modalInfo["IMEI#"]}
               </div>
             </div>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div className="form-group-container">
+                <div className="form-group">
+                  {formFields.map((field, i) => {
+                    if (i < 2)
+                      return (
+                        <TextField
+                          disabled={isSubmitting}
+                          error={field.error}
+                          fullWidth
+                          helperText={field.errorMessage || field.label}
+                          id={field.name}
+                          key={field.name}
+                          label={field.name}
+                          multiline={field.isTextArea}
+                          name={field.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          onKeyDown={handleKeyDown}
+                          placeholder={field.placeholder}
+                          required={field.isRequired}
+                          rows={5}
+                          select={Boolean(field.selectOptions)}
+                          type={field.type || "text"}
+                          value={field.value}
+                          variant="outlined"
+                        >
+                          {Boolean(field.selectOptions) &&
+                            field.selectOptions.map((option) => (
+                              <MenuItem key={option} value={option}>
+                                {option}
+                              </MenuItem>
+                            ))}
+                        </TextField>
+                      );
+                  })}
+                </div>
+                <div className="form-group">
+                  {formFields.map((field, i) => {
+                    if (i === 2 || i === 3)
+                      return (
+                        <TextField
+                          disabled={isSubmitting}
+                          error={field.error}
+                          fullWidth
+                          helperText={field.errorMessage || field.label}
+                          id={field.name}
+                          key={field.name}
+                          label={field.name}
+                          multiline={field.isTextArea}
+                          name={field.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          onKeyDown={handleKeyDown}
+                          placeholder={field.placeholder}
+                          required={field.isRequired}
+                          rows={5}
+                          select={Boolean(field.selectOptions)}
+                          type={field.type || "text"}
+                          value={field.value}
+                          variant="outlined"
+                        >
+                          {Boolean(field.selectOptions) &&
+                            field.selectOptions.map((option) => (
+                              <MenuItem key={option} value={option}>
+                                {option}
+                              </MenuItem>
+                            ))}
+                        </TextField>
+                      );
+                  })}
+                </div>
+                <div className="form-group">
+                  {formFields.map((field, i) => {
+                    if (i === 4 || i === 5)
+                      return (
+                        <TextField
+                          disabled={isSubmitting}
+                          error={field.error}
+                          fullWidth
+                          helperText={field.errorMessage || field.label}
+                          id={field.name}
+                          key={field.name}
+                          label={field.name}
+                          multiline={field.isTextArea}
+                          name={field.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          onKeyDown={handleKeyDown}
+                          placeholder={field.placeholder}
+                          required={field.isRequired}
+                          rows={5}
+                          select={Boolean(field.selectOptions)}
+                          type={field.type || "text"}
+                          value={field.value}
+                          variant="outlined"
+                        >
+                          {Boolean(field.selectOptions) &&
+                            field.selectOptions.map((option) => (
+                              <MenuItem key={option} value={option}>
+                                {option}
+                              </MenuItem>
+                            ))}
+                        </TextField>
+                      );
+                  })}
+                </div>
+                <div className="form-group">
+                  {formFields.map((field, i) => {
+                    if (i === 6 || i === 7)
+                      return (
+                        <TextField
+                          disabled={isSubmitting}
+                          error={field.error}
+                          fullWidth
+                          helperText={field.errorMessage || field.label}
+                          id={field.name}
+                          key={field.name}
+                          label={field.name}
+                          multiline={field.isTextArea}
+                          name={field.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          onKeyDown={handleKeyDown}
+                          placeholder={field.placeholder}
+                          required={field.isRequired}
+                          rows={5}
+                          select={Boolean(field.selectOptions)}
+                          type={field.type || "text"}
+                          value={field.value}
+                          variant="outlined"
+                        >
+                          {Boolean(field.selectOptions) &&
+                            field.selectOptions.map((option) => (
+                              <MenuItem key={option} value={option}>
+                                {option}
+                              </MenuItem>
+                            ))}
+                        </TextField>
+                      );
+                  })}
+                </div>
+              </div>
+            </Box>
           </div>
         )}
       </Modal>
