@@ -31,6 +31,11 @@
   color: styles.$tms-blue;
 }
 
+.spares-modal-container {
+  width: 80vw;
+  max-width: 600px;
+}
+
 .spares-modal-subheader {
   font-size: styles.rem(14);
   margin: 5px 0 0 10px;
