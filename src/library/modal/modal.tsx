@@ -18,16 +18,25 @@ function Modal({ children, ...props }: PropsWithChildren<ModalProps>) {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "auto",
+          width: "400",
+          maxHeight: "80vh",
           bgcolor: "background.paper",
           border: "none",
           borderRadius: "5px",
           boxShadow: 24,
-          p: 4,
-          scroll: "auto",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        {children}
+        <Box
+          sx={{
+            flexGrow: 1,
+            overflowY: "auto",
+            padding: 4,
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </MaterialModal>
   );

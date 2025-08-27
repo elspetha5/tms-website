@@ -24,7 +24,11 @@ export interface FormField {
   value?: string;
 }
 
-function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
+function useForm(
+  fieldsBlueprint: FormField[],
+  webAppUrl?: string,
+  additionalData?: {}
+) {
   const memoizedInitialState = useMemo(
     () => createInitialFormState(fieldsBlueprint),
     [fieldsBlueprint]
@@ -136,6 +140,11 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
       dataToSubmit.append(field.name, field.value);
     });
     dataToSubmit.append("recaptchaToken", recaptchaToken);
+    if (additionalData) {
+      for (const key in additionalData) {
+        dataToSubmit.append(key, additionalData[key]);
+      }
+    }
 
     if (webAppUrl) {
       try {
@@ -194,6 +203,7 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
     submitStatus,
     submitMessage,
     resetForm,
+    resetFormFields: () => setFormFields(memoizedInitialState),
   };
 }
 
