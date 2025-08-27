@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
 import Button from "../../library/button/button";
+import Message from "../../components/message/message";
 import Modal from "../../library/modal/modal";
 import Section from "../../components/section/section";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
@@ -70,14 +71,14 @@ const initSparesInventoryRequestFields: FormField[] = [
   {
     name: "Notes",
     placeholder: "Anything else needed?",
-    isRequired: true,
+    isRequired: false,
     isTextArea: true,
   },
 ];
 
 function SparesInventory() {
   const { currentUser } = useAuth() as UseAuth;
-  const [sparesData, setSparesData] = useState<[]>();
+  // const [sparesData, setSparesData] = useState<[]>();
   const [sparesArr, setSparesArr] = useState<CollapsibleItem[]>();
   const [modalInfo, setModalInfo] = useState();
   const {
@@ -88,47 +89,29 @@ function SparesInventory() {
     handleSheetSubmit,
     isError,
     isSubmitting,
+    resetForm,
+    resetFormFields,
     submitStatus,
     submitMessage,
   } = useForm(
     initSparesInventoryRequestFields,
-    import.meta.env.VITE_GOOGLE_SHEET_SPARES_INVENTORY_REQUEST_URL
+    import.meta.env.VITE_GOOGLE_SHEET_SPARES_INVENTORY_REQUEST_URL,
+    {
+      Model: modalInfo?.["Device model"],
+      "Phone #": modalInfo?.["Device Ph#"],
+      "SN#": modalInfo?.["SN#"],
+      "IMEI#": modalInfo?.["IMEI#"],
+      tenantId: getTenantId(currentUser),
+    }
   );
 
   async function getSpares() {
+    console.log("called");
     const data = await getSparesInventory(getTenantId(currentUser));
     if (data) {
-      setSparesData(data);
-      console.log(data);
-    } else {
-      console.log("no data");
-    }
-  }
-
-  function getIconColor(status) {
-    switch (status) {
-      case "Yes":
-        return "green";
-
-      case "No":
-        return "grey";
-
-      case "Requested":
-        return "blue";
-    }
-  }
-
-  useEffect(() => {
-    if (currentUser) {
-      getSpares();
-    }
-  }, [currentUser]);
-
-  useEffect(() => {
-    if (sparesData) {
       const currSparesArr: CollapsibleItem[] = [];
 
-      sparesData.forEach((spare) => {
+      data.forEach((spare) => {
         const deviceAvailability = spare["Device currently available?"];
         currSparesArr.push({
           content: (
@@ -178,22 +161,64 @@ function SparesInventory() {
 
       setSparesArr(currSparesArr);
     }
-  }, [sparesData]);
+  }
+
+  function getIconColor(status) {
+    switch (status) {
+      case "Yes":
+        return "green";
+
+      case "No":
+        return "grey";
+
+      case "Requested":
+        return "blue";
+    }
+  }
+
+  function closeModal() {
+    getSpares();
+    resetFormFields();
+    setModalInfo(undefined);
+
+    setTimeout(() => {
+      resetForm();
+    }, 30 * 1000);
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      getSpares();
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (submitStatus !== null && Boolean(modalInfo)) {
+      closeModal();
+    }
+  }, [submitStatus, modalInfo]);
+
+  useEffect(() => {
+    console.log(sparesArr);
+  }, [sparesArr]);
 
   return (
-    <Section title="Spares Inventory">
-      {sparesArr && sparesArr.length > 0 ? (
-        <div className="spares-collapsible-container">
-          <Collapsible arr={sparesArr} style={CollapsibleStyle.small} />
-        </div>
-      ) : (
-        <LoadingSpinner />
+    <Section className="spares-section-container" title="Spares Inventory">
+      {submitStatus && submitMessage && (
+        <Message type={submitStatus} message={submitMessage} />
       )}
+      <div className="spares-collapsible-container">
+        {sparesArr && sparesArr.length > 0 ? (
+          <Collapsible arr={sparesArr} style={CollapsibleStyle.small} />
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
 
-      <Modal open={Boolean(modalInfo)} onClose={() => setModalInfo(undefined)}>
+      <Modal open={Boolean(modalInfo)} onClose={closeModal}>
         {modalInfo && (
           <div className="spares-modal-container">
-            <div>
+            <div className="spares-modal-header">
               Requesting <b>{modalInfo["Device model"]}</b>
             </div>
             <div className="spares-modal-subheader">
@@ -358,6 +383,18 @@ function SparesInventory() {
                 </div>
               </div>
             </Box>
+            <Button
+              type="submit"
+              className="form-btn"
+              isPrimary
+              isDisabled={isSubmitting || isError}
+              onClick={(e) => {
+                handleSheetSubmit(e);
+                setSparesArr(undefined);
+              }}
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </Button>
           </div>
         )}
       </Modal>

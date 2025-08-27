@@ -1,8 +1,13 @@
 @use "../../shared/tms-styles.scss" as styles;
 
+.spares-section-container {
+  min-height: 600px;
+}
+
 .spares-collapsible-container {
   width: 100%;
   max-width: 450px;
+  margin-top: 50px;
 }
 
 .spares-device-info-container {
@@ -34,9 +39,16 @@
 .spares-modal-container {
   width: 80vw;
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spares-modal-header {
+  font-size: styles.rem(18);
 }
 
 .spares-modal-subheader {
   font-size: styles.rem(14);
-  margin: 5px 0 0 10px;
+  margin: 5px 0 20px 30px;
 }
