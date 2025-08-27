@@ -20,8 +20,8 @@ export interface FormField {
   name: string;
   placeholder?: string;
   selectOptions?: string[];
-  type?: string;
-  value?: string;
+  type?: "email" | "date" | "tel" | "number" | "password";
+  value?: any;
 }
 
 function useForm(
@@ -42,24 +42,39 @@ function useForm(
   >(null);
   const [submitMessage, setSubmitMessage] = useState("");
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormFields((prevFields) =>
-      prevFields.map((field) => {
-        let telValue;
-        if (field.type === "tel") {
-          telValue = handleFormatPhoneNumber(value);
-        }
-        return field.name === name
-          ? {
-              ...field,
-              value: telValue || value,
-              error: false,
-              errorMessage: "",
-            }
-          : field;
-      })
-    );
+  function handleChange(e, name?) {
+    if (e.target) {
+      const { name, value } = e.target;
+      setFormFields((prevFields) =>
+        prevFields.map((field) => {
+          let telValue;
+          if (field.type === "tel") {
+            telValue = handleFormatPhoneNumber(value);
+          }
+          return field.name === name
+            ? {
+                ...field,
+                value: telValue || value,
+                error: false,
+                errorMessage: "",
+              }
+            : field;
+        })
+      );
+    } else {
+      setFormFields((prevFields) =>
+        prevFields.map((field) =>
+          field.name === name
+            ? {
+                ...field,
+                value: e,
+                error: false,
+                errorMessage: "",
+              }
+            : field
+        )
+      );
+    }
   }
 
   function handleKeyDown(e) {

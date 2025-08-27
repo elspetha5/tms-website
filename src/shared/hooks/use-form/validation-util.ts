@@ -19,6 +19,9 @@ export function handleValidation(field, setIsError) {
   let updatedField = { ...field, error: false, errorMessage: "" };
   let isError = false;
 
+  if (updatedField.type === "date") {
+  }
+
   if (updatedField.type === "tel") {
     let newValue = field.value;
     newValue = newValue.replace(/^1+/, "").replace(/\D/g, "");
@@ -46,7 +49,12 @@ export function handleValidation(field, setIsError) {
     isError = true;
   }
 
-  if (updatedField.isRequired && !updatedField.value.trim()) {
+  if (
+    updatedField.isRequired &&
+    (typeof updatedField.value === "string"
+      ? !updatedField.value.trim()
+      : !updatedField.value)
+  ) {
     updatedField = {
       ...updatedField,
       error: true,

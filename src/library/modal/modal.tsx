@@ -19,7 +19,7 @@ function Modal({ children, ...props }: PropsWithChildren<ModalProps>) {
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: "400",
-          maxHeight: "80vh",
+          maxHeight: "90vh",
           bgcolor: "background.paper",
           border: "none",
           borderRadius: "5px",
