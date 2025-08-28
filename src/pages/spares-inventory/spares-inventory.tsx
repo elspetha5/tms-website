@@ -5,9 +5,6 @@ import {
   faTabletScreenButton,
 } from "@fortawesome/free-solid-svg-icons";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import dayjs from "dayjs";
 
 import Button from "../../library/button/button";
 import FormFieldInput from "../../library/form-field-input/form-field-input";
@@ -25,6 +22,7 @@ import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
 import { getTenantId } from "../../shared/utils";
 import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
+import { states } from "../../shared/constants";
 
 import "./spares-inventory.scss";
 
@@ -65,10 +63,35 @@ const initSparesInventoryRequestFields: FormField[] = [
     selectOptions: ["Yes", "No"],
   },
   {
-    name: "Shipping Address",
+    name: "Address line 1",
     placeholder: "",
     isRequired: true,
-    isTextArea: true,
+    type: "address",
+  },
+  {
+    name: "Address line 2",
+    placeholder: "",
+    isRequired: false,
+    type: "address",
+  },
+  {
+    name: "City",
+    placeholder: "",
+    isRequired: true,
+    type: "address",
+  },
+  {
+    name: "State",
+    placeholder: "",
+    isRequired: true,
+    selectOptions: states,
+    type: "address",
+  },
+  {
+    name: "Zip",
+    placeholder: "",
+    isRequired: true,
+    type: "address",
   },
   {
     name: "Notes",
@@ -80,7 +103,6 @@ const initSparesInventoryRequestFields: FormField[] = [
 
 function SparesInventory() {
   const { currentUser } = useAuth() as UseAuth;
-  // const [sparesData, setSparesData] = useState<[]>();
   const [sparesArr, setSparesArr] = useState<CollapsibleItem[]>();
   const [modalInfo, setModalInfo] = useState();
   const {
@@ -251,6 +273,7 @@ function SparesInventory() {
                       return (
                         <FormFieldInput
                           {...field}
+                          key={field.name}
                           isSubmitting={isSubmitting}
                           handleBlur={handleBlur}
                           handleChange={handleChange}
@@ -265,6 +288,7 @@ function SparesInventory() {
                       return (
                         <FormFieldInput
                           {...field}
+                          key={field.name}
                           isSubmitting={isSubmitting}
                           handleBlur={handleBlur}
                           handleChange={handleChange}
@@ -279,6 +303,23 @@ function SparesInventory() {
                       return (
                         <FormFieldInput
                           {...field}
+                          key={field.name}
+                          isSubmitting={isSubmitting}
+                          handleBlur={handleBlur}
+                          handleChange={handleChange}
+                          handleKeyDown={handleKeyDown}
+                        />
+                      );
+                  })}
+                </div>
+                <div className="form-group">
+                  <div className="spares-form-label">Shipping Address:</div>
+                  {formFields.map((field, i) => {
+                    if (i === 6 || i === 7)
+                      return (
+                        <FormFieldInput
+                          {...field}
+                          key={field.name}
                           isSubmitting={isSubmitting}
                           handleBlur={handleBlur}
                           handleChange={handleChange}
@@ -289,10 +330,41 @@ function SparesInventory() {
                 </div>
                 <div className="form-group">
                   {formFields.map((field, i) => {
-                    if (i === 6 || i === 7)
+                    if (i === 8 || i === 9)
                       return (
                         <FormFieldInput
                           {...field}
+                          key={field.name}
+                          isSubmitting={isSubmitting}
+                          handleBlur={handleBlur}
+                          handleChange={handleChange}
+                          handleKeyDown={handleKeyDown}
+                        />
+                      );
+                  })}
+                </div>
+                <div className="form-group spares-zip-code">
+                  {formFields.map((field, i) => {
+                    if (i === 10)
+                      return (
+                        <FormFieldInput
+                          {...field}
+                          key={field.name}
+                          isSubmitting={isSubmitting}
+                          handleBlur={handleBlur}
+                          handleChange={handleChange}
+                          handleKeyDown={handleKeyDown}
+                        />
+                      );
+                  })}
+                </div>
+                <div className="form-group">
+                  {formFields.map((field, i) => {
+                    if (i === 11)
+                      return (
+                        <FormFieldInput
+                          {...field}
+                          key={field.name}
                           isSubmitting={isSubmitting}
                           handleBlur={handleBlur}
                           handleChange={handleChange}

@@ -8,7 +8,15 @@ export default function LoadingSpinner() {
   return (
     <div className="loading-spinner-container">
       <svg className="loader" height="60px" viewBox="0 0 24 24" width="60px">
-        {circleArr.map((circle) => circle)}
+        {circleArr.map((_, index) => (
+          <circle
+            key={index}
+            cx="12"
+            cy="12"
+            r="10"
+            className="loader__value"
+          />
+        ))}
       </svg>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
