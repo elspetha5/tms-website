@@ -19,8 +19,8 @@ export interface FormField {
   label?: string;
   name: string;
   placeholder?: string;
-  selectOptions?: string[];
-  type?: "email" | "date" | "tel" | "number" | "password";
+  selectOptions?: string[] | { value: string; label: string }[];
+  type?: "email" | "date" | "tel" | "number" | "password" | "address";
   value?: any;
 }
 
@@ -151,14 +151,22 @@ function useForm(
     });
 
     const dataToSubmit = new URLSearchParams();
+    const addressFieldValues: string[] = [];
     formFields.forEach((field) => {
-      dataToSubmit.append(field.name, field.value);
+      if (field.type === "address") {
+        addressFieldValues.push(field.value);
+      } else {
+        dataToSubmit.append(field.name, field.value);
+      }
     });
     dataToSubmit.append("recaptchaToken", recaptchaToken);
     if (additionalData) {
       for (const key in additionalData) {
         dataToSubmit.append(key, additionalData[key]);
       }
+    }
+    if (addressFieldValues.length > 0) {
+      dataToSubmit.append("Shipping Address", addressFieldValues.join(" "));
     }
 
     if (webAppUrl) {

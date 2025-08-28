@@ -1,8 +1,7 @@
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
 
 import Section from "../../components/section/section";
+import FormFieldInput from "../../library/form-field-input/form-field-input";
 import useForm, { FormField } from "../../shared/hooks/use-form/use-form";
 import Button from "../../library/button/button";
 import Message from "../../components/message/message";
@@ -131,34 +130,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i < 2)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>
@@ -166,34 +145,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i === 2 || i === 3)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error || field.label}
-                        fullWidth
-                        helperText={field.errorMessage}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>
@@ -201,34 +160,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i === 4 || i === 5)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error || field.label}
-                        fullWidth
-                        helperText={field.errorMessage}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>
@@ -239,34 +178,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i === 6 || i === 7)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>
@@ -275,34 +194,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i === 8 || i === 9)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>
@@ -310,34 +209,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i === 10 || i === 11)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>
@@ -345,34 +224,14 @@ function GetStartedPage() {
                 {formFields.map((field, i) => {
                   if (i === 12)
                     return (
-                      <TextField
-                        disabled={isSubmitting}
-                        error={field.error}
-                        fullWidth
-                        helperText={field.errorMessage || field.label}
-                        id={field.name}
+                      <FormFieldInput
+                        {...field}
                         key={field.name}
-                        label={field.name}
-                        multiline={field.isTextArea}
-                        name={field.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        placeholder={field.placeholder}
-                        required={field.isRequired}
-                        rows={5}
-                        select={Boolean(field.selectOptions)}
-                        type={field.type || "text"}
-                        value={field.value}
-                        variant="outlined"
-                      >
-                        {Boolean(field.selectOptions) &&
-                          field.selectOptions.map((option) => (
-                            <MenuItem key={option} value={option}>
-                              {option}
-                            </MenuItem>
-                          ))}
-                      </TextField>
+                        isSubmitting={isSubmitting}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        handleKeyDown={handleKeyDown}
+                      />
                     );
                 })}
               </div>

@@ -19,7 +19,16 @@ export function handleValidation(field, setIsError) {
   let updatedField = { ...field, error: false, errorMessage: "" };
   let isError = false;
 
-  if (updatedField.type === "date") {
+  if (
+    (updatedField.name.toLowerCase().includes("zip") ||
+      updatedField.name.toLowerCase().includes("postal")) &&
+    !/^\d{5}(?:[-\s]\d{4})?$/.test(updatedField.value)
+  ) {
+    updatedField = {
+      ...updatedField,
+      error: true,
+      errorMessage: "Invalid zip code format (e.g, 12345 or 12345-6789)",
+    };
   }
 
   if (updatedField.type === "tel") {
@@ -29,7 +38,7 @@ export function handleValidation(field, setIsError) {
       updatedField = {
         ...updatedField,
         error: true,
-        errorMessage: "Not a valid phone number",
+        errorMessage: "Invalid phone number",
       };
       isError = true;
     }
@@ -44,7 +53,7 @@ export function handleValidation(field, setIsError) {
     updatedField = {
       ...updatedField,
       error: true,
-      errorMessage: "Not a valid email address",
+      errorMessage: "Invalid email address",
     };
     isError = true;
   }
