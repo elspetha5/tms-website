@@ -11,7 +11,7 @@ function PromoBanner() {
     <Button to={pageRoutes.getStarted} isTertiary>
       <div className="promo-banner-container">
         <div />
-        <div className="promo-banner-title">*SUMMER SPECIAL*</div>
+        <div className="promo-banner-title">*FALL SPECIAL*</div>
         <div className="promo-banner-arrow">
           <FontAwesomeIcon icon={faCircleArrowRight} />
         </div>
