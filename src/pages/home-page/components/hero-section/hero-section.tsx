@@ -20,9 +20,9 @@ function HeroSection() {
                 Total Control. Total Security. Total Mobility.
               </div>
               <div className="hero-subtitle bold">
-                The fastest and easiest way to manage, secure, backup and
-                recover your Corporate-owned and BYOD smartphone and tablet
-                devices
+                <span className="hero-name">TMS</span> is the fastest and
+                easiest way to manage, secure, backup and recover your
+                Corporate-owned and BYOD smartphone and tablet devices
               </div>
               <Button
                 className="hero-section-cta bold"
