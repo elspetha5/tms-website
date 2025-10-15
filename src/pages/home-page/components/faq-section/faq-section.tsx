@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
@@ -13,6 +14,7 @@ interface FaqItem {
   question: string;
   answer: string;
   height: string;
+  hash?: string;
 }
 
 const initFaqsArr: FaqItem[] = [
@@ -48,17 +50,27 @@ const initFaqsArr: FaqItem[] = [
       "Great question! Let's start with what Bring Your Own Device (BYOD) does not mean. It does not mean that we can monitor, view, or control your device. The main benefits of BYOD are protecting your data, and consolidating your work and home life.",
     height: "0px",
   },
+  {
+    id: "faq5",
+    isActive: false,
+    question: "What is the NO DOWNTIME Guarantee?",
+    answer:
+      "Our NO DOWNTIME Guarantee ensures continuous productivity for users. This guarantee hinges on the client maintaining a sufficient spares inventory, fully managed by TMS.",
+    height: "0px",
+    hash: "no-downtime-faq",
+  },
 ];
 
 function FaqSection() {
   const [faqsArr, setFaqsArr] = useState<FaqItem[]>(initFaqsArr);
   const answerRefs = useRef(new Map());
+  const { hash } = useLocation();
 
-  function setActiveQ(index) {
+  function setActiveQ(index: number, defaultActive?: boolean) {
     setFaqsArr((prevFaqsArr) => {
       return prevFaqsArr.map((q, i) => {
         if (index === i) {
-          const newIsActive = !q.isActive;
+          const newIsActive = defaultActive ? true : !q.isActive;
           let newHeight = "0px";
           if (newIsActive) {
             const contentElement = answerRefs.current.get(q.id);
@@ -74,12 +86,24 @@ function FaqSection() {
     });
   }
 
+  useEffect(() => {
+    if (hash) {
+      const hashIndex = faqsArr.findIndex((item) =>
+        item.hash ? hash.includes(item.hash) : false
+      );
+
+      if (hashIndex >= 0) {
+        setActiveQ(hashIndex, true);
+      }
+    }
+  }, [hash]);
+
   return (
     <div className="faq-section-container">
       <Section id="faqs" title="Frequently asked questions">
         <div className="faq-questions-container">
           {faqsArr.map((q, i) => (
-            <div key={q.id} className="faq-container">
+            <div key={q.id} id={q.hash || ""} className="faq-container">
               <div className="faq-header" onClick={() => setActiveQ(i)}>
                 <div className="faq-header-question">{q.question}</div>
                 <FontAwesomeIcon icon={q.isActive ? faMinus : faPlus} />

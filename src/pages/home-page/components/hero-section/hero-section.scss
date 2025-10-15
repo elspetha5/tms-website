@@ -10,7 +10,27 @@
 .hero-inner-container {
   min-height: 550px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  @include styles.media(styles.$min-sm) {
+    flex-direction: row;
+    align-items: normal;
+  }
+}
+
+.hero-guarantee {
+  margin-top: 10px;
+  margin-bottom: 75px;
+  margin-left: 30px;
+  width: 125px;
+
+  @include styles.media(styles.$min-sm) {
+    margin-top: 35px;
+    margin-bottom: 0;
+    width: 150px;
+  }
 }
 
 .hero-content {
@@ -22,7 +42,6 @@
   align-items: flex-start;
   margin-bottom: 30px;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   @include styles.media(styles.$min-xs) {
     width: 70%;
@@ -35,6 +54,13 @@
   @include styles.media(styles.$min-lg) {
     width: 50%;
   }
+}
+
+.hero-background-box {
+  background-color: #3b3b3bbe;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 .hero-title {

@@ -17,6 +17,7 @@ export const pageRoutes = {
   intoTheFuture: "/into-the-future",
   invoiceForm: "/invoice-form",
   login: "/login",
+  noDowntimeFaq: "/#no-downtime-faq",
   ourStory: "/our-story",
   partners: "/partners",
   partnersForm: "/partners/form",

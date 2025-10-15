@@ -10,7 +10,8 @@ function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { pathname, hash } = useLocation();
   const ctaText = "Let's talk";
-  const ctaLink = "https://calendar.app.google/8CCxv7c79X3JY7PZ9";
+  const ctaLink =
+    "https://calendly.com/totalmobilitysolution/30min?month=2025-10";
   const showLinks =
     pathname !== pageRoutes.getStarted &&
     pathname !== pageRoutes.supportRequest &&
