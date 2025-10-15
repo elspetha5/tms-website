@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import Button from "../../library/button/button";
-import { firebaseImgUrl, pageRoutes } from "../../shared/constants";
+import {
+  calendlyLink,
+  firebaseImgUrl,
+  pageRoutes,
+} from "../../shared/constants";
 
 import "./navbar.scss";
 
@@ -10,8 +14,6 @@ function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { pathname, hash } = useLocation();
   const ctaText = "Let's talk";
-  const ctaLink =
-    "https://calendly.com/totalmobilitysolution/30min?month=2025-10";
   const showLinks =
     pathname !== pageRoutes.getStarted &&
     pathname !== pageRoutes.supportRequest &&
@@ -51,7 +53,7 @@ function Navbar() {
     },
     {
       label: ctaText,
-      href: ctaLink,
+      href: calendlyLink,
     },
   ];
 
@@ -92,7 +94,7 @@ function Navbar() {
           ) : (
             <Button
               className={`nav-link bold`}
-              href={ctaLink}
+              href={calendlyLink}
               isPrimary
               onClick={scrollToTop}
             >
@@ -144,7 +146,7 @@ function Navbar() {
         ) : (
           <Button
             className={`nav-link nav-mobile-talk-link bold`}
-            href={ctaLink}
+            href={calendlyLink}
             isPrimary
             onClick={scrollToTop}
           >

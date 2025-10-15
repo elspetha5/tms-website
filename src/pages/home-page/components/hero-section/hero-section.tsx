@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import Button from "../../../../library/button/button";
 import ContentContainer from "../../../../components/content-container/content-container";
-import { pageRoutes } from "../../../../shared/constants";
+import { calendlyLink, pageRoutes } from "../../../../shared/constants";
 
 import "./hero-section.scss";
 
@@ -26,7 +26,7 @@ function HeroSection() {
               </div>
               <Button
                 className="hero-section-cta bold"
-                href="https://calendly.com/totalmobilitysolution/30min?month=2025-10"
+                href={calendlyLink}
                 isPrimary
               >
                 Connect Now

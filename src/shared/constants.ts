@@ -25,3 +25,5 @@ export const pageRoutes = {
   supportRequest: "/support-request",
   whyTms: "/why-tms",
 };
+
+export const calendlyLink = "https://calendly.com/totalmobilitysolution/15min";
