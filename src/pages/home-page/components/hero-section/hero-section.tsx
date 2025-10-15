@@ -24,13 +24,13 @@ function HeroSection() {
                 recover your Corporate-owned and BYOD smartphone and tablet
                 devices
               </div>
-              {/* <Button
+              <Button
                 className="hero-section-cta bold"
                 href="https://calendly.com/totalmobilitysolution/30min?month=2025-10"
                 isPrimary
               >
                 Connect Now
-              </Button> */}
+              </Button>
             </div>
           </div>
         </div>

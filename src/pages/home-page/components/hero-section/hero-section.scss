@@ -59,7 +59,7 @@
 .hero-background-box {
   background-color: #3b3b3bbe;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 10px 25px;
   margin-bottom: 20px;
 }
 
@@ -89,4 +89,9 @@
 .hero-section-cta {
   text-shadow: none;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid white;
+
+  &:hover {
+    border: 1px solid styles.$tms-blue;
+  }
 }
