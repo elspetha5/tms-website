@@ -2,17 +2,45 @@
 
 .promo-card-container {
   color: white;
-  background-image: linear-gradient(
-    to bottom right,
-    styles.$fall-red,
-    styles.$fall-orange
-  );
   text-align: center;
   margin-bottom: 20px;
   margin-top: -20px;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
+}
+
+.promo-card-winter {
+  background-image: linear-gradient(
+    to bottom right,
+    styles.$winter-light-blue,
+    styles.$winter-blue,
+    styles.$winter-dark-blue
+  );
+}
+
+.promo-card-fall {
+  background-image: linear-gradient(
+    to bottom right,
+    styles.$fall-red,
+    styles.$fall-orange
+  );
+}
+
+.promo-card-summer {
+  background-image: linear-gradient(
+    to bottom right,
+    styles.$summer-orange,
+    styles.$summer-yellow
+  );
+}
+
+.promo-card-spring {
+  background-image: linear-gradient(
+    to bottom right,
+    styles.$spring-yellow,
+    styles.$spring-green
+  );
 }
 
 .promo-card-title {
@@ -28,6 +56,5 @@
 .promo-card-date {
   font-size: styles.rem(10);
   width: 100%;
-  //   text-align: right;
   margin-top: 10px;
 }

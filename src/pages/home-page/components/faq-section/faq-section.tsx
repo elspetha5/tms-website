@@ -37,9 +37,9 @@ const initFaqsArr: FaqItem[] = [
   {
     id: "faq3",
     isActive: false,
-    question: "How do you prevent SMS-phishing?",
+    question: `What is "SMS-Phishing" or "Smishing" and how do you prevent it?`,
     answer:
-      "This is through an app on each device that TMS will manage on your behalf for maximum security.",
+      "Smishing is short for SMS-Phishing, which is phishing done through messaging (text, DM, WhatsApp, etc) and not email. Current email and cybersecurity MDR/EDR/XDR, etc. software products do not address on-device smishing for iOS and Android platforms. TMS does this through an app on each managed device.",
     height: "0px",
   },
   {
