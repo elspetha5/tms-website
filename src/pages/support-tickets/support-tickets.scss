@@ -1,0 +1,43 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.support-tickets-collapsible-container {
+  width: 100%;
+  max-width: 450px;
+  margin-top: 50px;
+}
+
+.support-tickets-no-ticket-msg {
+  text-align: center;
+  min-height: 300px;
+
+  > :nth-child(2) {
+    margin-top: 16px;
+    font-size: styles.rem(12);
+  }
+}
+
+.support-tickets-info-container {
+  font-size: 14px;
+  margin: 5px 0 25px 30px;
+  line-height: 1.75;
+}
+
+.support-tickets-label-text {
+  font-size: styles.rem(16);
+  display: flex;
+  align-items: center;
+}
+
+.support-tickets-icon-new {
+  color: styles.$success;
+  margin-right: 10px;
+}
+
+.support-tickets-icon-in-progress {
+  color: styles.$warning;
+  margin-right: 10px;
+}
+
+.support-tickets-label-date {
+  font-size: styles.rem(14);
+}

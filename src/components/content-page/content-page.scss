@@ -8,13 +8,6 @@
   height: 100%;
 
   @include styles.media(styles.$min-sm) {
-    // background-image: linear-gradient(
-    //   styles.$extra-light-blue,
-    //   styles.$extra-light-grey,
-    //   styles.$extra-light-grey
-    // );
-    // background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/light-mobile-device-background.png?alt=media&token=fd09a700-fc12-4b2d-adfd-1a9c655ad1c3");
-    // background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/light-mobile-device-background-angled.png?alt=media&token=a6f0bd2b-8bcb-4ffd-b48e-ca88c33966e9");
     background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/light-mobile-device-background-slightly-angled.png?alt=media&token=7a793819-4e4e-427f-939b-4f1f2038e8a4");
     background-size: 40%;
   }
@@ -34,6 +27,7 @@
   @include styles.media(styles.$min-sm) {
     margin: 0 60px;
     padding: 40px 80px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   }
 }
 

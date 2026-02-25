@@ -36,7 +36,6 @@ function Invoices() {
       setHasNoInvoices(true);
     }
   }
-  console.log(invoices);
 
   useEffect(() => {
     if (currentUser) {
