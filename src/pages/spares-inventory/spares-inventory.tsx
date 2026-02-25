@@ -17,7 +17,7 @@ import Collapsible, {
   CollapsibleStyle,
 } from "../../library/collapsible/collapsible";
 
-import { getSparesInventory } from "../../shared/queries";
+import { dataTypes, getCompanyData } from "../../shared/queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
 import { getTenantId } from "../../shared/utils";
@@ -126,11 +126,14 @@ function SparesInventory() {
       "SN#": modalInfo?.["SN#"],
       "IMEI#": modalInfo?.["IMEI#"],
       tenantId: getTenantId(currentUser),
-    }
+    },
   );
 
   async function getSpares() {
-    const data = await getSparesInventory(getTenantId(currentUser));
+    const data = await getCompanyData(
+      dataTypes.spares,
+      getTenantId(currentUser),
+    );
     if (data) {
       const currSparesArr: CollapsibleItem[] = [];
 
@@ -168,7 +171,7 @@ function SparesInventory() {
             <span>
               <FontAwesomeIcon
                 className={`spares-device-icon-${getIconColor(
-                  deviceAvailability
+                  deviceAvailability,
                 )}`}
                 icon={
                   spare["Device type"] === "Tablet"

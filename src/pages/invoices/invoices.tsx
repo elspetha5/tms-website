@@ -7,7 +7,7 @@ import Collapsible, {
 } from "../../library/collapsible/collapsible";
 import Button from "../../library/button/button";
 
-import { getStatments } from "../../shared/queries";
+import { dataTypes, getCompanyData } from "../../shared/queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
 import { getTenantId } from "../../shared/utils";
@@ -26,13 +26,17 @@ function Invoices() {
   const [displayNode, setDisplayNode] = useState<React.ReactNode>();
 
   async function getInvoices() {
-    const data = await getStatments(getTenantId(currentUser));
+    const data = await getCompanyData(
+      dataTypes.statements,
+      getTenantId(currentUser),
+    );
     if (data) {
       setInvoices(data);
     } else {
       setHasNoInvoices(true);
     }
   }
+  console.log(invoices);
 
   useEffect(() => {
     if (currentUser) {
@@ -102,7 +106,7 @@ function Invoices() {
             <div>
               <div className="invoices-by-company-name">{item}</div>
               <Collapsible arr={innerInvoiceArr} />
-            </div>
+            </div>,
           );
         }
       });
@@ -113,7 +117,7 @@ function Invoices() {
         setDisplayNode(
           <div className="invoices-by-company-container">
             {complexInvoiceArr.map((c) => c)}
-          </div>
+          </div>,
         );
       }
     }
