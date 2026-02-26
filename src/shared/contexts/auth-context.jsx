@@ -9,6 +9,9 @@ import { auth } from "../firebase";
 
 import { storageKeys } from "../constants";
 
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+const FOUR_HOURS_MS = 4 * 24 * 60 * 60 * 1000;
+
 const AuthContext = createContext({
   currentUser: null,
   signup: async () => {},
@@ -63,7 +66,7 @@ export function AuthProvider({ children }) {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       return userCredential.user;
@@ -107,7 +110,7 @@ export function AuthProvider({ children }) {
         setAuthError(error.message);
       } else {
         setAuthError(
-          "Failed to send password reset email, please try again later"
+          "Failed to send password reset email, please try again later",
         );
       }
       throw error;
@@ -117,12 +120,50 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    let idleTimer;
+
+    const resetIdleTimer = () => {
+      if (idleTimer) clearTimeout(idleTimer);
+
+      if (auth.currentUser) {
+        idleTimer = setTimeout(() => {
+          logout();
+        }, FOUR_HOURS_MS);
+      }
+    };
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const lastSignIn = new Date(user.metadata.lastSignInTime).getTime();
+        const now = Date.now();
+
+        if (now - lastSignIn > SEVEN_DAYS_MS) {
+          logout();
+          return;
+        }
+
+        window.addEventListener("mousemove", resetIdleTimer);
+        window.addEventListener("keydown", resetIdleTimer);
+        window.addEventListener("click", resetIdleTimer);
+
+        resetIdleTimer();
+      } else {
+        window.removeEventListener("mousemove", resetIdleTimer);
+        window.removeEventListener("keydown", resetIdleTimer);
+        window.removeEventListener("click", resetIdleTimer);
+      }
+
       setCurrentUser(user);
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+      clearTimeout(idleTimer);
+      window.removeEventListener("mousemove", resetIdleTimer);
+      window.removeEventListener("keydown", resetIdleTimer);
+      window.removeEventListener("click", resetIdleTimer);
+    };
   }, []);
 
   useEffect(() => {

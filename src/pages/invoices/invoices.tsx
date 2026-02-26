@@ -30,7 +30,7 @@ function Invoices() {
       dataTypes.statements,
       getTenantId(currentUser),
     );
-    if (data) {
+    if (Object.keys(data).length > 0) {
       setInvoices(data);
     } else {
       setHasNoInvoices(true);
