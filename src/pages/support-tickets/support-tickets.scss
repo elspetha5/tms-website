@@ -21,6 +21,7 @@
   font-size: styles.rem(18);
   border-bottom: 2px solid styles.$extra-light-grey;
   padding: 15px 0;
+  border-radius: 10px 10px 0 0;
 
   &:hover {
     background-color: styles.$tms-blue;
