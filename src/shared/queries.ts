@@ -36,7 +36,7 @@ export async function getCompanyData(
   const response = await fetch(getFetchUrl(dataType, tenantId, ticketType), {
     method: "POST",
     mode: "cors",
-    cache: "no-cache",
+    cache: "default",
   });
 
   if (!response.ok) {

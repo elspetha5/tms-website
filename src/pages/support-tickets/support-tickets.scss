@@ -3,7 +3,36 @@
 .support-tickets-collapsible-container {
   width: 100%;
   max-width: 450px;
-  margin-top: 50px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.support-tickets-tab-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.support-tickets-tab {
+  text-align: center;
+  width: 100%;
+  font-size: styles.rem(18);
+  border-bottom: 2px solid styles.$extra-light-grey;
+  padding: 15px 0;
+
+  &:hover {
+    background-color: styles.$tms-blue;
+    color: white;
+    border-bottom: 2px solid styles.$tms-blue;
+  }
+}
+
+.support-tickets-tab-selected {
+  @extend .support-tickets-tab;
+  color: styles.$dark-blue;
+  border-bottom: 2px solid styles.$tms-blue;
 }
 
 .support-tickets-no-ticket-msg {
@@ -29,17 +58,17 @@
 }
 
 .support-tickets-icon-new {
-  color: styles.$success;
+  color: styles.$dark-green;
   margin-right: 10px;
 }
 
 .support-tickets-icon-in-progress {
-  color: styles.$warning;
+  color: styles.$gold;
   margin-right: 10px;
 }
 
 .support-tickets-icon-resolved {
-  color: styles.$dark-blue;
+  color: styles.$tms-blue;
   margin-right: 10px;
 }
 

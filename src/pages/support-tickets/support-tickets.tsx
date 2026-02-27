@@ -28,11 +28,12 @@ function SupportTickets() {
   const [ticketsArr, setTicketsArr] = useState<CollapsibleItem[]>();
   const [isLoading, setIsLoading] = useState(true);
 
-  async function getTickets() {
+  async function getTickets(ticketType: "pending" | "resolved") {
+    setIsLoading(true);
     const data = await getCompanyData(
       dataTypes.supportTickets,
       getTenantId(currentUser),
-      selectedTab,
+      ticketType,
     );
 
     if (data) {
@@ -85,13 +86,33 @@ function SupportTickets() {
 
   useEffect(() => {
     if (currentUser) {
-      getTickets();
+      getTickets("pending");
     }
-  }, [currentUser, selectedTab]);
+  }, [currentUser]);
 
   return (
     <Section title="Support Tickets">
       <div className="support-tickets-collapsible-container">
+        <div className="support-tickets-tab-container">
+          <button
+            className={`support-tickets-tab${selectedTab === "pending" ? "-selected" : ""}`}
+            onClick={() => {
+              getTickets("pending");
+              setSelectedTab("pending");
+            }}
+          >
+            Pending
+          </button>
+          <button
+            className={`support-tickets-tab${selectedTab === "resolved" ? "-selected" : ""}`}
+            onClick={() => {
+              getTickets("resolved");
+              setSelectedTab("resolved");
+            }}
+          >
+            Resolved
+          </button>
+        </div>
         {!isLoading ? (
           <>
             {ticketsArr && ticketsArr.length > 0 ? (
