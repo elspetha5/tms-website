@@ -5,10 +5,10 @@ export const dataTypes = {
   supportTickets: "supportTickets",
 };
 
-function getFetchUrl(dataType, tenantId) {
+function getFetchUrl(dataType, tenantId, ticketType) {
   return `${
     import.meta.env.VITE_APPS_SCRIPT_URL
-  }?dataType=${dataType}&tenantId=${encodeURIComponent(tenantId)}`;
+  }?dataType=${dataType}&tenantId=${encodeURIComponent(tenantId)}&ticketType=${ticketType}`;
 }
 
 export async function getCompanyInfo(tenantId) {
@@ -28,8 +28,12 @@ export async function getCompanyInfo(tenantId) {
   return result;
 }
 
-export async function getCompanyData(dataType, tenantId) {
-  const response = await fetch(getFetchUrl(dataType, tenantId), {
+export async function getCompanyData(
+  dataType,
+  tenantId,
+  ticketType: string | null = null,
+) {
+  const response = await fetch(getFetchUrl(dataType, tenantId, ticketType), {
     method: "POST",
     mode: "cors",
     cache: "no-cache",

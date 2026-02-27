@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faCircleCheck,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Collapsible, {
   CollapsibleItem,
@@ -18,6 +22,9 @@ import "./support-tickets.scss";
 
 function SupportTickets() {
   const { currentUser } = useAuth() as UseAuth;
+  const [selectedTab, setSelectedTab] = useState<"pending" | "resolved">(
+    "pending",
+  );
   const [ticketsArr, setTicketsArr] = useState<CollapsibleItem[]>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,13 +32,15 @@ function SupportTickets() {
     const data = await getCompanyData(
       dataTypes.supportTickets,
       getTenantId(currentUser),
+      selectedTab,
     );
 
     if (data) {
-      const currTicketsArr: CollapsibleItem[] = [];
+      const currTicketArr: CollapsibleItem[] = [];
 
       data.forEach((ticket) => {
-        currTicketsArr.push({
+        const status = ticket["Status"];
+        const ticketObj = {
           content: (
             <div className="support-tickets-info-container">
               {Object.keys(ticket).map((key) => (
@@ -47,8 +56,14 @@ function SupportTickets() {
           label: (
             <span className="support-tickets-label-text">
               <FontAwesomeIcon
-                className={`support-tickets-icon-${ticket["Status"] === "New" ? "new" : "in-progress"}`}
-                icon={ticket["Status"] === "New" ? faCircle : faSpinner}
+                className={`support-tickets-icon-${status === "Resolved" ? "resolved" : status === "New" ? "new" : "in-progress"}`}
+                icon={
+                  status === "Resolved"
+                    ? faCircleCheck
+                    : status === "New"
+                      ? faCircle
+                      : faSpinner
+                }
               />
               <span>
                 <span className="support-tickets-label-date">
@@ -58,10 +73,12 @@ function SupportTickets() {
               </span>
             </span>
           ),
-        });
+        };
+
+        currTicketArr.push(ticketObj);
       });
 
-      setTicketsArr(currTicketsArr);
+      setTicketsArr(currTicketArr);
       setIsLoading(false);
     }
   }
@@ -70,7 +87,7 @@ function SupportTickets() {
     if (currentUser) {
       getTickets();
     }
-  }, [currentUser]);
+  }, [currentUser, selectedTab]);
 
   return (
     <Section title="Support Tickets">
