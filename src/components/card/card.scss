@@ -7,7 +7,7 @@
 }
 
 .card-background-blue {
-  background-color: styles.$extra-light-blue;
+  background-color: styles.$tms-blue;
   color: white;
 }
 
@@ -19,6 +19,11 @@
 
 .card-background-light-grey {
   background-color: styles.$extra-light-grey;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
+}
+
+.card-background-grey {
+  background-color: styles.$light-grey;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
 }
 

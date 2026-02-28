@@ -13,6 +13,8 @@ interface ImportMetaEnv {
   readonly VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL: string;
   readonly VITE_GOOGLE_RECAPTCHA_SITE_KEY: string;
   readonly VITE_GOOGLE_SHEET_PARTNERS_URL: string;
+  readonly VITE_GOOGLE_SHEET_SPARES_INVENTORY_REQUEST_URL: string;
+  readonly VITE_APPS_SCRIPT_URL: string;
 }
 
 interface ImportMeta {

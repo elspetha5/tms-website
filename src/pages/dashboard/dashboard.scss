@@ -1,0 +1,74 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.dash-logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dash-logo {
+  max-width: 300px;
+}
+
+.dash-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+
+  &:hover {
+    color: styles.$tms-blue;
+  }
+}
+
+.dash-card {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: none;
+  border: 1px solid styles.$grey;
+  color: styles.$dark-grey;
+
+  &:hover {
+    border: 1px solid styles.$tms-blue;
+    color: styles.$tms-blue;
+  }
+}
+
+.dash-card--disabled {
+  @extend .dash-card;
+  border: 1px solid styles.$light-grey;
+  color: white;
+  cursor: default;
+
+  &:hover {
+    border: 1px solid styles.$light-grey;
+    color: white;
+  }
+}
+
+.dash-icon {
+  font-size: 20px;
+  margin: 5px 0 10px;
+}
+
+.dash-info-container {
+  width: 90%;
+  margin: 70px auto 50px;
+}
+
+.dash-info-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.alpha-logo {
+  background-color: styles.$dark-grey;
+}

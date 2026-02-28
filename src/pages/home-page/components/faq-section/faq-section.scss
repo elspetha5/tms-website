@@ -8,28 +8,3 @@
   max-width: 800px;
   margin-top: -20px;
 }
-
-.faq-container {
-  padding: 20px 0;
-  border-bottom: 1px solid styles.$light-grey;
-}
-
-.faq-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: styles.rem(18);
-  margin: 20px 0;
-  cursor: pointer;
-
-  .faq-header-question {
-    margin-right: 10px;
-  }
-}
-
-.faq-answer {
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  max-width: 90%;
-}

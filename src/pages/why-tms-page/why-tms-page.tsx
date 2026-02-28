@@ -24,7 +24,7 @@ const listItems = [
   },
   {
     title: "Full Lifecycle Coverage:",
-    text: "From procurement and setup, to remote management, help desk, repairs, backup, recovery and security —- we’ve got every stage covered so your devices (and your people) are always ready and protected.",
+    text: "From procurement to retirement, we manage the complete setup including: per-device kitting and staging, remote management, help desk, repairs, backup, recovery, security and everything else —- we’ve got every stage covered so your devices (and your people) are always ready and protected.",
   },
 ];
 
@@ -43,10 +43,8 @@ function WhyTmsPage() {
       <div className="content-page-section-title">What Makes TMS Unique?</div>
       <UnorderedList list={listItems} listName="why" />
       <div className="content-page-tagline">
-        Total Control. Total Security. Total Mobility.
-      </div>
-      <div className="why-tms-tagline-explainer">
-        Your trusted partner for managed iOS & Android device solutions.
+        Your trusted partner for managed iOS & Android device lifecycle
+        solutions.
       </div>
 
       <div className="cta-center">

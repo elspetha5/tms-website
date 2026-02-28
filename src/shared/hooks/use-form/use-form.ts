@@ -19,12 +19,16 @@ export interface FormField {
   label?: string;
   name: string;
   placeholder?: string;
-  selectOptions?: string[];
-  type?: string;
-  value?: string;
+  selectOptions?: string[] | { value: string; label: string }[];
+  type?: "email" | "date" | "tel" | "number" | "password" | "address";
+  value?: any;
 }
 
-function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
+function useForm(
+  fieldsBlueprint: FormField[],
+  webAppUrl?: string,
+  additionalData?: {}
+) {
   const memoizedInitialState = useMemo(
     () => createInitialFormState(fieldsBlueprint),
     [fieldsBlueprint]
@@ -38,24 +42,39 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
   >(null);
   const [submitMessage, setSubmitMessage] = useState("");
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormFields((prevFields) =>
-      prevFields.map((field) => {
-        let telValue;
-        if (field.type === "tel") {
-          telValue = handleFormatPhoneNumber(value);
-        }
-        return field.name === name
-          ? {
-              ...field,
-              value: telValue || value,
-              error: false,
-              errorMessage: "",
-            }
-          : field;
-      })
-    );
+  function handleChange(e, name?) {
+    if (e.target) {
+      const { name, value } = e.target;
+      setFormFields((prevFields) =>
+        prevFields.map((field) => {
+          let telValue;
+          if (field.type === "tel") {
+            telValue = handleFormatPhoneNumber(value);
+          }
+          return field.name === name
+            ? {
+                ...field,
+                value: telValue || value,
+                error: false,
+                errorMessage: "",
+              }
+            : field;
+        })
+      );
+    } else {
+      setFormFields((prevFields) =>
+        prevFields.map((field) =>
+          field.name === name
+            ? {
+                ...field,
+                value: e,
+                error: false,
+                errorMessage: "",
+              }
+            : field
+        )
+      );
+    }
   }
 
   function handleKeyDown(e) {
@@ -132,10 +151,23 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
     });
 
     const dataToSubmit = new URLSearchParams();
+    const addressFieldValues: string[] = [];
     formFields.forEach((field) => {
-      dataToSubmit.append(field.name, field.value);
+      if (field.type === "address") {
+        addressFieldValues.push(field.value);
+      } else {
+        dataToSubmit.append(field.name, field.value);
+      }
     });
     dataToSubmit.append("recaptchaToken", recaptchaToken);
+    if (additionalData) {
+      for (const key in additionalData) {
+        dataToSubmit.append(key, additionalData[key]);
+      }
+    }
+    if (addressFieldValues.length > 0) {
+      dataToSubmit.append("Shipping Address", addressFieldValues.join(" "));
+    }
 
     if (webAppUrl) {
       try {
@@ -194,6 +226,7 @@ function useForm(fieldsBlueprint: FormField[], webAppUrl?: string) {
     submitStatus,
     submitMessage,
     resetForm,
+    resetFormFields: () => setFormFields(memoizedInitialState),
   };
 }
 

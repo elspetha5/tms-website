@@ -7,11 +7,10 @@
   font-family: "Open Sans", sans-serif;
   height: 100%;
 
-  background-image: linear-gradient(
-    styles.$extra-light-blue,
-    styles.$extra-light-grey,
-    styles.$extra-light-grey
-  );
+  @include styles.media(styles.$min-sm) {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/light-mobile-device-background-slightly-angled.png?alt=media&token=7a793819-4e4e-427f-939b-4f1f2038e8a4");
+    background-size: 40%;
+  }
 }
 
 .content-page-inner-container {
@@ -28,6 +27,7 @@
   @include styles.media(styles.$min-sm) {
     margin: 0 60px;
     padding: 40px 80px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   }
 }
 

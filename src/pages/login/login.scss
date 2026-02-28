@@ -1,0 +1,12 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.login-forgot-password {
+  margin-bottom: 25px;
+  font-size: styles.rem(14);
+}
+
+.login-reset-success-text {
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+}

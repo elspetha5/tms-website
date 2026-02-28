@@ -1,0 +1,78 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.support-tickets-collapsible-container {
+  width: 100%;
+  max-width: 450px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.support-tickets-tab-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.support-tickets-tab {
+  text-align: center;
+  width: 100%;
+  font-size: styles.rem(18);
+  border-bottom: 2px solid styles.$extra-light-grey;
+  padding: 15px 0;
+  border-radius: 10px 10px 0 0;
+
+  &:hover {
+    background-color: styles.$tms-blue;
+    color: white;
+    border-bottom: 2px solid styles.$tms-blue;
+  }
+}
+
+.support-tickets-tab-selected {
+  @extend .support-tickets-tab;
+  color: styles.$dark-blue;
+  border-bottom: 2px solid styles.$tms-blue;
+}
+
+.support-tickets-no-ticket-msg {
+  text-align: center;
+  min-height: 300px;
+
+  > :nth-child(2) {
+    margin-top: 16px;
+    font-size: styles.rem(12);
+  }
+}
+
+.support-tickets-info-container {
+  font-size: 14px;
+  margin: 5px 0 25px 30px;
+  line-height: 1.75;
+}
+
+.support-tickets-label-text {
+  font-size: styles.rem(16);
+  display: flex;
+  align-items: center;
+}
+
+.support-tickets-icon-new {
+  color: styles.$dark-green;
+  margin-right: 10px;
+}
+
+.support-tickets-icon-in-progress {
+  color: styles.$gold;
+  margin-right: 10px;
+}
+
+.support-tickets-icon-resolved {
+  color: styles.$tms-blue;
+  margin-right: 10px;
+}
+
+.support-tickets-label-date {
+  font-size: styles.rem(14);
+}

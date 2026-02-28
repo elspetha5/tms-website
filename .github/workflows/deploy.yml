@@ -41,6 +41,8 @@ jobs:
           VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL: ${{ secrets.GOOGLE_SHEET_SUPPORT_REQUEST_URL }}
           VITE_GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
           VITE_GOOGLE_SHEET_PARTNERS_URL: ${{ secrets.GOOGLE_SHEET_PARTNERS_URL }}
+          VITE_GOOGLE_SHEET_SPARES_INVENTORY_REQUEST_URL: ${{ secrets.GOOGLE_SHEET_SPARES_INVENTORY_REQUEST_URL }}
+          VITE_APPS_SCRIPT_URL: ${{ secrets.GOOGLE_APPS_SCRIPT_URL }}
 
       - name: Create CNAME file
         run: echo "totalmobilitysolution.com" > ./dist/CNAME

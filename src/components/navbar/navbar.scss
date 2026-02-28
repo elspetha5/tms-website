@@ -38,6 +38,12 @@
   }
 }
 
+.nav-tagline {
+  text-align: center;
+  width: 100%;
+  font-size: styles.rem(10);
+}
+
 .nav-links-container {
   display: none;
 
@@ -51,6 +57,7 @@
   margin: 10px 0;
   border-bottom: 2px solid transparent;
   border-top: 2px solid transparent;
+  cursor: pointer;
 
   &:hover {
     border-bottom: 2px solid styles.$dark-blue;
@@ -144,4 +151,22 @@
   @include styles.media(styles.$min-sm) {
     display: none;
   }
+}
+
+.nav-logout-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logout-btns-wrapper {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logout-modal-btn {
+  margin-left: 15px;
 }

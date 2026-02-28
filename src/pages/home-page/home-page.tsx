@@ -2,6 +2,7 @@ import HeroSection from "./components/hero-section/hero-section";
 import VideoSection from "./components/video-section/video-section";
 import InfographicSection from "./components/infographic-section/infographic-section";
 // import TestimonialsSection from "./components/testimonials-section/testimonials-section";
+import EmmMspSection from "./components/emm-msp-section/emm-msp-section";
 import PricingSection from "./components/pricing-section/pricing-section";
 import FaqSection from "./components/faq-section/faq-section";
 import AffiliateSection from "./components/affiliate-section/affiliate-section";
@@ -15,6 +16,7 @@ function HomePage() {
       <VideoSection />
       <InfographicSection />
       {/* <TestimonialsSection /> */}
+      <EmmMspSection />
       <PricingSection />
       <FaqSection />
       <AffiliateSection />

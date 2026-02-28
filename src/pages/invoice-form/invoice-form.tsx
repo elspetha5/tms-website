@@ -2,15 +2,17 @@ import { Navigate } from "react-router-dom";
 import { User } from "firebase/auth";
 
 import { useAuth } from "../../shared/contexts/auth-context";
-import { users } from "../../shared/users";
+import { UseAuth } from "../../shared/types";
 
 import "./invoice-form.scss";
 
 function InvoiceForm() {
-  const { currentUser } = useAuth() as { currentUser: User | null };
-  console.log(currentUser);
+  const { currentUser } = useAuth() as UseAuth;
   const isTmsUser = currentUser
-    ? Boolean(users.TmsUsers.find((id) => id === currentUser.uid)?.[0])
+    ? Boolean(
+        currentUser.tenantId === "tms-group-3ovbh" ||
+          currentUser.tenantId === null
+      )
     : false;
 
   return !isTmsUser ? <Navigate to="/" replace /> : <div>invoice form</div>;

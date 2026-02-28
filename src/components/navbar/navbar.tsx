@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../shared/contexts/auth-context";
 
 import Button from "../../library/button/button";
+import Modal from "../../library/modal/modal";
 import {
   calendlyLink,
   firebaseImgUrl,
@@ -11,7 +14,10 @@ import {
 import "./navbar.scss";
 
 function Navbar() {
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { pathname, hash } = useLocation();
   const ctaText = "Let's talk";
   const showLinks =
@@ -28,7 +34,20 @@ function Navbar() {
     }
   }
 
-  const navbarLinks = [
+  async function handleLogout(e) {
+    e.preventDefault();
+
+    try {
+      await logout();
+      setShowLogoutModal(false);
+    } catch (firebaseError) {
+      console.error("Logout component caught error:", firebaseError);
+    }
+
+    navigate(pageRoutes.home);
+  }
+
+  const publicNavbarLinks = [
     {
       label: "Home",
       to: hash || pathname === "/" ? pageRoutes.homeScroll : pageRoutes.home,
@@ -52,8 +71,25 @@ function Navbar() {
       isActive: hash === pageRoutes.faqs.substring(1),
     },
     {
+      label: "Login",
+      to: pageRoutes.login,
+      isActive: pathname === pageRoutes.login,
+    },
+    {
       label: ctaText,
       href: calendlyLink,
+    },
+  ];
+
+  const privateNavbarLinks = [
+    {
+      label: "Dashboard",
+      to: pageRoutes.privateRoutes.dashboard,
+      isActive: pathname === pageRoutes.privateRoutes.dashboard,
+    },
+    {
+      label: "Logout",
+      isActive: pathname === pageRoutes.login,
     },
   ];
 
@@ -72,24 +108,47 @@ function Navbar() {
               src={`${firebaseImgUrl}/TMS-logo-no-background.png?alt=media&token=cf8499c6-a5dd-4d14-9a67-85b2e98c87d8`}
               alt="logo"
             />
+            <div className="nav-tagline">
+              The Mobile Device Lifecycle Management Experts
+            </div>
           </Link>
         </div>
 
         <div className="nav-links-container">
           {showLinks ? (
             <>
-              {navbarLinks.map((link) => (
-                <Button
-                  className={`nav-link${link.isActive ? "-active" : ""} bold`}
-                  to={link.to}
-                  href={link.href}
-                  isPrimary={link.label === ctaText}
-                  key={link.label}
-                  onClick={scrollToTop}
-                >
-                  {link.label}
-                </Button>
-              ))}
+              {(currentUser ? privateNavbarLinks : publicNavbarLinks).map(
+                (link) => {
+                  if (link.label === "Logout") {
+                    return (
+                      <div
+                        className={`nav-link${
+                          link.isActive ? "-active" : ""
+                        } bold`}
+                        key="Logout"
+                        onClick={() => setShowLogoutModal(true)}
+                      >
+                        Logout
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <Button
+                        className={`nav-link${
+                          link.isActive ? "-active" : ""
+                        } bold`}
+                        to={link.to}
+                        href={link.href}
+                        isPrimary={link.label === ctaText}
+                        key={link.label}
+                        onClick={scrollToTop}
+                      >
+                        {link.label}
+                      </Button>
+                    );
+                  }
+                },
+              )}
             </>
           ) : (
             <Button
@@ -129,18 +188,36 @@ function Navbar() {
             <div
               className={`nav-mobile-menu${showMobileMenu ? "-active" : ""}`}
             >
-              {navbarLinks.map((link) => (
-                <Button
-                  className={`nav-link${link.isActive ? "-active" : ""}`}
-                  to={link.to}
-                  href={link.href}
-                  isPrimary={link.label === ctaText}
-                  key={link.label}
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}
-                >
-                  {link.label}
-                </Button>
-              ))}
+              {(currentUser ? privateNavbarLinks : publicNavbarLinks).map(
+                (link) => {
+                  if (link.label === "Logout") {
+                    return (
+                      <div
+                        className={`nav-link${
+                          link.isActive ? "-active" : ""
+                        } bold`}
+                        key="Logout"
+                        onClick={() => setShowLogoutModal(true)}
+                      >
+                        Logout
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <Button
+                        className={`nav-link${link.isActive ? "-active" : ""}`}
+                        to={link.to}
+                        href={link.href}
+                        isPrimary={link.label === ctaText}
+                        key={link.label}
+                        onClick={() => setShowMobileMenu(!showMobileMenu)}
+                      >
+                        {link.label}
+                      </Button>
+                    );
+                  }
+                },
+              )}
             </div>
           </>
         ) : (
@@ -154,6 +231,24 @@ function Navbar() {
           </Button>
         )}
       </div>
+
+      <Modal open={showLogoutModal} onClose={() => setShowLogoutModal(false)}>
+        <div className="nav-logout-modal">
+          <div>Are you sure you want to logout?</div>
+          <div className="nav-logout-btns-wrapper">
+            <Button isSecondary onClick={() => setShowLogoutModal(false)}>
+              Cancel
+            </Button>
+            <Button
+              className="nav-logout-modal-btn"
+              isPrimary
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </nav>
   );
 }

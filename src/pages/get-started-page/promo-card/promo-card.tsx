@@ -9,7 +9,7 @@ function PromoCard() {
     <div className={`promo-card-container promo-card-${title.toLowerCase()}`}>
       <div className="promo-card-title">{`*${title} SPECIAL*`}</div>
       <div className="promo-card-description">
-        1st month free for new clients
+        10% off first month for new clients
       </div>
       <div className="promo-card-date">{date}</div>
     </div>

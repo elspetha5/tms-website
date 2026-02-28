@@ -1,0 +1,42 @@
+@use "../../shared/tms-styles.scss" as styles;
+
+.collapsible-container {
+  padding: 5px 0;
+  border-bottom: 1px solid styles.$light-grey;
+
+  &:hover {
+    border-bottom: 1px solid styles.$tms-blue;
+  }
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: styles.rem(18);
+  margin: 15px 0;
+  cursor: pointer;
+
+  .collapsible-label {
+    margin-right: 10px;
+  }
+}
+
+.collapsible-content {
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  max-width: 90%;
+}
+
+.collapsible-container-small {
+  @extend .collapsible-container;
+  border-bottom: 1px solid styles.$extra-light-grey;
+}
+
+.collapsible-header-small {
+  @extend .collapsible-header;
+  font-weight: normal;
+  font-size: styles.rem(16);
+  margin: 5px 0;
+}
