@@ -2,7 +2,6 @@ import ContentPage from "../../components/content-page/content-page";
 import UnorderedList from "../../components/unordered-list/unordered-list";
 
 import LiveGlowing from "../../shared/icons/live-glowing";
-import LiveFlames from "../../shared/icons/live-flames";
 
 import "./coming-soon.scss";
 
@@ -10,7 +9,7 @@ const comingSoonItems = [
   {
     text: (
       <div className="coming-soon-feature">
-        Login for clients <LiveFlames className="coming-soon-feature-icon" />
+        Login for clients <LiveGlowing className="coming-soon-feature-icon" />
       </div>
     ),
   },
@@ -18,7 +17,7 @@ const comingSoonItems = [
     text: (
       <div className="coming-soon-feature">
         Client profiles
-        <LiveFlames className="coming-soon-feature-icon" />
+        <LiveGlowing className="coming-soon-feature-icon" />
       </div>
     ),
   },
@@ -26,7 +25,7 @@ const comingSoonItems = [
     text: (
       <div className="coming-soon-feature">
         Access to invoices
-        <LiveFlames className="coming-soon-feature-icon" />
+        <LiveGlowing className="coming-soon-feature-icon" />
       </div>
     ),
   },

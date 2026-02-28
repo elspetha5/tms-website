@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   href?: string;
   icon?: ElementType;
+  isBlack?: boolean;
   isDisabled?: boolean;
   isPrimary?: boolean;
   isSecondary?: boolean;
@@ -23,6 +24,7 @@ function Button(props: ButtonProps) {
     className: classNameProp,
     href,
     icon: Icon,
+    isBlack,
     isDisabled,
     isPrimary,
     isSecondary,
@@ -36,6 +38,7 @@ function Button(props: ButtonProps) {
   if (isSecondary) className = "btn-secondary";
   if (isTertiary) className = "btn-tertiary";
   if (isDisabled) className = `${className}-disabled`;
+  if (isBlack) className = "btn-black";
   let button;
 
   if (to) {

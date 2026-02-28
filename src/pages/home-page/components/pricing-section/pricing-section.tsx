@@ -8,9 +8,7 @@ import { pageRoutes } from "../../../../shared/constants";
 
 import "./pricing-section.scss";
 
-const caveatsArr = [
-  "All prices based on 100+ devices managed, are per device/month and all-inclusive",
-];
+const caveatsArr = ["*Travel to and on-site at client not included"];
 
 const pricingCardsArr = [
   {
@@ -23,7 +21,6 @@ const pricingCardsArr = [
       </span>
     ),
     items: [
-      "Typically for companies with 1-50 employees",
       "Free device fleet audit",
       "Cellular carrier account setup, management, and full-service TEM procurement provider",
       "Full migration services",
@@ -34,19 +31,17 @@ const pricingCardsArr = [
       "Additional fees apply",
     ],
     check: true,
-    backgroundColor: backgroundColors.lightGrey,
+    backgroundColor: backgroundColors.black,
   },
   {
-    title: "Growing",
-    subtitle:
-      "For companies ready to utilize their mobile fleet and scale to greater heights",
+    title: "Growth",
+    subtitle: "For companies ready to utilize their mobile fleet and scale",
     price: (
       <span>
-        $99.99<span className="pricing-per-text">/device</span>
+        $99.99<span className="pricing-per-text">/seat</span>
       </span>
     ),
     items: [
-      "Typically for companies wtih 50-200 employees",
       "Includes everything from Starter plan",
       "On-device security, network compliance and SMS-phishing prevention",
       "Device spares inventory management",
@@ -59,18 +54,17 @@ const pricingCardsArr = [
   {
     title: "Pro",
     subtitle:
-      "Our MOST POPULAR option is for companies that know the value of partnerships with the right people",
+      "Our MOST POPULAR option - For companies that know the value of partnerships with the right people",
     price: (
       <span>
         $149.99<span className="pricing-per-text">/seat</span>
       </span>
     ),
     items: [
-      "Typically for companies wtih 200+ employees",
-      "Includes everything from Starter and Growing plans",
+      "Includes everything from Starter and Growth plans",
       "On-device real-time backup and recovery",
-      "Travel and client on-site",
-      "Flat rate with no additional fees, we cover everything!",
+      "Hardware repairs included",
+      "Flat rate with no additional fees*",
     ],
     check: false,
     backgroundColor: backgroundColors.blue,
@@ -109,19 +103,20 @@ function PricingSection() {
                 <Button
                   className="pricing-cta bold"
                   to={pageRoutes.getStarted}
-                  isPrimary={i < 2}
-                  isSecondary={i === 2}
+                  isBlack={i === 2}
+                  isPrimary={i === 1}
+                  isSecondary={i === 0}
                 >
                   Get Started
                 </Button>
               </Card>
             ))}
           </div>
-          {/* <div className="pricing-caveats-container">
-          {caveatsArr.map((c) => (
-            <div className="pricing-caveat" key={c}>{`> ${c}`}</div>
-          ))}
-        </div> */}
+          <div className="pricing-caveats-container">
+            {caveatsArr.map((c) => (
+              <div className="pricing-caveat" key={c}>{`> ${c}`}</div>
+            ))}
+          </div>
         </div>
       </Section>
     </div>
