@@ -1,0 +1,108 @@
+@use "../../../../shared/tms-styles.scss" as styles;
+
+.emm-msp-section-container {
+  //   background-image: url("https://firebasestorage.googleapis.com/v0/b/total-mobility-solution-6c7cc.firebasestorage.app/o/light-mobile-device-background-slightly-angled.png?alt=media&token=7a793819-4e4e-427f-939b-4f1f2038e8a4");
+  //   background-size: 40%;
+  background-color: styles.$extra-light-grey;
+}
+
+.emm-msp-content-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emm-msp-section-subtitle {
+  max-width: 700px;
+}
+
+.emm-msp-points-container {
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px 20px;
+  align-items: stretch;
+  margin-top: 40px;
+
+  @include styles.media(styles.$min-xs) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.emm-msp-list-container {
+  display: inline-block;
+  background-color: styles.$tms-blue;
+  color: white;
+  text-align: left;
+  padding: 20px;
+  padding-bottom: 140px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
+
+  //   &:nth-child(odd) {
+  //     margin-top: 0;
+  //     padding-bottom: 0;
+  //     padding-top: 140px;
+  //     clip-path: polygon(0% 100%, 0% 40%, 50% 0%, 100% 40%, 100% 100%);
+  //   }
+}
+
+.emm-msp-list-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.emm-msp-list-subtitle {
+  font-size: 12px;
+}
+
+.emm-msp-roi-title {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  font-size: styles.rem(25);
+  font-weight: bold;
+}
+
+.emm-msp-table-container {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+  font-size: styles.rem(16);
+  background-color: white;
+}
+
+.emm-msp-table-head-tr {
+  border-bottom: 2px solid styles.$dark-grey;
+}
+
+.emm-msp-table-body-tr {
+  transition: 0.2s;
+  border-bottom: 2px solid styles.$extra-light-grey;
+
+  &:hover {
+    background-color: styles.$extra-light-blue;
+  }
+}
+
+.emm-msp-cell {
+  padding: 15px;
+  text-align: left;
+}
+
+.emm-msp-factor-cell {
+  font-weight: 600;
+}
+
+.emm-msp-tms-cell {
+  font-weight: 500;
+  color: styles.$dark-blue;
+}
+
+.emm-msp-bottom-line {
+  margin-top: 50px;
+  margin-bottom: 90px;
+  max-width: 700px;
+}
