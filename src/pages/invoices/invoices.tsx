@@ -7,6 +7,7 @@ import Collapsible, {
 } from "../../library/collapsible/collapsible";
 import Button from "../../library/button/button";
 
+import { pageRoutes } from "../../shared/constants";
 import { dataTypes, getCompanyData } from "../../shared/queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
@@ -123,7 +124,7 @@ function Invoices() {
   }, [invoices]);
 
   return (
-    <Section title="Invoices">
+    <Section backBtnLink={pageRoutes.privateRoutes.dashboard} title="Invoices">
       {displayNode ? (
         <div className="invoices-collapsible-container">{displayNode}</div>
       ) : hasNoInvoices ? (

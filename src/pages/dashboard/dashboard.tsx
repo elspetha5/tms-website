@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
+// import Button from "../../library/button/button";
 import Card from "../../components/card/card";
 import Section from "../../components/section/section";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
@@ -134,10 +135,16 @@ function Dashboard() {
             <div className="dash-info-devices">
               Total Devices Managed: <b>{companyInfo?.numOfDevices}</b>
             </div>
-            <div>
+            {/* <div>
               Support Level: <b>{companyInfo?.supportLevelText}</b>
-            </div>
+            </div> */}
           </div>
+          {/* <div className="dashboard-contact-container">
+            <div>Questions or feedback?</div>
+            <Button href="mailto:contact@totalmobilitysolution.com" isTertiary>
+              contact@totalmobilitysolution.com
+            </Button>
+          </div> */}
         </div>
       ) : (
         <LoadingSpinner />

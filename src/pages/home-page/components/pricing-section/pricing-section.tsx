@@ -8,7 +8,10 @@ import { pageRoutes } from "../../../../shared/constants";
 
 import "./pricing-section.scss";
 
-const caveatsArr = ["*Travel to and on-site at client not included"];
+const caveatsArr = [
+  "All prices are per month and based on a minimum of 100 devices or seats",
+  "*Travel to and on-site at client not included",
+];
 
 const pricingCardsArr = [
   {
@@ -22,6 +25,8 @@ const pricingCardsArr = [
     ),
     items: [
       "Free device fleet audit",
+      "Device lifecycle management",
+      "MDM/UEM setup and management",
       "Cellular carrier account setup, management, and full-service TEM procurement provider",
       "Full migration services",
       "All staging services",
@@ -30,7 +35,6 @@ const pricingCardsArr = [
       "Device fleet EOL management",
       "Additional fees apply",
     ],
-    check: true,
     backgroundColor: backgroundColors.black,
   },
   {
@@ -48,13 +52,13 @@ const pricingCardsArr = [
       "Onboarding included",
       "Additional fees apply",
     ],
-    check: false,
     backgroundColor: backgroundColors.lightGrey,
+    badge: "MOST POPULAR",
   },
   {
     title: "Pro",
     subtitle:
-      "Our MOST POPULAR option - For companies that know the value of partnerships with the right people",
+      "For companies that know the value of partnerships with the right people",
     price: (
       <span>
         $149.99<span className="pricing-per-text">/seat</span>
@@ -66,7 +70,6 @@ const pricingCardsArr = [
       "Hardware repairs included",
       "Flat rate with no additional fees*",
     ],
-    check: false,
     backgroundColor: backgroundColors.blue,
   },
 ];
@@ -81,6 +84,7 @@ function PricingSection() {
               <Card
                 key={c.title}
                 backgroundColor={c.backgroundColor}
+                badge={c.badge}
                 className="pricing-card-container"
               >
                 <div>
@@ -114,7 +118,10 @@ function PricingSection() {
           </div>
           <div className="pricing-caveats-container">
             {caveatsArr.map((c) => (
-              <div className="pricing-caveat" key={c}>{`> ${c}`}</div>
+              <div
+                className="pricing-caveat"
+                key={c}
+              >{`${c.startsWith("*") ? "" : ">"} ${c}`}</div>
             ))}
           </div>
         </div>

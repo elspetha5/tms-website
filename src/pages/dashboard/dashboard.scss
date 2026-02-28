@@ -72,3 +72,10 @@
 .alpha-logo {
   background-color: styles.$dark-grey;
 }
+
+.dashboard-contact-container {
+  position: absolute;
+  font-size: styles.rem(14);
+  right: 0;
+  bottom: 20px;
+}

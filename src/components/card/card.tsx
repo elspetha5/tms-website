@@ -12,6 +12,7 @@ export enum backgroundColors {
 
 interface CardProps {
   backgroundColor?: backgroundColors;
+  badge?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
@@ -19,6 +20,7 @@ interface CardProps {
 
 function Card({ children, ...props }: PropsWithChildren<CardProps>) {
   const {
+    badge,
     backgroundColor = backgroundColors.white,
     className,
     disabled = false,
@@ -32,6 +34,7 @@ function Card({ children, ...props }: PropsWithChildren<CardProps>) {
       } ${className}`}
       onClick={onClick}
     >
+      {badge && <div className="card-badge">{badge}</div>}
       {children}
     </div>
   );

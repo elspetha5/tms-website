@@ -133,7 +133,7 @@ function EmmMspSection() {
             When a company manages its own fleet, they aren’t just paying for
             software; they are paying in lost productivity, security gaps, and
             "hidden" IT labor. Here is a breakdown of why an Enterprise Mobility
-            Management (EMM) Managed Service Provider (MSP) is worth the
+            Management (EMM) Managed Services Provider (MSP) is worth the
             investment.
           </div>
           <div className="emm-msp-points-container">

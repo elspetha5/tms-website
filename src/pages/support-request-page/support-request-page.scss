@@ -1,7 +1,18 @@
 @use "../../shared/tms-styles.scss" as styles;
 
-.spacer-div {
-  height: 20px;
+.support-request-hours {
+  margin: 20px 0;
+  max-width: 500px;
+  text-align: center;
+
+  > :first-child {
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  > :nth-child(2) {
+    font-size: styles.rem(14);
+  }
 }
 
 .support-req-msg {

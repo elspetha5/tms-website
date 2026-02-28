@@ -17,6 +17,7 @@ import Collapsible, {
   CollapsibleStyle,
 } from "../../library/collapsible/collapsible";
 
+import { pageRoutes } from "../../shared/constants";
 import { dataTypes, getCompanyData } from "../../shared/queries";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
@@ -225,7 +226,11 @@ function SparesInventory() {
   }, [submitStatus, modalInfo]);
 
   return (
-    <Section className="spares-section-container" title="Spares Inventory">
+    <Section
+      backBtnLink={pageRoutes.privateRoutes.dashboard}
+      className="spares-section-container"
+      title="Spares Inventory"
+    >
       {submitStatus && submitStatus === "success" && submitMessage && (
         <Message type={submitStatus} message={submitMessage} />
       )}

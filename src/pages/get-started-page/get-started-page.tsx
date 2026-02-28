@@ -84,6 +84,12 @@ const initGetStartedFields: FormField[] = [
     selectOptions: ["I'm ready now", "Within 30 days", "Exploring my options"],
   },
   {
+    label: "Which plan are you most interested in?",
+    name: "Plan",
+    isRequired: true,
+    selectOptions: ["Starter", "Growth", "Pro", "Let's talk"],
+  },
+  {
     name: "More details",
     placeholder:
       "Please share any additional details about your fleet of mobile devices",
@@ -105,7 +111,7 @@ function GetStartedPage() {
     submitMessage,
   } = useForm(
     initGetStartedFields,
-    import.meta.env.VITE_GOOGLE_SHEET_GET_STARTED_URL
+    import.meta.env.VITE_GOOGLE_SHEET_GET_STARTED_URL,
   );
 
   return (
@@ -222,7 +228,7 @@ function GetStartedPage() {
               </div>
               <div className="form-group">
                 {formFields.map((field, i) => {
-                  if (i === 12)
+                  if (i === 12 || i === 13)
                     return (
                       <FormFieldInput
                         {...field}

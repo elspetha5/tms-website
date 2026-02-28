@@ -13,6 +13,7 @@ import Collapsible, {
 import Section from "../../components/section/section";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
 
+import { pageRoutes } from "../../shared/constants";
 import { useAuth } from "../../shared/contexts/auth-context";
 import { UseAuth } from "../../shared/types";
 import { dataTypes, getCompanyData } from "../../shared/queries";
@@ -91,7 +92,10 @@ function SupportTickets() {
   }, [currentUser]);
 
   return (
-    <Section title="Support Tickets">
+    <Section
+      backBtnLink={pageRoutes.privateRoutes.dashboard}
+      title="Support Tickets"
+    >
       <div className="support-tickets-collapsible-container">
         <div className="support-tickets-tab-container">
           <button

@@ -69,7 +69,7 @@ function SupportRequestPage() {
     submitMessage,
   } = useForm(
     initSupportRequestFields,
-    import.meta.env.VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL
+    import.meta.env.VITE_GOOGLE_SHEET_SUPPORT_REQUEST_URL,
   );
   const successMsg =
     "Thank you for your Support Request! TMS tech support will contact you very soon.";
@@ -83,7 +83,13 @@ function SupportRequestPage() {
           message={submitStatus === "success" ? successMsg : submitMessage}
         />
       )}
-      <div className="spacer-div" />
+      <div className="support-request-hours">
+        <div>Support hours are 6am - 6pm PST.</div>{" "}
+        <div>
+          All support requests are responded to in the order they are received.
+          Our goal is 1 hour resonse time. We look forward to serving you soon!
+        </div>
+      </div>
       <Box
         component="form"
         sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}

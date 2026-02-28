@@ -45,6 +45,7 @@ const initFaqsArr: CollapsibleItem[] = [
     content:
       "Our NO DOWNTIME Guarantee ensures continuous productivity for users. This guarantee hinges on the client maintaining a sufficient spares inventory, fully managed by TMS.",
     height: "0px",
+    hash: "no-downtime-faq",
   },
 ];
 

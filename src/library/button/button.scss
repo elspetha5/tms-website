@@ -29,13 +29,26 @@
 .btn-secondary {
   @extend %btn;
   background-color: white;
-  color: black;
-  // border: 2px solid styles.$tms-blue;
+  color: styles.$dark-grey;
+  border: 2px solid styles.$dark-grey;
 
   &:hover {
     background-color: styles.$tms-blue;
     color: white;
     border: 2px solid styles.$tms-blue;
+  }
+}
+
+.btn-black {
+  @extend %btn;
+  color: white;
+  background-color: styles.$dark-grey;
+  border: 2px solid styles.$dark-grey;
+
+  &:hover {
+    background-color: white;
+    color: styles.$dark-grey;
+    border: 2px solid styles.$dark-grey;
   }
 }
 
@@ -46,12 +59,6 @@
   &:hover {
     color: styles.$link-blue-hover;
   }
-}
-
-.btn-black {
-  @extend %btn;
-  color: white;
-  background-color: black;
 }
 
 .btn-primary-disabled,

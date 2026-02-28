@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
@@ -12,6 +13,7 @@ export enum CollapsibleStyle {
 
 export interface CollapsibleItem {
   content: React.ReactNode;
+  hash?: string;
   height: string;
   id: string;
   isActive: boolean;
@@ -27,12 +29,13 @@ function Collapsible(props: CollapsibleProps) {
   const { arr: propsArr, style = CollapsibleStyle.regular } = props;
   const [arr, setArr] = useState(propsArr);
   const itemRefs = useRef(new Map());
+  const { hash } = useLocation();
 
-  function setActiveItem(index) {
+  function setActiveItem(index: number, defaultActive?: boolean) {
     setArr((prevArr) => {
       return prevArr.map((item, i) => {
         if (index === i) {
-          const newIsActive = !item.isActive;
+          const newIsActive = defaultActive ? true : !item.isActive;
           let newHeight = "0px";
           if (newIsActive) {
             const contentElement = itemRefs.current.get(item.id);
@@ -48,11 +51,24 @@ function Collapsible(props: CollapsibleProps) {
     });
   }
 
+  useEffect(() => {
+    if (hash) {
+      const hashIndex = arr.findIndex((item) =>
+        item.hash ? hash.includes(item.hash) : false,
+      );
+
+      if (hashIndex >= 0) {
+        setActiveItem(hashIndex, true);
+      }
+    }
+  }, [hash]);
+
   return (
     <>
       {arr.map((item, i) => (
         <div
           key={item.id}
+          id={item.hash || ""}
           className={`collapsible-container${
             style === CollapsibleStyle.small ? "-small" : ""
           }`}
