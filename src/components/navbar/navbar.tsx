@@ -108,6 +108,9 @@ function Navbar() {
               src={`${firebaseImgUrl}/TMS-logo-no-background.png?alt=media&token=cf8499c6-a5dd-4d14-9a67-85b2e98c87d8`}
               alt="logo"
             />
+            <div className="nav-tagline">
+              The Mobile Device Lifecycle Management Experts
+            </div>
           </Link>
         </div>
 
