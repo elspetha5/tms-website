@@ -84,7 +84,7 @@ function SupportRequestPage() {
         />
       )}
       <div className="support-request-hours">
-        <div>Support hours: 6am - 6pm PST</div>{" "}
+        <div>Support hours: M-F 6am - 6pm PST</div>
         <div>
           All support requests are responded to in the order they are received.
           Our goal is 1 hour resonse time. We look forward to serving you soon!
