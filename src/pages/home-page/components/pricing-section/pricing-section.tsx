@@ -71,6 +71,7 @@ const pricingCardsArr = [
       "Flat rate with no additional fees*",
     ],
     backgroundColor: backgroundColors.blue,
+    badge: "BEST VALUE",
   },
 ];
 
