@@ -78,7 +78,7 @@ const pricingCardsArr = [
 function PricingSection() {
   return (
     <div className="pricing-section-container">
-      <Section id="pricing" title="Pricing">
+      <Section id="pricing" title="Plans">
         <div className="pricing-content-container">
           <div className="pricing-grid-container">
             {pricingCardsArr.map((c, i) => (

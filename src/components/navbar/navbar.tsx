@@ -61,7 +61,7 @@ function Navbar() {
       isActive: pathname === pageRoutes.whyTms,
     },
     {
-      label: "Pricing",
+      label: "Plans",
       to: pageRoutes.pricing,
       isActive: hash === pageRoutes.pricing.substring(1),
     },
