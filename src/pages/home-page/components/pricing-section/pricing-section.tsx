@@ -20,7 +20,7 @@ const pricingCardsArr = [
       "For companies wanting to get their mobile device fleet off to a running start",
     price: (
       <span>
-        $49.99<span className="pricing-per-text">/device</span>
+        $49<span className="pricing-per-text">/device</span>
       </span>
     ),
     items: [
@@ -42,7 +42,7 @@ const pricingCardsArr = [
     subtitle: "For companies ready to utilize their mobile fleet and scale",
     price: (
       <span>
-        $99.99<span className="pricing-per-text">/seat</span>
+        $99<span className="pricing-per-text">/seat</span>
       </span>
     ),
     items: [
@@ -61,7 +61,7 @@ const pricingCardsArr = [
       "For companies that know the value of partnerships with the right people",
     price: (
       <span>
-        $149.99<span className="pricing-per-text">/seat</span>
+        $149<span className="pricing-per-text">/seat</span>
       </span>
     ),
     items: [

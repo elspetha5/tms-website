@@ -152,7 +152,7 @@ function EmmMspSection() {
               <tr className="emm-msp-table-head-tr">
                 <th className="emm-msp-cell">Factor</th>
                 <th className="emm-msp-cell">DIY Management</th>
-                <th className="emm-msp-cell">EMM MSP Model</th>
+                <th className="emm-msp-cell">DFY EMM MSP Model</th>
               </tr>
             </thead>
             <tbody>
