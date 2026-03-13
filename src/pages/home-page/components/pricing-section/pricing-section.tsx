@@ -47,7 +47,7 @@ const pricingCardsArr = [
     ),
     items: [
       "Includes everything from Starter plan",
-      "On-device security, network compliance and SMS-phishing prevention",
+      "On-device security and network compliance via SMS-phishing prevention",
       "Device spares inventory management",
       "Onboarding included",
       "Additional fees apply",
