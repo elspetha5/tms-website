@@ -68,6 +68,7 @@ const pricingCardsArr = [
       "Includes everything from Starter and Growth plans",
       "On-device real-time backup and recovery",
       "Hardware repairs included",
+      "Extended Support Hours",
       "Flat rate with no additional fees*",
     ],
     backgroundColor: backgroundColors.blue,
