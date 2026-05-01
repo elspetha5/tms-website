@@ -10,7 +10,7 @@ import "./pricing-section.scss";
 
 const caveatsArr = [
   "All prices are per month and based on a minimum of 100 devices or seats",
-  "*Travel to and on-site at client not included",
+  "*Travel to, from and on-site at client not included",
 ];
 
 const pricingCardsArr = [
