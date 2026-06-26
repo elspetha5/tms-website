@@ -18,6 +18,7 @@ const affiliatesLogoArr = [
   `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FT-mobile-logo.png?alt=media&token=cb5a5beb-acca-429e-9718-0ad0f1667613`,
   `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FVerizon-business-logo.png?alt=media&token=5f660d29-46ae-48d7-a153-676be4589fb3`,
   `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FVMwarebyBroadcom-logo.jpeg?alt=media&token=251afe7e-92ac-4164-b384-2a325b4f6f56`,
+  `${firebaseImgUrl}/Partners%20%26%20Affiliations%2Fdatto.png?alt=media&token=b0c104c3-e8be-4e02-9104-03b7773ccf7d`,
 ];
 
 function AffiliateSection() {
@@ -37,6 +38,18 @@ function AffiliateSection() {
           </div>
         ))}
       </div>
+      <a
+        href="https://startupfa.me/s/tms?utm_source=totalmobilitysolution.com"
+        target="_blank"
+        className="startup-fame-badge"
+      >
+        <img
+          src="https://startupfa.me/badges/featured/default-small-rounded.webp"
+          alt="TMS - Featured on Startup Fame"
+          width="240"
+          height="37"
+        />
+      </a>
     </Section>
   );
 }

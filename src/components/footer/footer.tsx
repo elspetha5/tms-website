@@ -4,6 +4,7 @@ import {
   faFacebook,
   faXTwitter,
   faInstagram,
+  faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons/faCopyright";
 
@@ -33,6 +34,11 @@ const socialBtns = [
     href: "https://www.instagram.com/total_mobility_solution/",
     icon: faInstagram,
     key: "instagram",
+  },
+  {
+    href: "https://www.tiktok.com/@tmsnow8?is_from_webapp=1&sender_device=pc",
+    icon: faTiktok,
+    key: "tiktok",
   },
 ];
 
