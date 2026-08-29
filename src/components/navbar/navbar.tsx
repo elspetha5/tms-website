@@ -6,7 +6,7 @@ import { useAuth } from "../../shared/contexts/auth-context";
 import Button from "../../library/button/button";
 import Modal from "../../library/modal/modal";
 import {
-  calendlyLink,
+  bookingLink,
   firebaseImgUrl,
   pageRoutes,
 } from "../../shared/constants";
@@ -77,7 +77,7 @@ function Navbar() {
     },
     {
       label: ctaText,
-      href: calendlyLink,
+      href: bookingLink,
     },
   ];
 
@@ -153,7 +153,7 @@ function Navbar() {
           ) : (
             <Button
               className={`nav-link bold`}
-              href={calendlyLink}
+              href={bookingLink}
               isPrimary
               onClick={scrollToTop}
             >
@@ -223,7 +223,7 @@ function Navbar() {
         ) : (
           <Button
             className={`nav-link nav-mobile-talk-link bold`}
-            href={calendlyLink}
+            href={bookingLink}
             isPrimary
             onClick={scrollToTop}
           >

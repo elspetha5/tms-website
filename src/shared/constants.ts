@@ -31,7 +31,8 @@ export const pageRoutes = {
   whyTms: "/why-tms",
 };
 
-export const calendlyLink = "https://calendly.com/totalmobilitysolution/15min";
+export const bookingLink =
+  "https://bookings.cloud.microsoft/book/TMSIntroCall2@totalmobilitysolution.com/s/cSmEAmQsn0mSv-v5pnXXnw2?ismsaljsauthenabled";
 export const storageKeys = {
   companyInfo: "companyInfo",
 };
