@@ -20,8 +20,8 @@ function HeroSection() {
                 Total Control. Total Security. Total Mobility.
               </div>
               <div className="hero-subtitle bold">
-                The fastest and simplest way to manage, secure and scale your
-                mobile device fleet
+                The simplest and the fastest way to manage, secure and scale
+                your mobile device fleet
               </div>
               <Button
                 className="hero-section-cta bold"
