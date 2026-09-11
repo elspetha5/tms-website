@@ -72,7 +72,7 @@ const pricingCardsArr = [
       "Hardware repairs included",
       "Most device accessories included",
       "Free overnight shipping",
-      "Extended support hours",
+      "24/7 support",
       "Flat rate with no additional fees*",
     ],
     backgroundColor: backgroundColors.blue,
