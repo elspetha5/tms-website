@@ -52,7 +52,7 @@ const initFaqsArr: CollapsibleItem[] = [
     isActive: false,
     label: "Why TMS?",
     content:
-      "We are the service that you dream about. That one-stop-shop, turn-key service. That ultra premium service that you look at your revenue and profit in 2-4 quarters and you can't explain why it's up. That service that you magically sleep better after you plug it into your business. That's TMS.",
+      "We are the service that you dream about. That one-stop-shop, turn-key service. That ultra premium service that you look at your revenue and profit in 2-4 quarters and you can't explain why it's up. TMS becomes that part of your company that you never have to think about... because it always just works and is always better than you expected. That service that you magically sleep better after you plug it into your business. That's TMS.",
     height: "0px",
     hash: "no-downtime-faq",
   },
