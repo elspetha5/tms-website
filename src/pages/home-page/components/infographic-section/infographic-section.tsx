@@ -20,7 +20,7 @@ function InfographicSection() {
       </div>
       <img
         className="infographic-img"
-        src={`${firebaseImgUrl}/New-TMS-infographic-white.svg?alt=media&token=f839fd4c-6316-4519-898e-89ed2ea2e141`}
+        src={`${firebaseImgUrl}/New-TMS-infographic-white.svg?alt=media&token=1e739150-017d-4b87-9ae0-11fec405d5bf`}
         alt="TMS Infographic"
       />
     </div>

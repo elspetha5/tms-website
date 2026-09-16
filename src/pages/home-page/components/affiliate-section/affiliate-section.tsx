@@ -4,7 +4,7 @@ import { firebaseImgUrl } from "../../../../shared/constants";
 import "./affiliate-section.scss";
 
 const affiliatesLogoArr = [
-  `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FApple-logo.png?alt=media&token=3093c05b-dc91-41de-8eb8-a1000e3183f0`,
+  `${firebaseImgUrl}/Partners%20%26%20Affiliations%2Fios.png?alt=media&token=94c8caf2-7bff-425d-a16c-4d4db5909100`,
   `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FAndroid-logo.png?alt=media&token=7e7d9fab-9640-4bb0-b11b-35c871a7c258`,
   `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FATT-business-logo.png?alt=media&token=0363a2f6-9810-437c-862d-d46eb910b39a`,
   `${firebaseImgUrl}/Partners%20%26%20Affiliations%2FBaramundi-logo.png?alt=media&token=ee7d6aff-33df-43e6-bdcc-89a57fb7aa33`,
