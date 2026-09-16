@@ -87,7 +87,7 @@ const initGetStartedFields: FormField[] = [
     label: "Which plan are you most interested in?",
     name: "Plan",
     isRequired: true,
-    selectOptions: ["Starter", "Growth", "Pro", "Let's talk"],
+    selectOptions: ["Starter", "Growth", "Pro", "Enterprise", "Let's talk"],
   },
   {
     name: "More details",

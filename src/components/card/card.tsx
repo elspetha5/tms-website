@@ -20,8 +20,8 @@ interface CardProps {
 
 function Card({ children, ...props }: PropsWithChildren<CardProps>) {
   const {
-    badge,
     backgroundColor = backgroundColors.white,
+    badge,
     className,
     disabled = false,
     onClick,

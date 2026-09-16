@@ -16,7 +16,7 @@
   align-items: stretch;
 
   @include styles.media(styles.$min-sm) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -74,4 +74,16 @@
 
 .pricing-per-text {
   font-size: styles.rem(16);
+}
+
+.pricing-enterprise-title {
+  color: styles.$tms-blue;
+}
+
+.pricing-enterprise-price {
+  font-size: styles.rem(20);
+}
+
+.pricing-card-enterprise-price {
+  border-bottom: 1px solid styles.$tms-blue;
 }

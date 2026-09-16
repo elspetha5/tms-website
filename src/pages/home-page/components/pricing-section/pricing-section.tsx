@@ -10,7 +10,7 @@ import "./pricing-section.scss";
 
 const caveatsArr = [
   "All prices are per month and based on a minimum of 100 devices or seats",
-  "*Travel to, from and on-site at client not included",
+  "*Travel to, from and on-site at client and projects not included",
 ];
 
 const pricingCardsArr = [
@@ -48,7 +48,7 @@ const pricingCardsArr = [
     ),
     items: [
       "Includes everything from Starter plan",
-      "SMS-phishing prevention. Benefits: Real-time on-device security, network compliance and more",
+      "SMS-phishing aka smishing prevention. Benefits: Real-time on-device security, network compliance and more",
       "Device spares inventory management",
       "Onboarding included",
       "Free 2-day shipping",
@@ -67,7 +67,7 @@ const pricingCardsArr = [
       </span>
     ),
     items: [
-      "Includes everything from Starter and Growth plans",
+      "Includes everything from Growth plan",
       "On-device real-time backup and recovery",
       "Hardware repairs included",
       "Most device accessories included",
@@ -77,6 +77,24 @@ const pricingCardsArr = [
     ],
     backgroundColor: backgroundColors.blue,
     badge: "BEST VALUE",
+  },
+  {
+    title: "Enterprise",
+    subtitle: "For companies at scale needing everything",
+    price: (
+      <span className="pricing-enterprise-price">Inquire for pricing</span>
+    ),
+    items: [
+      "Includes everything from Pro plan",
+      "Every OS supported",
+      "Every device supported",
+      "Full imaging services",
+      "Embedded on-site at your location(s)",
+      "Network support",
+      "And more!",
+    ],
+    backgroundColor: backgroundColors.white,
+    badge: "FULL SERVICE",
   },
 ];
 
@@ -94,9 +112,21 @@ function PricingSection() {
                 className="pricing-card-container"
               >
                 <div>
-                  <div className="pricing-card-title">{c.title}</div>
+                  <div
+                    className={`pricing-card-title ${
+                      c.title === "Enterprise" ? "pricing-enterprise-title" : ""
+                    }`}
+                  >
+                    {c.title}
+                  </div>
                   <div className="pricing-card-subtitle">{c.subtitle}</div>
-                  <div className="pricing-card-price">
+                  <div
+                    className={`pricing-card-price ${
+                      c.title === "Enterprise"
+                        ? "pricing-card-enterprise-price"
+                        : ""
+                    }`}
+                  >
                     <div>{c.price}</div>
                   </div>
                   {c.items.map((item) => (
@@ -110,15 +140,25 @@ function PricingSection() {
                     </div>
                   ))}
                 </div>
-                <Button
-                  className="pricing-cta bold"
-                  to={pageRoutes.getStarted}
-                  isBlack={i === 2}
-                  isPrimary={i === 1}
-                  isSecondary={i === 0}
-                >
-                  Get Started
-                </Button>
+                {c.title === "Enterprise" ? (
+                  <Button
+                    className="pricing-cta bold"
+                    to={pageRoutes.getStarted}
+                    isPrimary
+                  >
+                    Request Pricing
+                  </Button>
+                ) : (
+                  <Button
+                    className="pricing-cta bold"
+                    to={pageRoutes.getStarted}
+                    isBlack={i === 2}
+                    isPrimary={i === 1}
+                    isSecondary={i === 0}
+                  >
+                    Get Started
+                  </Button>
+                )}
               </Card>
             ))}
           </div>
