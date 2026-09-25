@@ -11,19 +11,11 @@ const initFaqsArr: CollapsibleItem[] = [
     isActive: false,
     label: "What is TMS?",
     content:
-      "We are an MSP with exclusive support for iOS and Android platforms. We provide a mobile device lifecycle management solution that helps organizations manage, secure, and streamline the Corporate-owned and BYOD smartphone and tablet devices that touch their environment.",
+      "We are an MSP with focused support for iOS and Android platforms. We provide a mobile device lifecycle management solution that helps organizations manage, secure, and streamline the Corporate-owned and BYOD smartphone and tablet devices that touch their environment. We also offer full service support per our Enterprise plan.",
     height: "0px",
   },
   {
     id: "faq2",
-    isActive: false,
-    label: "How will you manage my devices exactly?",
-    content:
-      "Certainly the backbone of remotely managing your fleet will be via an MDM/UEM solution. We support and manage any and all multi-platform MDM/UEM products.",
-    height: "0px",
-  },
-  {
-    id: "faq3",
     isActive: false,
     label: 'What is "SMS-Phishing" or "Smishing" and how do you prevent it?',
     content:
@@ -31,7 +23,7 @@ const initFaqsArr: CollapsibleItem[] = [
     height: "0px",
   },
   {
-    id: "faq4",
+    id: "faq3",
     isActive: false,
     label: "What does BYOD mean?",
     content:
@@ -39,7 +31,7 @@ const initFaqsArr: CollapsibleItem[] = [
     height: "0px",
   },
   {
-    id: "faq5",
+    id: "faq4",
     isActive: false,
     label: "What is the NO DOWNTIME Guarantee?",
     content:
@@ -48,7 +40,7 @@ const initFaqsArr: CollapsibleItem[] = [
     hash: "no-downtime-faq",
   },
   {
-    id: "faq6",
+    id: "faq5",
     isActive: false,
     label: "Why TMS?",
     content:
