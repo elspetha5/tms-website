@@ -22,6 +22,7 @@ import Login from "./pages/login/login";
 import OurStoryPage from "./pages/our-story-page/our-story-page";
 import PartnersForm from "./pages/partners-page/partners-form/partners-form";
 import PartnersPage from "./pages/partners-page/partners-page";
+import PrivacyPolicy from "./pages/privacy-policy/privacy-policy";
 import SupportRequestPage from "./pages/support-request-page/support-request-page";
 import WhyTmsPage from "./pages/why-tms-page/why-tms-page";
 
@@ -101,6 +102,10 @@ function App() {
               element={<DeviceSecurity />}
             />
             <Route path={pageRoutes.login} element={<Login />} />
+            <Route
+              path={pageRoutes.privacyPolicy}
+              element={<PrivacyPolicy />}
+            />
 
             <Route element={<PrivateRoute />}>
               <Route

@@ -59,6 +59,10 @@ const footerColumns = [
       { label: "Partners", to: pageRoutes.partners },
       { label: "Support Request", to: pageRoutes.supportRequest },
       { label: "Coming Soon!", to: pageRoutes.comingSoon },
+      {
+        label: "Privacy Policy",
+        to: pageRoutes.privacyPolicy,
+      },
     ],
   },
 ];

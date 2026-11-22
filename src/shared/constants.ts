@@ -20,6 +20,7 @@ export const pageRoutes = {
   partners: "/partners",
   partnersForm: "/partners/form",
   pricing: "/#pricing",
+  privacyPolicy: "/privacy-policy",
   privateRoutes: {
     dashboard: "/dashboard",
     invoices: "/dashboard/invoices",
